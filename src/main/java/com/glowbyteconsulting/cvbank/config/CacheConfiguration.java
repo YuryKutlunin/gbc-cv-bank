@@ -47,6 +47,9 @@ public class CacheConfiguration {
             createCache(cm, com.glowbyteconsulting.cvbank.domain.User.class.getName());
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Authority.class.getName());
             createCache(cm, com.glowbyteconsulting.cvbank.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ResourcePool.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ResourcePool.class.getName() + ".employees");
             // jhipster-needle-ehcache-add-entry
         };
     }

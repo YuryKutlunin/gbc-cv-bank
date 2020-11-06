@@ -1,0 +1,65 @@
+{
+  "name": "Employee",
+  "fields": [
+    {
+      "fieldName": "firstNm",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastNm",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "middleNm",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNum",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "birthDt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "idTitle",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "resourcePoolCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emailCurator",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "resourcePool",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "resourcepool",
+      "otherEntityField": "resourcePoolCode"
+    }
+  ],
+  "changelogDate": "20201106143436",
+  "entityTableName": "employee",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
