@@ -47,6 +47,34 @@ public class CacheConfiguration {
             createCache(cm, com.glowbyteconsulting.cvbank.domain.User.class.getName());
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Authority.class.getName());
             createCache(cm, com.glowbyteconsulting.cvbank.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".emailCurators");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".emails");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ResourcePool.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ResourcePool.class.getName() + ".idResourcePools");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.JobTitle.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.JobTitle.class.getName() + ".idTitles");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Education.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.University.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.University.class.getName() + ".idUnivers");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.EducType.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.EducType.class.getName() + ".idEducTypes");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Project.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Project.class.getName() + ".idProjects");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ProjectTechnology.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Technology.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Technology.class.getName() + ".idTechnologies");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.EmployeeProject.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ProjectRole.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ProjectRole.class.getName() + ".idRoles");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Certificate.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Certificate.class.getName() + ".idCertificates");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.EmployeeCertif.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Skill.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Skill.class.getName() + ".idSkills");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.EmployeeSkill.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.SkillLevel.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.SkillLevel.class.getName() + ".idLevels");
             // jhipster-needle-ehcache-add-entry
         };
     }
