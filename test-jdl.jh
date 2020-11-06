@@ -1,0 +1,25 @@
+entity Employee
+{
+firstNm String,
+lastNm String,
+middleNm String,
+email String,
+phoneNum String,
+workType String,
+birthDt Instant,
+idTitle Long,
+resourcePoolCode String,
+emailCurator String
+}
+
+entity ResourcePool
+{
+resourcePoolCode String,
+resourcePoolNm String,
+poolLeader String
+}
+
+relationship OneToMany 
+{
+ResourcePool{employee(resourcePoolCode)} to Employee{resourcepool(resourcePoolCode)}
+}
