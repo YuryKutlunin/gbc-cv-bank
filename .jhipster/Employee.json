@@ -1,0 +1,109 @@
+{
+  "name": "Employee",
+  "fields": [
+    {
+      "fieldName": "firstNm",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastNm",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "middleNm",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNum",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "birthDt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "idTitle",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "resourcePoolCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emailCurator",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "employee"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "education",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "education"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeProject",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "employeeProject"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeCertif",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "employeeCertif"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeSkill",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "employeeSkill"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "employee",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "resourcePool",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "resourcePool",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "jobTitle",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "jobTitle",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201106141029",
+  "entityTableName": "employee",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

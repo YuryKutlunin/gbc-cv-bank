@@ -1,0 +1,71 @@
+{
+  "name": "Education",
+  "fields": [
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idUniver",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idEducType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "faculty",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "specialty",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "specialization",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startYear",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "endYear",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "education",
+      "relationshipName": "employee",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "university",
+      "otherEntityRelationshipName": "education",
+      "relationshipName": "university",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "educType",
+      "otherEntityRelationshipName": "education",
+      "relationshipName": "educType",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201106141329",
+  "entityTableName": "education",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

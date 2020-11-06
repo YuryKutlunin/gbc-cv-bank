@@ -1,0 +1,32 @@
+{
+  "name": "Skill",
+  "fields": [
+    {
+      "fieldName": "idSkill",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "skillNm",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeSkill",
+      "otherEntityRelationshipName": "skill",
+      "relationshipName": "employeeSkill"
+    }
+  ],
+  "changelogDate": "20201106142329",
+  "entityTableName": "skill",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

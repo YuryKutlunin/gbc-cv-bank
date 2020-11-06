@@ -1,0 +1,32 @@
+{
+  "name": "EducType",
+  "fields": [
+    {
+      "fieldName": "idEducType",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "educTypeNm",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "education",
+      "otherEntityRelationshipName": "educType",
+      "relationshipName": "education"
+    }
+  ],
+  "changelogDate": "20201106141529",
+  "entityTableName": "educ_type",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

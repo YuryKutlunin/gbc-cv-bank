@@ -1,0 +1,32 @@
+{
+  "name": "University",
+  "fields": [
+    {
+      "fieldName": "idUniver",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "univerNm",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "education",
+      "otherEntityRelationshipName": "university",
+      "relationshipName": "education"
+    }
+  ],
+  "changelogDate": "20201106141429",
+  "entityTableName": "university",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

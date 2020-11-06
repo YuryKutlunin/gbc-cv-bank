@@ -1,0 +1,40 @@
+{
+  "name": "ProjectTechnology",
+  "fields": [
+    {
+      "fieldName": "idProject",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idTechnology",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "project",
+      "otherEntityRelationshipName": "projectTechnology",
+      "relationshipName": "project",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "technology",
+      "otherEntityRelationshipName": "projectTechnology",
+      "relationshipName": "technology",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201106141729",
+  "entityTableName": "project_technology",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

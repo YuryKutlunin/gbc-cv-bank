@@ -1,0 +1,51 @@
+{
+  "name": "EmployeeSkill",
+  "fields": [
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idSkill",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idLevel",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employeeSkill",
+      "relationshipName": "employee",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "skill",
+      "otherEntityRelationshipName": "employeeSkill",
+      "relationshipName": "skill",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "skillLevel",
+      "otherEntityRelationshipName": "employeeSkill",
+      "relationshipName": "skillLevel",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201106142429",
+  "entityTableName": "employee_skill",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

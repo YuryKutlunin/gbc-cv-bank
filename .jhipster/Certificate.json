@@ -1,0 +1,36 @@
+{
+  "name": "Certificate",
+  "fields": [
+    {
+      "fieldName": "idCertificate",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "certificateNm",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "certScopeNm",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeCertif",
+      "otherEntityRelationshipName": "certificate",
+      "relationshipName": "employeeCertif"
+    }
+  ],
+  "changelogDate": "20201106142129",
+  "entityTableName": "certificate",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

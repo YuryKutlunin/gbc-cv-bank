@@ -1,0 +1,32 @@
+{
+  "name": "ProjectRole",
+  "fields": [
+    {
+      "fieldName": "idRole",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "roleNm",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeProject",
+      "otherEntityRelationshipName": "projectRole",
+      "relationshipName": "employeeProject"
+    }
+  ],
+  "changelogDate": "20201106142029",
+  "entityTableName": "project_role",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
