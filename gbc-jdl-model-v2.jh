@@ -1,0 +1,202 @@
+entity Employee
+{
+firstNm String,
+lastNm String,
+middleNm String,
+email String,
+phoneNum String,
+workType String,
+birthDt Instant,
+idTitle Long,
+resourcePoolCode String,
+emailCurator String
+}
+
+entity ResourcePool
+{
+resourcePoolCode String,
+resourcePoolNm String,
+poolLeader String
+}
+
+entity JobTitle
+{
+idTitle Long,
+titleNM String
+}
+
+entity Education
+{
+email String,
+idUniver Long,
+idEducType String,
+faculty String,
+specialty String,
+specialization String,
+startYear Long,
+endYear Long
+}
+
+entity University
+{
+idUniver Long,
+univerNm String
+}
+
+entity EducType
+{
+idEducType Long,
+educTypeNm String
+}
+
+entity Project
+{
+idProject Long,
+projectNm String,
+companyNM String,
+startDt Instant,
+endDt Instant
+}
+
+entity ProjectTechnology
+{
+idProject Long,
+idTechnology Long
+}
+
+entity Technology
+{
+idTechnology Long,
+TechnologyNm String
+}
+
+entity EmployeeProject
+{
+email String,
+idProject Long,
+idRole Long,
+responsibilityNm String,
+startDt Instant,
+endDt Instant //null если еще участвует в проекте
+}
+
+entity ProjectRole
+{
+idRole Long,
+roleNm String
+}
+
+entity Certificate
+{
+idCertificate Long,
+certificateNm String,
+certScopeNm String
+}
+
+entity EmployeeCertif
+{
+email String,
+idCertificate Long,
+startDt Instant,
+endDt Instant
+}
+
+entity Skill
+{
+idSkill Long,
+skillNm String
+}
+
+entity EmployeeSkill
+{
+email String,
+idSkill Long,
+idLevel Long
+}
+
+entity SkillLevel
+{
+idLevel Long,
+levelDesc String
+}
+
+relationship OneToMany 
+{
+Employee{employee(email)} to Employee{empl(email)}
+}
+
+relationship OneToMany 
+{
+ResourcePool{employee(resourcePoolCode)} to Employee{resourcePool(resourcePoolCode)}
+}
+
+relationship OneToMany 
+{
+JobTitle{employee(idTitle)} to Employee{jobtitle(idTitle)}
+}
+
+relationship OneToMany 
+{
+Employee{education(email)} to Education{employee(email)} 
+}
+
+relationship OneToMany 
+{
+University{education(idUniver)} to Education{university(idUniver)} 
+}
+
+relationship OneToMany 
+{
+EducType{education(idEducType)} to Education{eductype(idEducType)} 
+}
+
+relationship OneToMany 
+{
+Project{projecttechnology(idProject)} to ProjectTechnology{project(idProject)} 
+}
+
+relationship OneToMany 
+{
+Technology{projecttechnology(idTechnology)} to ProjectTechnology{technology(idTechnology)} 
+}
+
+relationship OneToMany 
+{
+Employee{employeeproject(email)} to EmployeeProject{employee(email)} 
+}
+
+relationship OneToMany 
+{
+Project{employeeproject(idProject)} to EmployeeProject{project(idProject)} 
+}
+
+relationship OneToMany 
+{
+ProjectRole{employeeproject(idRole)} to EmployeeProject{projectrole(idRole)} 
+}
+
+relationship OneToMany 
+{
+Employee{employeecertif(email)} to EmployeeCertif{employee(email)} 
+}
+
+relationship OneToMany 
+{
+Certificate{employeecertif(idCertificate)} to EmployeeCertif{certificate(idCertificate)} 
+}
+
+relationship OneToMany 
+{
+Employee{employeeskill(email)} to EmployeeSkill{employee(email)} 
+}
+
+relationship OneToMany 
+{
+Skill{employeeskill(idSkill)} to EmployeeSkill{skill(idSkill)} 
+}
+
+relationship OneToMany 
+{
+SkillLevel{employeeskill(idLevel)} to EmployeeSkill{skilllevel(idLevel)} 
+}
+

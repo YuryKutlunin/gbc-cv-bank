@@ -7,8 +7,11 @@ import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipste
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
+import { getEntities as getEmployees } from 'app/entities/employee/employee.reducer';
 import { IResourcePool } from 'app/shared/model/resource-pool.model';
 import { getEntities as getResourcePools } from 'app/entities/resource-pool/resource-pool.reducer';
+import { IJobTitle } from 'app/shared/model/job-title.model';
+import { getEntities as getJobTitles } from 'app/entities/job-title/job-title.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './employee.reducer';
 import { IEmployee } from 'app/shared/model/employee.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -17,10 +20,13 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IEmployeeUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
-  const [resourcepoolId, setResourcepoolId] = useState('0');
+  const [employeeId, setEmployeeId] = useState('0');
+  const [emplId, setEmplId] = useState('0');
+  const [resourcePoolId, setResourcePoolId] = useState('0');
+  const [jobtitleId, setJobtitleId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { employeeEntity, resourcePools, loading, updating } = props;
+  const { employeeEntity, employees, resourcePools, jobTitles, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/employee');
@@ -33,7 +39,9 @@ export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
       props.getEntity(props.match.params.id);
     }
 
+    props.getEmployees();
     props.getResourcePools();
+    props.getJobTitles();
   }, []);
 
   useEffect(() => {
@@ -146,13 +154,39 @@ export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
                 <AvField id="employee-emailCurator" type="text" name="emailCurator" />
               </AvGroup>
               <AvGroup>
-                <Label for="employee-resourcepool">Resourcepool</Label>
-                <AvInput id="employee-resourcepool" type="select" className="form-control" name="resourcepool.id">
+                <Label for="employee-empl">Empl</Label>
+                <AvInput id="employee-empl" type="select" className="form-control" name="empl.id">
+                  <option value="" key="0" />
+                  {employees
+                    ? employees.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.email}
+                        </option>
+                      ))
+                    : null}
+                </AvInput>
+              </AvGroup>
+              <AvGroup>
+                <Label for="employee-resourcePool">Resource Pool</Label>
+                <AvInput id="employee-resourcePool" type="select" className="form-control" name="resourcePool.id">
                   <option value="" key="0" />
                   {resourcePools
                     ? resourcePools.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
                           {otherEntity.resourcePoolCode}
+                        </option>
+                      ))
+                    : null}
+                </AvInput>
+              </AvGroup>
+              <AvGroup>
+                <Label for="employee-jobtitle">Jobtitle</Label>
+                <AvInput id="employee-jobtitle" type="select" className="form-control" name="jobtitle.id">
+                  <option value="" key="0" />
+                  {jobTitles
+                    ? jobTitles.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.idTitle}
                         </option>
                       ))
                     : null}
@@ -177,7 +211,9 @@ export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
+  employees: storeState.employee.entities,
   resourcePools: storeState.resourcePool.entities,
+  jobTitles: storeState.jobTitle.entities,
   employeeEntity: storeState.employee.entity,
   loading: storeState.employee.loading,
   updating: storeState.employee.updating,
@@ -185,7 +221,9 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
+  getEmployees,
   getResourcePools,
+  getJobTitles,
   getEntity,
   updateEntity,
   createEntity,

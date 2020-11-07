@@ -33,7 +33,7 @@ public class ResourcePool implements Serializable {
     @Column(name = "pool_leader")
     private String poolLeader;
 
-    @OneToMany(mappedBy = "resourcepool")
+    @OneToMany(mappedBy = "resourcePool")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Employee> employees = new HashSet<>();
 
@@ -96,13 +96,13 @@ public class ResourcePool implements Serializable {
 
     public ResourcePool addEmployee(Employee employee) {
         this.employees.add(employee);
-        employee.setResourcepool(this);
+        employee.setResourcePool(this);
         return this;
     }
 
     public ResourcePool removeEmployee(Employee employee) {
         this.employees.remove(employee);
-        employee.setResourcepool(null);
+        employee.setResourcePool(null);
         return this;
     }
 

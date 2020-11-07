@@ -44,11 +44,55 @@
   ],
   "relationships": [
     {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "empl",
+      "relationshipName": "employee"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "education",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "education"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeProject",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "employeeproject"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeCertif",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "employeecertif"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employeeSkill",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "employeeskill"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "empl",
+      "otherEntityField": "email"
+    },
+    {
       "relationshipType": "many-to-one",
       "otherEntityName": "resourcePool",
       "otherEntityRelationshipName": "employee",
-      "relationshipName": "resourcepool",
+      "relationshipName": "resourcePool",
       "otherEntityField": "resourcePoolCode"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "jobTitle",
+      "otherEntityRelationshipName": "employee",
+      "relationshipName": "jobtitle",
+      "otherEntityField": "idTitle"
     }
   ],
   "changelogDate": "20201106143436",
