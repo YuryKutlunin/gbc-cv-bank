@@ -36,22 +36,13 @@
             <column name="birth_dt" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="id_title" type="bigint">
+            <column name="email_curator_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="resource_pool_code" type="varchar(255)">
+            <column name="resource_pool_id_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="email_curator" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="empl_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="resource_pool_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="jobtitle_id" type="bigint">
+            <column name="id_title_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -85,9 +76,6 @@
             <column name="phone_num" type="string"/>
             <column name="work_type" type="string"/>
             <column name="birth_dt" type="datetime"/>
-            <column name="id_title" type="numeric"/>
-            <column name="resource_pool_code" type="string"/>
-            <column name="email_curator" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

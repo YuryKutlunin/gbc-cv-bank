@@ -72,7 +72,6 @@ class ResourcePoolGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "resourcePoolCode":"SAMPLE_TEXT"
                 , "resourcePoolNm":"SAMPLE_TEXT"
                 , "poolLeader":"SAMPLE_TEXT"
                 }""")).asJson

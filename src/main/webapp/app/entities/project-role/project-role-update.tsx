@@ -72,12 +72,6 @@ export const ProjectRoleUpdate = (props: IProjectRoleUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="idRoleLabel" for="project-role-idRole">
-                  Id Role
-                </Label>
-                <AvField id="project-role-idRole" type="string" className="form-control" name="idRole" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="roleNmLabel" for="project-role-roleNm">
                   Role Nm
                 </Label>

@@ -2,10 +2,6 @@
   "name": "Skill",
   "fields": [
     {
-      "fieldName": "idSkill",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "skillNm",
       "fieldType": "String"
     }
@@ -14,8 +10,8 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "employeeSkill",
-      "otherEntityRelationshipName": "skill",
-      "relationshipName": "employeeskill"
+      "otherEntityRelationshipName": "idSkill",
+      "relationshipName": "employeeskillskill"
     }
   ],
   "changelogDate": "20201107095120",

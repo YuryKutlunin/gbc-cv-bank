@@ -1,40 +1,27 @@
 {
   "name": "EmployeeSkill",
-  "fields": [
-    {
-      "fieldName": "email",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "idSkill",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idLevel",
-      "fieldType": "Long"
-    }
-  ],
+  "fields": [],
   "relationships": [
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "employee",
-      "otherEntityRelationshipName": "employeeskill",
-      "relationshipName": "employee",
+      "otherEntityRelationshipName": "employeeskillemployee",
+      "relationshipName": "email",
       "otherEntityField": "email"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "skill",
-      "otherEntityRelationshipName": "employeeskill",
-      "relationshipName": "skill",
-      "otherEntityField": "idSkill"
+      "otherEntityRelationshipName": "employeeskillskill",
+      "relationshipName": "idSkill",
+      "otherEntityField": "id"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "skillLevel",
-      "otherEntityRelationshipName": "employeeskill",
-      "relationshipName": "skilllevel",
-      "otherEntityField": "idLevel"
+      "otherEntityRelationshipName": "employeeskillskilllevel",
+      "relationshipName": "idLevel",
+      "otherEntityField": "id"
     }
   ],
   "changelogDate": "20201107095220",

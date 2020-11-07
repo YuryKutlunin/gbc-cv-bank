@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, Label } from 'reactstrap';
-import { AvFeedback, AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
+import { AvFeedback, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
@@ -19,8 +19,8 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IProjectTechnologyUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const ProjectTechnologyUpdate = (props: IProjectTechnologyUpdateProps) => {
-  const [projectId, setProjectId] = useState('0');
-  const [technologyId, setTechnologyId] = useState('0');
+  const [idProjectId, setIdProjectId] = useState('0');
+  const [idTechnologyId, setIdTechnologyId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
   const { projectTechnologyEntity, projects, technologies, loading, updating } = props;
@@ -81,38 +81,26 @@ export const ProjectTechnologyUpdate = (props: IProjectTechnologyUpdateProps) =>
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="idProjectLabel" for="project-technology-idProject">
-                  Id Project
-                </Label>
-                <AvField id="project-technology-idProject" type="string" className="form-control" name="idProject" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="idTechnologyLabel" for="project-technology-idTechnology">
-                  Id Technology
-                </Label>
-                <AvField id="project-technology-idTechnology" type="string" className="form-control" name="idTechnology" />
-              </AvGroup>
-              <AvGroup>
-                <Label for="project-technology-project">Project</Label>
-                <AvInput id="project-technology-project" type="select" className="form-control" name="project.id">
+                <Label for="project-technology-idProject">Id Project</Label>
+                <AvInput id="project-technology-idProject" type="select" className="form-control" name="idProject.id">
                   <option value="" key="0" />
                   {projects
                     ? projects.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idProject}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="project-technology-technology">Technology</Label>
-                <AvInput id="project-technology-technology" type="select" className="form-control" name="technology.id">
+                <Label for="project-technology-idTechnology">Id Technology</Label>
+                <AvInput id="project-technology-idTechnology" type="select" className="form-control" name="idTechnology.id">
                   <option value="" key="0" />
                   {technologies
                     ? technologies.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idTechnology}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}

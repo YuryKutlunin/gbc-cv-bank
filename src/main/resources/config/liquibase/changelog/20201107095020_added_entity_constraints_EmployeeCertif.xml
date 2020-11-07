@@ -8,15 +8,15 @@
     -->
     <changeSet id="20201107095020-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="employee_id"
+        <addForeignKeyConstraint baseColumnNames="email_id"
                                  baseTableName="employee_certif"
-                                 constraintName="fk_employee_certif_employee_id"
+                                 constraintName="fk_employee_certif_email_id"
                                  referencedColumnNames="id"
                                  referencedTableName="employee"/>
 
-        <addForeignKeyConstraint baseColumnNames="certificate_id"
+        <addForeignKeyConstraint baseColumnNames="id_certificate_id"
                                  baseTableName="employee_certif"
-                                 constraintName="fk_employee_certif_certificate_id"
+                                 constraintName="fk_employee_certif_id_certificate_id"
                                  referencedColumnNames="id"
                                  referencedTableName="certificate"/>
 

@@ -2,10 +2,6 @@
   "name": "Project",
   "fields": [
     {
-      "fieldName": "idProject",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "projectNm",
       "fieldType": "String"
     },
@@ -26,14 +22,14 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "projectTechnology",
-      "otherEntityRelationshipName": "project",
-      "relationshipName": "projecttechnology"
+      "otherEntityRelationshipName": "idProject",
+      "relationshipName": "projecttechnologyproject"
     },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "employeeProject",
-      "otherEntityRelationshipName": "project",
-      "relationshipName": "employeeproject"
+      "otherEntityRelationshipName": "idProject",
+      "relationshipName": "employeeprojectproject"
     }
   ],
   "changelogDate": "20201107094420",

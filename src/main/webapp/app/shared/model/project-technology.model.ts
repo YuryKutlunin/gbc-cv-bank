@@ -3,10 +3,8 @@ import { ITechnology } from 'app/shared/model/technology.model';
 
 export interface IProjectTechnology {
   id?: number;
-  idProject?: number;
-  idTechnology?: number;
-  project?: IProject;
-  technology?: ITechnology;
+  idProject?: IProject;
+  idTechnology?: ITechnology;
 }
 
 export const defaultValue: Readonly<IProjectTechnology> = {};

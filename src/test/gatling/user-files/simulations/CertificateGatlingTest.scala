@@ -72,7 +72,6 @@ class CertificateGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "idCertificate":null
                 , "certificateNm":"SAMPLE_TEXT"
                 , "certScopeNm":"SAMPLE_TEXT"
                 }""")).asJson

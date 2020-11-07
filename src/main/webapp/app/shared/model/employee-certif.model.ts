@@ -4,12 +4,10 @@ import { ICertificate } from 'app/shared/model/certificate.model';
 
 export interface IEmployeeCertif {
   id?: number;
-  email?: string;
-  idCertificate?: number;
   startDt?: string;
   endDt?: string;
-  employee?: IEmployee;
-  certificate?: ICertificate;
+  email?: IEmployee;
+  idCertificate?: ICertificate;
 }
 
 export const defaultValue: Readonly<IEmployeeCertif> = {};

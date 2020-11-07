@@ -72,12 +72,6 @@ export const UniversityUpdate = (props: IUniversityUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="idUniverLabel" for="university-idUniver">
-                  Id Univer
-                </Label>
-                <AvField id="university-idUniver" type="string" className="form-control" name="idUniver" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="univerNmLabel" for="university-univerNm">
                   Univer Nm
                 </Label>

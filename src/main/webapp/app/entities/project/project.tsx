@@ -33,7 +33,6 @@ export const Project = (props: IProjectProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Id Project</th>
                 <th>Project Nm</th>
                 <th>Company NM</th>
                 <th>Start Dt</th>
@@ -49,7 +48,6 @@ export const Project = (props: IProjectProps) => {
                       {project.id}
                     </Button>
                   </td>
-                  <td>{project.idProject}</td>
                   <td>{project.projectNm}</td>
                   <td>{project.companyNM}</td>
                   <td>{project.startDt ? <TextFormat type="date" value={project.startDt} format={APP_DATE_FORMAT} /> : null}</td>

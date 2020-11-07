@@ -72,7 +72,6 @@ class ProjectRoleGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "idRole":null
                 , "roleNm":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))

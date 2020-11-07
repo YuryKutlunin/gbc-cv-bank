@@ -26,10 +26,6 @@ export const ProjectDetail = (props: IProjectDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="idProject">Id Project</span>
-          </dt>
-          <dd>{projectEntity.idProject}</dd>
-          <dt>
             <span id="projectNm">Project Nm</span>
           </dt>
           <dd>{projectEntity.projectNm}</dd>

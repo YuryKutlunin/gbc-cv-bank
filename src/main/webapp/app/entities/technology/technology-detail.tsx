@@ -26,10 +26,6 @@ export const TechnologyDetail = (props: ITechnologyDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="idTechnology">Id Technology</span>
-          </dt>
-          <dd>{technologyEntity.idTechnology}</dd>
-          <dt>
             <span id="technologyNm">Technology Nm</span>
           </dt>
           <dd>{technologyEntity.technologyNm}</dd>

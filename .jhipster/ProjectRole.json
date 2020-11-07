@@ -2,10 +2,6 @@
   "name": "ProjectRole",
   "fields": [
     {
-      "fieldName": "idRole",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "roleNm",
       "fieldType": "String"
     }
@@ -14,8 +10,8 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "employeeProject",
-      "otherEntityRelationshipName": "projectrole",
-      "relationshipName": "employeeproject"
+      "otherEntityRelationshipName": "idRole",
+      "relationshipName": "employeeprojectprojectrole"
     }
   ],
   "changelogDate": "20201107094820",

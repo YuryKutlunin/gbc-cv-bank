@@ -35,8 +35,6 @@ export const ProjectTechnology = (props: IProjectTechnologyProps) => {
                 <th>ID</th>
                 <th>Id Project</th>
                 <th>Id Technology</th>
-                <th>Project</th>
-                <th>Technology</th>
                 <th />
               </tr>
             </thead>
@@ -48,18 +46,16 @@ export const ProjectTechnology = (props: IProjectTechnologyProps) => {
                       {projectTechnology.id}
                     </Button>
                   </td>
-                  <td>{projectTechnology.idProject}</td>
-                  <td>{projectTechnology.idTechnology}</td>
                   <td>
-                    {projectTechnology.project ? (
-                      <Link to={`project/${projectTechnology.project.id}`}>{projectTechnology.project.idProject}</Link>
+                    {projectTechnology.idProject ? (
+                      <Link to={`project/${projectTechnology.idProject.id}`}>{projectTechnology.idProject.id}</Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {projectTechnology.technology ? (
-                      <Link to={`technology/${projectTechnology.technology.id}`}>{projectTechnology.technology.idTechnology}</Link>
+                    {projectTechnology.idTechnology ? (
+                      <Link to={`technology/${projectTechnology.idTechnology.id}`}>{projectTechnology.idTechnology.id}</Link>
                     ) : (
                       ''
                     )}

@@ -8,21 +8,21 @@
     -->
     <changeSet id="20201107095220-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="employee_id"
+        <addForeignKeyConstraint baseColumnNames="email_id"
                                  baseTableName="employee_skill"
-                                 constraintName="fk_employee_skill_employee_id"
+                                 constraintName="fk_employee_skill_email_id"
                                  referencedColumnNames="id"
                                  referencedTableName="employee"/>
 
-        <addForeignKeyConstraint baseColumnNames="skill_id"
+        <addForeignKeyConstraint baseColumnNames="id_skill_id"
                                  baseTableName="employee_skill"
-                                 constraintName="fk_employee_skill_skill_id"
+                                 constraintName="fk_employee_skill_id_skill_id"
                                  referencedColumnNames="id"
                                  referencedTableName="skill"/>
 
-        <addForeignKeyConstraint baseColumnNames="skilllevel_id"
+        <addForeignKeyConstraint baseColumnNames="id_level_id"
                                  baseTableName="employee_skill"
-                                 constraintName="fk_employee_skill_skilllevel_id"
+                                 constraintName="fk_employee_skill_id_level_id"
                                  referencedColumnNames="id"
                                  referencedTableName="skill_level"/>
 

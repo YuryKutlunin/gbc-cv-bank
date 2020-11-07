@@ -26,18 +26,6 @@ export const EducationDetail = (props: IEducationDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="email">Email</span>
-          </dt>
-          <dd>{educationEntity.email}</dd>
-          <dt>
-            <span id="idUniver">Id Univer</span>
-          </dt>
-          <dd>{educationEntity.idUniver}</dd>
-          <dt>
-            <span id="idEducType">Id Educ Type</span>
-          </dt>
-          <dd>{educationEntity.idEducType}</dd>
-          <dt>
             <span id="faculty">Faculty</span>
           </dt>
           <dd>{educationEntity.faculty}</dd>
@@ -57,12 +45,12 @@ export const EducationDetail = (props: IEducationDetailProps) => {
             <span id="endYear">End Year</span>
           </dt>
           <dd>{educationEntity.endYear}</dd>
-          <dt>Employee</dt>
-          <dd>{educationEntity.employee ? educationEntity.employee.email : ''}</dd>
-          <dt>University</dt>
-          <dd>{educationEntity.university ? educationEntity.university.idUniver : ''}</dd>
-          <dt>Eductype</dt>
-          <dd>{educationEntity.eductype ? educationEntity.eductype.idEducType : ''}</dd>
+          <dt>Email</dt>
+          <dd>{educationEntity.email ? educationEntity.email.email : ''}</dd>
+          <dt>Id Univer</dt>
+          <dd>{educationEntity.idUniver ? educationEntity.idUniver.id : ''}</dd>
+          <dt>Id Educ Type</dt>
+          <dd>{educationEntity.idEducType ? educationEntity.idEducType.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/education" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

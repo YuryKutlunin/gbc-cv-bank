@@ -3,18 +3,20 @@ package com.glowbyteconsulting.cvbank.web.rest;
 import com.glowbyteconsulting.cvbank.domain.ProjectTechnology;
 import com.glowbyteconsulting.cvbank.repository.ProjectTechnologyRepository;
 import com.glowbyteconsulting.cvbank.web.rest.errors.BadRequestAlertException;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.glowbyteconsulting.cvbank.domain.ProjectTechnology}.
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 @Transactional
 public class ProjectTechnologyResource {
+
     private final Logger log = LoggerFactory.getLogger(ProjectTechnologyResource.class);
 
     private static final String ENTITY_NAME = "projectTechnology";
@@ -44,15 +47,13 @@ public class ProjectTechnologyResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/project-technologies")
-    public ResponseEntity<ProjectTechnology> createProjectTechnology(@RequestBody ProjectTechnology projectTechnology)
-        throws URISyntaxException {
+    public ResponseEntity<ProjectTechnology> createProjectTechnology(@RequestBody ProjectTechnology projectTechnology) throws URISyntaxException {
         log.debug("REST request to save ProjectTechnology : {}", projectTechnology);
         if (projectTechnology.getId() != null) {
             throw new BadRequestAlertException("A new projectTechnology cannot already have an ID", ENTITY_NAME, "idexists");
         }
         ProjectTechnology result = projectTechnologyRepository.save(projectTechnology);
-        return ResponseEntity
-            .created(new URI("/api/project-technologies/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/project-technologies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -67,15 +68,13 @@ public class ProjectTechnologyResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/project-technologies")
-    public ResponseEntity<ProjectTechnology> updateProjectTechnology(@RequestBody ProjectTechnology projectTechnology)
-        throws URISyntaxException {
+    public ResponseEntity<ProjectTechnology> updateProjectTechnology(@RequestBody ProjectTechnology projectTechnology) throws URISyntaxException {
         log.debug("REST request to update ProjectTechnology : {}", projectTechnology);
         if (projectTechnology.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         ProjectTechnology result = projectTechnologyRepository.save(projectTechnology);
-        return ResponseEntity
-            .ok()
+        return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, projectTechnology.getId().toString()))
             .body(result);
     }
@@ -114,9 +113,6 @@ public class ProjectTechnologyResource {
     public ResponseEntity<Void> deleteProjectTechnology(@PathVariable Long id) {
         log.debug("REST request to delete ProjectTechnology : {}", id);
         projectTechnologyRepository.deleteById(id);
-        return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

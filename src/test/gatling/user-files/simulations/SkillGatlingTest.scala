@@ -72,7 +72,6 @@ class SkillGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "idSkill":null
                 , "skillNm":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))

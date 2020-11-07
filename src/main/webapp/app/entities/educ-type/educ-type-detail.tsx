@@ -26,10 +26,6 @@ export const EducTypeDetail = (props: IEducTypeDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="idEducType">Id Educ Type</span>
-          </dt>
-          <dd>{educTypeEntity.idEducType}</dd>
-          <dt>
             <span id="educTypeNm">Educ Type Nm</span>
           </dt>
           <dd>{educTypeEntity.educTypeNm}</dd>

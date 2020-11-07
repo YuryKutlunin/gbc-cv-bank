@@ -26,18 +26,6 @@ export const EmployeeProjectDetail = (props: IEmployeeProjectDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="email">Email</span>
-          </dt>
-          <dd>{employeeProjectEntity.email}</dd>
-          <dt>
-            <span id="idProject">Id Project</span>
-          </dt>
-          <dd>{employeeProjectEntity.idProject}</dd>
-          <dt>
-            <span id="idRole">Id Role</span>
-          </dt>
-          <dd>{employeeProjectEntity.idRole}</dd>
-          <dt>
             <span id="responsibilityNm">Responsibility Nm</span>
           </dt>
           <dd>{employeeProjectEntity.responsibilityNm}</dd>
@@ -55,12 +43,12 @@ export const EmployeeProjectDetail = (props: IEmployeeProjectDetailProps) => {
           <dd>
             {employeeProjectEntity.endDt ? <TextFormat value={employeeProjectEntity.endDt} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
-          <dt>Employee</dt>
-          <dd>{employeeProjectEntity.employee ? employeeProjectEntity.employee.email : ''}</dd>
-          <dt>Project</dt>
-          <dd>{employeeProjectEntity.project ? employeeProjectEntity.project.idProject : ''}</dd>
-          <dt>Projectrole</dt>
-          <dd>{employeeProjectEntity.projectrole ? employeeProjectEntity.projectrole.idRole : ''}</dd>
+          <dt>Email</dt>
+          <dd>{employeeProjectEntity.email ? employeeProjectEntity.email.email : ''}</dd>
+          <dt>Id Project</dt>
+          <dd>{employeeProjectEntity.idProject ? employeeProjectEntity.idProject.id : ''}</dd>
+          <dt>Id Role</dt>
+          <dd>{employeeProjectEntity.idRole ? employeeProjectEntity.idRole.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/employee-project" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

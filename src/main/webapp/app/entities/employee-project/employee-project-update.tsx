@@ -21,9 +21,9 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IEmployeeProjectUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const EmployeeProjectUpdate = (props: IEmployeeProjectUpdateProps) => {
-  const [employeeId, setEmployeeId] = useState('0');
-  const [projectId, setProjectId] = useState('0');
-  const [projectroleId, setProjectroleId] = useState('0');
+  const [emailId, setEmailId] = useState('0');
+  const [idProjectId, setIdProjectId] = useState('0');
+  const [idRoleId, setIdRoleId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
   const { employeeProjectEntity, employees, projects, projectRoles, loading, updating } = props;
@@ -88,24 +88,6 @@ export const EmployeeProjectUpdate = (props: IEmployeeProjectUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="emailLabel" for="employee-project-email">
-                  Email
-                </Label>
-                <AvField id="employee-project-email" type="text" name="email" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="idProjectLabel" for="employee-project-idProject">
-                  Id Project
-                </Label>
-                <AvField id="employee-project-idProject" type="string" className="form-control" name="idProject" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="idRoleLabel" for="employee-project-idRole">
-                  Id Role
-                </Label>
-                <AvField id="employee-project-idRole" type="string" className="form-control" name="idRole" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="responsibilityNmLabel" for="employee-project-responsibilityNm">
                   Responsibility Nm
                 </Label>
@@ -138,8 +120,8 @@ export const EmployeeProjectUpdate = (props: IEmployeeProjectUpdateProps) => {
                 />
               </AvGroup>
               <AvGroup>
-                <Label for="employee-project-employee">Employee</Label>
-                <AvInput id="employee-project-employee" type="select" className="form-control" name="employee.id">
+                <Label for="employee-project-email">Email</Label>
+                <AvInput id="employee-project-email" type="select" className="form-control" name="email.id">
                   <option value="" key="0" />
                   {employees
                     ? employees.map(otherEntity => (
@@ -151,26 +133,26 @@ export const EmployeeProjectUpdate = (props: IEmployeeProjectUpdateProps) => {
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="employee-project-project">Project</Label>
-                <AvInput id="employee-project-project" type="select" className="form-control" name="project.id">
+                <Label for="employee-project-idProject">Id Project</Label>
+                <AvInput id="employee-project-idProject" type="select" className="form-control" name="idProject.id">
                   <option value="" key="0" />
                   {projects
                     ? projects.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idProject}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="employee-project-projectrole">Projectrole</Label>
-                <AvInput id="employee-project-projectrole" type="select" className="form-control" name="projectrole.id">
+                <Label for="employee-project-idRole">Id Role</Label>
+                <AvInput id="employee-project-idRole" type="select" className="form-control" name="idRole.id">
                   <option value="" key="0" />
                   {projectRoles
                     ? projectRoles.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idRole}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, Label } from 'reactstrap';
-import { AvFeedback, AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
+import { AvFeedback, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
@@ -21,9 +21,9 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IEmployeeSkillUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const EmployeeSkillUpdate = (props: IEmployeeSkillUpdateProps) => {
-  const [employeeId, setEmployeeId] = useState('0');
-  const [skillId, setSkillId] = useState('0');
-  const [skilllevelId, setSkilllevelId] = useState('0');
+  const [emailId, setEmailId] = useState('0');
+  const [idSkillId, setIdSkillId] = useState('0');
+  const [idLevelId, setIdLevelId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
   const { employeeSkillEntity, employees, skills, skillLevels, loading, updating } = props;
@@ -85,26 +85,8 @@ export const EmployeeSkillUpdate = (props: IEmployeeSkillUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="emailLabel" for="employee-skill-email">
-                  Email
-                </Label>
-                <AvField id="employee-skill-email" type="text" name="email" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="idSkillLabel" for="employee-skill-idSkill">
-                  Id Skill
-                </Label>
-                <AvField id="employee-skill-idSkill" type="string" className="form-control" name="idSkill" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="idLevelLabel" for="employee-skill-idLevel">
-                  Id Level
-                </Label>
-                <AvField id="employee-skill-idLevel" type="string" className="form-control" name="idLevel" />
-              </AvGroup>
-              <AvGroup>
-                <Label for="employee-skill-employee">Employee</Label>
-                <AvInput id="employee-skill-employee" type="select" className="form-control" name="employee.id">
+                <Label for="employee-skill-email">Email</Label>
+                <AvInput id="employee-skill-email" type="select" className="form-control" name="email.id">
                   <option value="" key="0" />
                   {employees
                     ? employees.map(otherEntity => (
@@ -116,26 +98,26 @@ export const EmployeeSkillUpdate = (props: IEmployeeSkillUpdateProps) => {
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="employee-skill-skill">Skill</Label>
-                <AvInput id="employee-skill-skill" type="select" className="form-control" name="skill.id">
+                <Label for="employee-skill-idSkill">Id Skill</Label>
+                <AvInput id="employee-skill-idSkill" type="select" className="form-control" name="idSkill.id">
                   <option value="" key="0" />
                   {skills
                     ? skills.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idSkill}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="employee-skill-skilllevel">Skilllevel</Label>
-                <AvInput id="employee-skill-skilllevel" type="select" className="form-control" name="skilllevel.id">
+                <Label for="employee-skill-idLevel">Id Level</Label>
+                <AvInput id="employee-skill-idLevel" type="select" className="form-control" name="idLevel.id">
                   <option value="" key="0" />
                   {skillLevels
                     ? skillLevels.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idLevel}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}

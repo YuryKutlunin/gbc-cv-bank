@@ -2,14 +2,6 @@
   "name": "EmployeeCertif",
   "fields": [
     {
-      "fieldName": "email",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "idCertificate",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "startDt",
       "fieldType": "Instant"
     },
@@ -22,16 +14,16 @@
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "employee",
-      "otherEntityRelationshipName": "employeecertif",
-      "relationshipName": "employee",
+      "otherEntityRelationshipName": "employeecertifemployee",
+      "relationshipName": "email",
       "otherEntityField": "email"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "certificate",
-      "otherEntityRelationshipName": "employeecertif",
-      "relationshipName": "certificate",
-      "otherEntityField": "idCertificate"
+      "otherEntityRelationshipName": "employeecertifcertificate",
+      "relationshipName": "idCertificate",
+      "otherEntityField": "id"
     }
   ],
   "changelogDate": "20201107095020",

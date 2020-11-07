@@ -1,15 +1,9 @@
 package com.glowbyteconsulting.cvbank.web.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import com.glowbyteconsulting.cvbank.GbccvBankApp;
 import com.glowbyteconsulting.cvbank.domain.SkillLevel;
 import com.glowbyteconsulting.cvbank.repository.SkillLevelRepository;
-import java.util.List;
-import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +13,13 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import javax.persistence.EntityManager;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link SkillLevelResource} REST controller.
@@ -27,8 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 public class SkillLevelResourceIT {
-    private static final Long DEFAULT_ID_LEVEL = 1L;
-    private static final Long UPDATED_ID_LEVEL = 2L;
 
     private static final String DEFAULT_LEVEL_DESC = "AAAAAAAAAA";
     private static final String UPDATED_LEVEL_DESC = "BBBBBBBBBB";
@@ -51,10 +50,10 @@ public class SkillLevelResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static SkillLevel createEntity(EntityManager em) {
-        SkillLevel skillLevel = new SkillLevel().idLevel(DEFAULT_ID_LEVEL).levelDesc(DEFAULT_LEVEL_DESC);
+        SkillLevel skillLevel = new SkillLevel()
+            .levelDesc(DEFAULT_LEVEL_DESC);
         return skillLevel;
     }
-
     /**
      * Create an updated entity for this test.
      *
@@ -62,7 +61,8 @@ public class SkillLevelResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static SkillLevel createUpdatedEntity(EntityManager em) {
-        SkillLevel skillLevel = new SkillLevel().idLevel(UPDATED_ID_LEVEL).levelDesc(UPDATED_LEVEL_DESC);
+        SkillLevel skillLevel = new SkillLevel()
+            .levelDesc(UPDATED_LEVEL_DESC);
         return skillLevel;
     }
 
@@ -76,17 +76,15 @@ public class SkillLevelResourceIT {
     public void createSkillLevel() throws Exception {
         int databaseSizeBeforeCreate = skillLevelRepository.findAll().size();
         // Create the SkillLevel
-        restSkillLevelMockMvc
-            .perform(
-                post("/api/skill-levels").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(skillLevel))
-            )
+        restSkillLevelMockMvc.perform(post("/api/skill-levels")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(skillLevel)))
             .andExpect(status().isCreated());
 
         // Validate the SkillLevel in the database
         List<SkillLevel> skillLevelList = skillLevelRepository.findAll();
         assertThat(skillLevelList).hasSize(databaseSizeBeforeCreate + 1);
         SkillLevel testSkillLevel = skillLevelList.get(skillLevelList.size() - 1);
-        assertThat(testSkillLevel.getIdLevel()).isEqualTo(DEFAULT_ID_LEVEL);
         assertThat(testSkillLevel.getLevelDesc()).isEqualTo(DEFAULT_LEVEL_DESC);
     }
 
@@ -99,16 +97,16 @@ public class SkillLevelResourceIT {
         skillLevel.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restSkillLevelMockMvc
-            .perform(
-                post("/api/skill-levels").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(skillLevel))
-            )
+        restSkillLevelMockMvc.perform(post("/api/skill-levels")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(skillLevel)))
             .andExpect(status().isBadRequest());
 
         // Validate the SkillLevel in the database
         List<SkillLevel> skillLevelList = skillLevelRepository.findAll();
         assertThat(skillLevelList).hasSize(databaseSizeBeforeCreate);
     }
+
 
     @Test
     @Transactional
@@ -117,15 +115,13 @@ public class SkillLevelResourceIT {
         skillLevelRepository.saveAndFlush(skillLevel);
 
         // Get all the skillLevelList
-        restSkillLevelMockMvc
-            .perform(get("/api/skill-levels?sort=id,desc"))
+        restSkillLevelMockMvc.perform(get("/api/skill-levels?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(skillLevel.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idLevel").value(hasItem(DEFAULT_ID_LEVEL.intValue())))
             .andExpect(jsonPath("$.[*].levelDesc").value(hasItem(DEFAULT_LEVEL_DESC)));
     }
-
+    
     @Test
     @Transactional
     public void getSkillLevel() throws Exception {
@@ -133,20 +129,18 @@ public class SkillLevelResourceIT {
         skillLevelRepository.saveAndFlush(skillLevel);
 
         // Get the skillLevel
-        restSkillLevelMockMvc
-            .perform(get("/api/skill-levels/{id}", skillLevel.getId()))
+        restSkillLevelMockMvc.perform(get("/api/skill-levels/{id}", skillLevel.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(skillLevel.getId().intValue()))
-            .andExpect(jsonPath("$.idLevel").value(DEFAULT_ID_LEVEL.intValue()))
             .andExpect(jsonPath("$.levelDesc").value(DEFAULT_LEVEL_DESC));
     }
-
     @Test
     @Transactional
     public void getNonExistingSkillLevel() throws Exception {
         // Get the skillLevel
-        restSkillLevelMockMvc.perform(get("/api/skill-levels/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
+        restSkillLevelMockMvc.perform(get("/api/skill-levels/{id}", Long.MAX_VALUE))
+            .andExpect(status().isNotFound());
     }
 
     @Test
@@ -161,21 +155,18 @@ public class SkillLevelResourceIT {
         SkillLevel updatedSkillLevel = skillLevelRepository.findById(skillLevel.getId()).get();
         // Disconnect from session so that the updates on updatedSkillLevel are not directly saved in db
         em.detach(updatedSkillLevel);
-        updatedSkillLevel.idLevel(UPDATED_ID_LEVEL).levelDesc(UPDATED_LEVEL_DESC);
+        updatedSkillLevel
+            .levelDesc(UPDATED_LEVEL_DESC);
 
-        restSkillLevelMockMvc
-            .perform(
-                put("/api/skill-levels")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedSkillLevel))
-            )
+        restSkillLevelMockMvc.perform(put("/api/skill-levels")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(updatedSkillLevel)))
             .andExpect(status().isOk());
 
         // Validate the SkillLevel in the database
         List<SkillLevel> skillLevelList = skillLevelRepository.findAll();
         assertThat(skillLevelList).hasSize(databaseSizeBeforeUpdate);
         SkillLevel testSkillLevel = skillLevelList.get(skillLevelList.size() - 1);
-        assertThat(testSkillLevel.getIdLevel()).isEqualTo(UPDATED_ID_LEVEL);
         assertThat(testSkillLevel.getLevelDesc()).isEqualTo(UPDATED_LEVEL_DESC);
     }
 
@@ -185,10 +176,9 @@ public class SkillLevelResourceIT {
         int databaseSizeBeforeUpdate = skillLevelRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restSkillLevelMockMvc
-            .perform(
-                put("/api/skill-levels").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(skillLevel))
-            )
+        restSkillLevelMockMvc.perform(put("/api/skill-levels")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(skillLevel)))
             .andExpect(status().isBadRequest());
 
         // Validate the SkillLevel in the database
@@ -205,8 +195,8 @@ public class SkillLevelResourceIT {
         int databaseSizeBeforeDelete = skillLevelRepository.findAll().size();
 
         // Delete the skillLevel
-        restSkillLevelMockMvc
-            .perform(delete("/api/skill-levels/{id}", skillLevel.getId()).accept(MediaType.APPLICATION_JSON))
+        restSkillLevelMockMvc.perform(delete("/api/skill-levels/{id}", skillLevel.getId())
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

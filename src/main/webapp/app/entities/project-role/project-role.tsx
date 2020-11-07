@@ -33,7 +33,6 @@ export const ProjectRole = (props: IProjectRoleProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Id Role</th>
                 <th>Role Nm</th>
                 <th />
               </tr>
@@ -46,7 +45,6 @@ export const ProjectRole = (props: IProjectRoleProps) => {
                       {projectRole.id}
                     </Button>
                   </td>
-                  <td>{projectRole.idRole}</td>
                   <td>{projectRole.roleNm}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

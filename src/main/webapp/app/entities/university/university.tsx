@@ -33,7 +33,6 @@ export const University = (props: IUniversityProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Id Univer</th>
                 <th>Univer Nm</th>
                 <th />
               </tr>
@@ -46,7 +45,6 @@ export const University = (props: IUniversityProps) => {
                       {university.id}
                     </Button>
                   </td>
-                  <td>{university.idUniver}</td>
                   <td>{university.univerNm}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

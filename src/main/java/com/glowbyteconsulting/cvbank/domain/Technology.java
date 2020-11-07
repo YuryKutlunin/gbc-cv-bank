@@ -1,11 +1,13 @@
 package com.glowbyteconsulting.cvbank.domain;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Technology.
@@ -14,6 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "technology")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Technology implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,15 +24,12 @@ public class Technology implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "id_technology")
-    private Long idTechnology;
-
     @Column(name = "technology_nm")
     private String technologyNm;
 
-    @OneToMany(mappedBy = "technology")
+    @OneToMany(mappedBy = "idTechnology")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<ProjectTechnology> projecttechnologies = new HashSet<>();
+    private Set<ProjectTechnology> projecttechnologytechnologies = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -38,19 +38,6 @@ public class Technology implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdTechnology() {
-        return idTechnology;
-    }
-
-    public Technology idTechnology(Long idTechnology) {
-        this.idTechnology = idTechnology;
-        return this;
-    }
-
-    public void setIdTechnology(Long idTechnology) {
-        this.idTechnology = idTechnology;
     }
 
     public String getTechnologyNm() {
@@ -66,31 +53,30 @@ public class Technology implements Serializable {
         this.technologyNm = technologyNm;
     }
 
-    public Set<ProjectTechnology> getProjecttechnologies() {
-        return projecttechnologies;
+    public Set<ProjectTechnology> getProjecttechnologytechnologies() {
+        return projecttechnologytechnologies;
     }
 
-    public Technology projecttechnologies(Set<ProjectTechnology> projectTechnologies) {
-        this.projecttechnologies = projectTechnologies;
+    public Technology projecttechnologytechnologies(Set<ProjectTechnology> projectTechnologies) {
+        this.projecttechnologytechnologies = projectTechnologies;
         return this;
     }
 
-    public Technology addProjecttechnology(ProjectTechnology projectTechnology) {
-        this.projecttechnologies.add(projectTechnology);
-        projectTechnology.setTechnology(this);
+    public Technology addProjecttechnologytechnology(ProjectTechnology projectTechnology) {
+        this.projecttechnologytechnologies.add(projectTechnology);
+        projectTechnology.setIdTechnology(this);
         return this;
     }
 
-    public Technology removeProjecttechnology(ProjectTechnology projectTechnology) {
-        this.projecttechnologies.remove(projectTechnology);
-        projectTechnology.setTechnology(null);
+    public Technology removeProjecttechnologytechnology(ProjectTechnology projectTechnology) {
+        this.projecttechnologytechnologies.remove(projectTechnology);
+        projectTechnology.setIdTechnology(null);
         return this;
     }
 
-    public void setProjecttechnologies(Set<ProjectTechnology> projectTechnologies) {
-        this.projecttechnologies = projectTechnologies;
+    public void setProjecttechnologytechnologies(Set<ProjectTechnology> projectTechnologies) {
+        this.projecttechnologytechnologies = projectTechnologies;
     }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -114,7 +100,6 @@ public class Technology implements Serializable {
     public String toString() {
         return "Technology{" +
             "id=" + getId() +
-            ", idTechnology=" + getIdTechnology() +
             ", technologyNm='" + getTechnologyNm() + "'" +
             "}";
     }

@@ -20,10 +20,10 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IEmployeeUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
-  const [employeeId, setEmployeeId] = useState('0');
-  const [emplId, setEmplId] = useState('0');
-  const [resourcePoolId, setResourcePoolId] = useState('0');
-  const [jobtitleId, setJobtitleId] = useState('0');
+  const [employeeemployeeId, setEmployeeemployeeId] = useState('0');
+  const [emailCuratorId, setEmailCuratorId] = useState('0');
+  const [resourcePoolIdId, setResourcePoolIdId] = useState('0');
+  const [idTitleId, setIdTitleId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
   const { employeeEntity, employees, resourcePools, jobTitles, loading, updating } = props;
@@ -136,26 +136,8 @@ export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
                 />
               </AvGroup>
               <AvGroup>
-                <Label id="idTitleLabel" for="employee-idTitle">
-                  Id Title
-                </Label>
-                <AvField id="employee-idTitle" type="string" className="form-control" name="idTitle" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="resourcePoolCodeLabel" for="employee-resourcePoolCode">
-                  Resource Pool Code
-                </Label>
-                <AvField id="employee-resourcePoolCode" type="text" name="resourcePoolCode" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="emailCuratorLabel" for="employee-emailCurator">
-                  Email Curator
-                </Label>
-                <AvField id="employee-emailCurator" type="text" name="emailCurator" />
-              </AvGroup>
-              <AvGroup>
-                <Label for="employee-empl">Empl</Label>
-                <AvInput id="employee-empl" type="select" className="form-control" name="empl.id">
+                <Label for="employee-emailCurator">Email Curator</Label>
+                <AvInput id="employee-emailCurator" type="select" className="form-control" name="emailCurator.id">
                   <option value="" key="0" />
                   {employees
                     ? employees.map(otherEntity => (
@@ -167,26 +149,26 @@ export const EmployeeUpdate = (props: IEmployeeUpdateProps) => {
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="employee-resourcePool">Resource Pool</Label>
-                <AvInput id="employee-resourcePool" type="select" className="form-control" name="resourcePool.id">
+                <Label for="employee-resourcePoolId">Resource Pool Id</Label>
+                <AvInput id="employee-resourcePoolId" type="select" className="form-control" name="resourcePoolId.id">
                   <option value="" key="0" />
                   {resourcePools
                     ? resourcePools.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.resourcePoolCode}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="employee-jobtitle">Jobtitle</Label>
-                <AvInput id="employee-jobtitle" type="select" className="form-control" name="jobtitle.id">
+                <Label for="employee-idTitle">Id Title</Label>
+                <AvInput id="employee-idTitle" type="select" className="form-control" name="idTitle.id">
                   <option value="" key="0" />
                   {jobTitles
                     ? jobTitles.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idTitle}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}

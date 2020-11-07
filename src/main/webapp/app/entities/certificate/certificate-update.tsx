@@ -72,12 +72,6 @@ export const CertificateUpdate = (props: ICertificateUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="idCertificateLabel" for="certificate-idCertificate">
-                  Id Certificate
-                </Label>
-                <AvField id="certificate-idCertificate" type="string" className="form-control" name="idCertificate" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="certificateNmLabel" for="certificate-certificateNm">
                   Certificate Nm
                 </Label>

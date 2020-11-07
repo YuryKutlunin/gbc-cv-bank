@@ -25,18 +25,10 @@ export const ProjectTechnologyDetail = (props: IProjectTechnologyDetailProps) =>
           ProjectTechnology [<b>{projectTechnologyEntity.id}</b>]
         </h2>
         <dl className="jh-entity-details">
-          <dt>
-            <span id="idProject">Id Project</span>
-          </dt>
-          <dd>{projectTechnologyEntity.idProject}</dd>
-          <dt>
-            <span id="idTechnology">Id Technology</span>
-          </dt>
-          <dd>{projectTechnologyEntity.idTechnology}</dd>
-          <dt>Project</dt>
-          <dd>{projectTechnologyEntity.project ? projectTechnologyEntity.project.idProject : ''}</dd>
-          <dt>Technology</dt>
-          <dd>{projectTechnologyEntity.technology ? projectTechnologyEntity.technology.idTechnology : ''}</dd>
+          <dt>Id Project</dt>
+          <dd>{projectTechnologyEntity.idProject ? projectTechnologyEntity.idProject.id : ''}</dd>
+          <dt>Id Technology</dt>
+          <dd>{projectTechnologyEntity.idTechnology ? projectTechnologyEntity.idTechnology.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/project-technology" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
