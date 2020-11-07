@@ -57,13 +57,13 @@ spring:
     basename: i18n/messages
   task:
     execution:
-      thread-name-prefix: gbccv-bank-task-
+      thread-name-prefix: gbc-cv-bank-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: gbccv-bank-scheduling-
+      thread-name-prefix: gbc-cv-bank-scheduling-
       pool:
         size: 1
   thymeleaf:

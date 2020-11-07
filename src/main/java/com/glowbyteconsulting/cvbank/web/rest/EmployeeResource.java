@@ -3,20 +3,18 @@ package com.glowbyteconsulting.cvbank.web.rest;
 import com.glowbyteconsulting.cvbank.domain.Employee;
 import com.glowbyteconsulting.cvbank.repository.EmployeeRepository;
 import com.glowbyteconsulting.cvbank.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.glowbyteconsulting.cvbank.domain.Employee}.
@@ -25,7 +23,6 @@ import java.util.Optional;
 @RequestMapping("/api")
 @Transactional
 public class EmployeeResource {
-
     private final Logger log = LoggerFactory.getLogger(EmployeeResource.class);
 
     private static final String ENTITY_NAME = "employee";
@@ -53,7 +50,8 @@ public class EmployeeResource {
             throw new BadRequestAlertException("A new employee cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Employee result = employeeRepository.save(employee);
-        return ResponseEntity.created(new URI("/api/employees/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/employees/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -74,7 +72,8 @@ public class EmployeeResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Employee result = employeeRepository.save(employee);
-        return ResponseEntity.ok()
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, employee.getId().toString()))
             .body(result);
     }
@@ -91,15 +90,28 @@ public class EmployeeResource {
     }
 
     /**
-     * {@code GET  /employees/:id} : get the "id" employee.
+     * {@code GET  /employee/:id} : get the "id" employee.
      *
      * @param id the id of the employee to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the employee, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/employees/{id}")
+    @GetMapping("/employee/{id}")
     public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
         log.debug("REST request to get Employee : {}", id);
         Optional<Employee> employee = employeeRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(employee);
+    }
+
+    /**
+     * {@code GET  /employees/:email} : get the "email" employees.
+     *
+     * @param email the email of the employee to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the employee, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/employees/{email}")
+    public ResponseEntity<List<Employee>> getEmployeeByEmail(@PathVariable String email) {
+        log.debug("REST request to get Employee : {}", email);
+        Optional<List<Employee>> employee = employeeRepository.findByEmail(email);
         return ResponseUtil.wrapOrNotFound(employee);
     }
 
@@ -113,6 +125,9 @@ public class EmployeeResource {
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         log.debug("REST request to delete Employee : {}", id);
         employeeRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+            .build();
     }
 }
