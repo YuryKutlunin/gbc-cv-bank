@@ -15,15 +15,6 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="id_project" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="id_role" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="responsibility_nm" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -33,13 +24,13 @@
             <column name="end_dt" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="employee_id" type="bigint">
+            <column name="email_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="project_id" type="bigint">
+            <column name="id_project_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="projectrole_id" type="bigint">
+            <column name="id_role_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -67,9 +58,6 @@
                   separator=";"
                   tableName="employee_project">
             <column name="id" type="numeric"/>
-            <column name="email" type="string"/>
-            <column name="id_project" type="numeric"/>
-            <column name="id_role" type="numeric"/>
             <column name="responsibility_nm" type="string"/>
             <column name="start_dt" type="datetime"/>
             <column name="end_dt" type="datetime"/>

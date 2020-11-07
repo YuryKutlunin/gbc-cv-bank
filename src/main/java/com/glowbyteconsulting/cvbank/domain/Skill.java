@@ -1,11 +1,13 @@
 package com.glowbyteconsulting.cvbank.domain;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A Skill.
@@ -14,6 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "skill")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Skill implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,15 +24,12 @@ public class Skill implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "id_skill")
-    private Long idSkill;
-
     @Column(name = "skill_nm")
     private String skillNm;
 
-    @OneToMany(mappedBy = "skill")
+    @OneToMany(mappedBy = "idSkill")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<EmployeeSkill> employeeskills = new HashSet<>();
+    private Set<EmployeeSkill> employeeskillskills = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -38,19 +38,6 @@ public class Skill implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdSkill() {
-        return idSkill;
-    }
-
-    public Skill idSkill(Long idSkill) {
-        this.idSkill = idSkill;
-        return this;
-    }
-
-    public void setIdSkill(Long idSkill) {
-        this.idSkill = idSkill;
     }
 
     public String getSkillNm() {
@@ -66,31 +53,30 @@ public class Skill implements Serializable {
         this.skillNm = skillNm;
     }
 
-    public Set<EmployeeSkill> getEmployeeskills() {
-        return employeeskills;
+    public Set<EmployeeSkill> getEmployeeskillskills() {
+        return employeeskillskills;
     }
 
-    public Skill employeeskills(Set<EmployeeSkill> employeeSkills) {
-        this.employeeskills = employeeSkills;
+    public Skill employeeskillskills(Set<EmployeeSkill> employeeSkills) {
+        this.employeeskillskills = employeeSkills;
         return this;
     }
 
-    public Skill addEmployeeskill(EmployeeSkill employeeSkill) {
-        this.employeeskills.add(employeeSkill);
-        employeeSkill.setSkill(this);
+    public Skill addEmployeeskillskill(EmployeeSkill employeeSkill) {
+        this.employeeskillskills.add(employeeSkill);
+        employeeSkill.setIdSkill(this);
         return this;
     }
 
-    public Skill removeEmployeeskill(EmployeeSkill employeeSkill) {
-        this.employeeskills.remove(employeeSkill);
-        employeeSkill.setSkill(null);
+    public Skill removeEmployeeskillskill(EmployeeSkill employeeSkill) {
+        this.employeeskillskills.remove(employeeSkill);
+        employeeSkill.setIdSkill(null);
         return this;
     }
 
-    public void setEmployeeskills(Set<EmployeeSkill> employeeSkills) {
-        this.employeeskills = employeeSkills;
+    public void setEmployeeskillskills(Set<EmployeeSkill> employeeSkills) {
+        this.employeeskillskills = employeeSkills;
     }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -114,7 +100,6 @@ public class Skill implements Serializable {
     public String toString() {
         return "Skill{" +
             "id=" + getId() +
-            ", idSkill=" + getIdSkill() +
             ", skillNm='" + getSkillNm() + "'" +
             "}";
     }

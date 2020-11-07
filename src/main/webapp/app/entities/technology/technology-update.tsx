@@ -72,12 +72,6 @@ export const TechnologyUpdate = (props: ITechnologyUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="idTechnologyLabel" for="technology-idTechnology">
-                  Id Technology
-                </Label>
-                <AvField id="technology-idTechnology" type="string" className="form-control" name="idTechnology" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="technologyNmLabel" for="technology-technologyNm">
                   Technology Nm
                 </Label>

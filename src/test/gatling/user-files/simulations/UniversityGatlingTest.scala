@@ -72,7 +72,6 @@ class UniversityGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "idUniver":null
                 , "univerNm":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))

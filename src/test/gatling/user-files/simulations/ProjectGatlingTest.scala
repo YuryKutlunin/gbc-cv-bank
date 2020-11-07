@@ -72,7 +72,6 @@ class ProjectGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "idProject":null
                 , "projectNm":"SAMPLE_TEXT"
                 , "companyNM":"SAMPLE_TEXT"
                 , "startDt":"2020-01-01T00:00:00.000Z"

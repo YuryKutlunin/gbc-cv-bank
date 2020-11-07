@@ -72,12 +72,6 @@ export const SkillLevelUpdate = (props: ISkillLevelUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="idLevelLabel" for="skill-level-idLevel">
-                  Id Level
-                </Label>
-                <AvField id="skill-level-idLevel" type="string" className="form-control" name="idLevel" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="levelDescLabel" for="skill-level-levelDesc">
                   Level Desc
                 </Label>

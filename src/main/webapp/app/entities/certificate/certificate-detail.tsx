@@ -26,10 +26,6 @@ export const CertificateDetail = (props: ICertificateDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="idCertificate">Id Certificate</span>
-          </dt>
-          <dd>{certificateEntity.idCertificate}</dd>
-          <dt>
             <span id="certificateNm">Certificate Nm</span>
           </dt>
           <dd>{certificateEntity.certificateNm}</dd>

@@ -26,10 +26,6 @@ export const UniversityDetail = (props: IUniversityDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="idUniver">Id Univer</span>
-          </dt>
-          <dd>{universityEntity.idUniver}</dd>
-          <dt>
             <span id="univerNm">Univer Nm</span>
           </dt>
           <dd>{universityEntity.univerNm}</dd>

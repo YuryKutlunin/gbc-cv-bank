@@ -72,8 +72,6 @@ class EmployeeCertifGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "email":"SAMPLE_TEXT"
-                , "idCertificate":null
                 , "startDt":"2020-01-01T00:00:00.000Z"
                 , "endDt":"2020-01-01T00:00:00.000Z"
                 }""")).asJson

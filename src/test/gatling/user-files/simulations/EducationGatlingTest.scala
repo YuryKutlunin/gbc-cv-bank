@@ -72,9 +72,6 @@ class EducationGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "email":"SAMPLE_TEXT"
-                , "idUniver":null
-                , "idEducType":"SAMPLE_TEXT"
                 , "faculty":"SAMPLE_TEXT"
                 , "specialty":"SAMPLE_TEXT"
                 , "specialization":"SAMPLE_TEXT"

@@ -29,9 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ResourcePoolResourceIT {
 
-    private static final String DEFAULT_RESOURCE_POOL_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_RESOURCE_POOL_CODE = "BBBBBBBBBB";
-
     private static final String DEFAULT_RESOURCE_POOL_NM = "AAAAAAAAAA";
     private static final String UPDATED_RESOURCE_POOL_NM = "BBBBBBBBBB";
 
@@ -57,7 +54,6 @@ public class ResourcePoolResourceIT {
      */
     public static ResourcePool createEntity(EntityManager em) {
         ResourcePool resourcePool = new ResourcePool()
-            .resourcePoolCode(DEFAULT_RESOURCE_POOL_CODE)
             .resourcePoolNm(DEFAULT_RESOURCE_POOL_NM)
             .poolLeader(DEFAULT_POOL_LEADER);
         return resourcePool;
@@ -70,7 +66,6 @@ public class ResourcePoolResourceIT {
      */
     public static ResourcePool createUpdatedEntity(EntityManager em) {
         ResourcePool resourcePool = new ResourcePool()
-            .resourcePoolCode(UPDATED_RESOURCE_POOL_CODE)
             .resourcePoolNm(UPDATED_RESOURCE_POOL_NM)
             .poolLeader(UPDATED_POOL_LEADER);
         return resourcePool;
@@ -95,7 +90,6 @@ public class ResourcePoolResourceIT {
         List<ResourcePool> resourcePoolList = resourcePoolRepository.findAll();
         assertThat(resourcePoolList).hasSize(databaseSizeBeforeCreate + 1);
         ResourcePool testResourcePool = resourcePoolList.get(resourcePoolList.size() - 1);
-        assertThat(testResourcePool.getResourcePoolCode()).isEqualTo(DEFAULT_RESOURCE_POOL_CODE);
         assertThat(testResourcePool.getResourcePoolNm()).isEqualTo(DEFAULT_RESOURCE_POOL_NM);
         assertThat(testResourcePool.getPoolLeader()).isEqualTo(DEFAULT_POOL_LEADER);
     }
@@ -131,7 +125,6 @@ public class ResourcePoolResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(resourcePool.getId().intValue())))
-            .andExpect(jsonPath("$.[*].resourcePoolCode").value(hasItem(DEFAULT_RESOURCE_POOL_CODE)))
             .andExpect(jsonPath("$.[*].resourcePoolNm").value(hasItem(DEFAULT_RESOURCE_POOL_NM)))
             .andExpect(jsonPath("$.[*].poolLeader").value(hasItem(DEFAULT_POOL_LEADER)));
     }
@@ -147,7 +140,6 @@ public class ResourcePoolResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(resourcePool.getId().intValue()))
-            .andExpect(jsonPath("$.resourcePoolCode").value(DEFAULT_RESOURCE_POOL_CODE))
             .andExpect(jsonPath("$.resourcePoolNm").value(DEFAULT_RESOURCE_POOL_NM))
             .andExpect(jsonPath("$.poolLeader").value(DEFAULT_POOL_LEADER));
     }
@@ -172,7 +164,6 @@ public class ResourcePoolResourceIT {
         // Disconnect from session so that the updates on updatedResourcePool are not directly saved in db
         em.detach(updatedResourcePool);
         updatedResourcePool
-            .resourcePoolCode(UPDATED_RESOURCE_POOL_CODE)
             .resourcePoolNm(UPDATED_RESOURCE_POOL_NM)
             .poolLeader(UPDATED_POOL_LEADER);
 
@@ -185,7 +176,6 @@ public class ResourcePoolResourceIT {
         List<ResourcePool> resourcePoolList = resourcePoolRepository.findAll();
         assertThat(resourcePoolList).hasSize(databaseSizeBeforeUpdate);
         ResourcePool testResourcePool = resourcePoolList.get(resourcePoolList.size() - 1);
-        assertThat(testResourcePool.getResourcePoolCode()).isEqualTo(UPDATED_RESOURCE_POOL_CODE);
         assertThat(testResourcePool.getResourcePoolNm()).isEqualTo(UPDATED_RESOURCE_POOL_NM);
         assertThat(testResourcePool.getPoolLeader()).isEqualTo(UPDATED_POOL_LEADER);
     }

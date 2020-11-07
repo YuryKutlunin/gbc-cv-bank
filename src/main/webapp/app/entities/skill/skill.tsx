@@ -33,7 +33,6 @@ export const Skill = (props: ISkillProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Id Skill</th>
                 <th>Skill Nm</th>
                 <th />
               </tr>
@@ -46,7 +45,6 @@ export const Skill = (props: ISkillProps) => {
                       {skill.id}
                     </Button>
                   </td>
-                  <td>{skill.idSkill}</td>
                   <td>{skill.skillNm}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

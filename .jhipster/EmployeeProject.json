@@ -2,18 +2,6 @@
   "name": "EmployeeProject",
   "fields": [
     {
-      "fieldName": "email",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "idProject",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idRole",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "responsibilityNm",
       "fieldType": "String"
     },
@@ -30,23 +18,23 @@
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "employee",
-      "otherEntityRelationshipName": "employeeproject",
-      "relationshipName": "employee",
+      "otherEntityRelationshipName": "employeeprojectemployee",
+      "relationshipName": "email",
       "otherEntityField": "email"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "project",
-      "otherEntityRelationshipName": "employeeproject",
-      "relationshipName": "project",
-      "otherEntityField": "idProject"
+      "otherEntityRelationshipName": "employeeprojectproject",
+      "relationshipName": "idProject",
+      "otherEntityField": "id"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "projectRole",
-      "otherEntityRelationshipName": "employeeproject",
-      "relationshipName": "projectrole",
-      "otherEntityField": "idRole"
+      "otherEntityRelationshipName": "employeeprojectprojectrole",
+      "relationshipName": "idRole",
+      "otherEntityField": "id"
     }
   ],
   "changelogDate": "20201107094720",

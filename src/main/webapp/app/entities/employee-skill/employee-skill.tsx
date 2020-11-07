@@ -36,9 +36,6 @@ export const EmployeeSkill = (props: IEmployeeSkillProps) => {
                 <th>Email</th>
                 <th>Id Skill</th>
                 <th>Id Level</th>
-                <th>Employee</th>
-                <th>Skill</th>
-                <th>Skilllevel</th>
                 <th />
               </tr>
             </thead>
@@ -50,19 +47,10 @@ export const EmployeeSkill = (props: IEmployeeSkillProps) => {
                       {employeeSkill.id}
                     </Button>
                   </td>
-                  <td>{employeeSkill.email}</td>
-                  <td>{employeeSkill.idSkill}</td>
-                  <td>{employeeSkill.idLevel}</td>
+                  <td>{employeeSkill.email ? <Link to={`employee/${employeeSkill.email.id}`}>{employeeSkill.email.email}</Link> : ''}</td>
+                  <td>{employeeSkill.idSkill ? <Link to={`skill/${employeeSkill.idSkill.id}`}>{employeeSkill.idSkill.id}</Link> : ''}</td>
                   <td>
-                    {employeeSkill.employee ? <Link to={`employee/${employeeSkill.employee.id}`}>{employeeSkill.employee.email}</Link> : ''}
-                  </td>
-                  <td>{employeeSkill.skill ? <Link to={`skill/${employeeSkill.skill.id}`}>{employeeSkill.skill.idSkill}</Link> : ''}</td>
-                  <td>
-                    {employeeSkill.skilllevel ? (
-                      <Link to={`skill-level/${employeeSkill.skilllevel.id}`}>{employeeSkill.skilllevel.idLevel}</Link>
-                    ) : (
-                      ''
-                    )}
+                    {employeeSkill.idLevel ? <Link to={`skill-level/${employeeSkill.idLevel.id}`}>{employeeSkill.idLevel.id}</Link> : ''}
                   </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

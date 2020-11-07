@@ -72,9 +72,6 @@ class EmployeeSkillGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "email":"SAMPLE_TEXT"
-                , "idSkill":null
-                , "idLevel":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_employeeSkill_url"))).exitHereIfFailed

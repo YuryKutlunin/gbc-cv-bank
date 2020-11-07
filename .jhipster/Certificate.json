@@ -2,10 +2,6 @@
   "name": "Certificate",
   "fields": [
     {
-      "fieldName": "idCertificate",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "certificateNm",
       "fieldType": "String"
     },
@@ -18,8 +14,8 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "employeeCertif",
-      "otherEntityRelationshipName": "certificate",
-      "relationshipName": "employeecertif"
+      "otherEntityRelationshipName": "idCertificate",
+      "relationshipName": "employeecertifcertificate"
     }
   ],
   "changelogDate": "20201107094920",

@@ -2,10 +2,6 @@
   "name": "University",
   "fields": [
     {
-      "fieldName": "idUniver",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "univerNm",
       "fieldType": "String"
     }
@@ -14,8 +10,8 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "education",
-      "otherEntityRelationshipName": "university",
-      "relationshipName": "education"
+      "otherEntityRelationshipName": "idUniver",
+      "relationshipName": "educationuniversity"
     }
   ],
   "changelogDate": "20201107094220",

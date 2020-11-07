@@ -33,12 +33,10 @@ export const EmployeeCertif = (props: IEmployeeCertifProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Email</th>
-                <th>Id Certificate</th>
                 <th>Start Dt</th>
                 <th>End Dt</th>
-                <th>Employee</th>
-                <th>Certificate</th>
+                <th>Email</th>
+                <th>Id Certificate</th>
                 <th />
               </tr>
             </thead>
@@ -50,22 +48,16 @@ export const EmployeeCertif = (props: IEmployeeCertifProps) => {
                       {employeeCertif.id}
                     </Button>
                   </td>
-                  <td>{employeeCertif.email}</td>
-                  <td>{employeeCertif.idCertificate}</td>
                   <td>
                     {employeeCertif.startDt ? <TextFormat type="date" value={employeeCertif.startDt} format={APP_DATE_FORMAT} /> : null}
                   </td>
                   <td>{employeeCertif.endDt ? <TextFormat type="date" value={employeeCertif.endDt} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>
-                    {employeeCertif.employee ? (
-                      <Link to={`employee/${employeeCertif.employee.id}`}>{employeeCertif.employee.email}</Link>
-                    ) : (
-                      ''
-                    )}
+                    {employeeCertif.email ? <Link to={`employee/${employeeCertif.email.id}`}>{employeeCertif.email.email}</Link> : ''}
                   </td>
                   <td>
-                    {employeeCertif.certificate ? (
-                      <Link to={`certificate/${employeeCertif.certificate.id}`}>{employeeCertif.certificate.idCertificate}</Link>
+                    {employeeCertif.idCertificate ? (
+                      <Link to={`certificate/${employeeCertif.idCertificate.id}`}>{employeeCertif.idCertificate.id}</Link>
                     ) : (
                       ''
                     )}

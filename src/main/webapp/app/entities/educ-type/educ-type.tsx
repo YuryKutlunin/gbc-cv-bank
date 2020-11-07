@@ -33,7 +33,6 @@ export const EducType = (props: IEducTypeProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Id Educ Type</th>
                 <th>Educ Type Nm</th>
                 <th />
               </tr>
@@ -46,7 +45,6 @@ export const EducType = (props: IEducTypeProps) => {
                       {educType.id}
                     </Button>
                   </td>
-                  <td>{educType.idEducType}</td>
                   <td>{educType.educTypeNm}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

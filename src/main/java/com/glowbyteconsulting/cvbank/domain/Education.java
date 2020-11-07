@@ -1,10 +1,12 @@
 package com.glowbyteconsulting.cvbank.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
 
 /**
  * A Education.
@@ -13,21 +15,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "education")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Education implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
-
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "id_univer")
-    private Long idUniver;
-
-    @Column(name = "id_educ_type")
-    private String idEducType;
 
     @Column(name = "faculty")
     private String faculty;
@@ -45,16 +39,16 @@ public class Education implements Serializable {
     private Long endYear;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "educations", allowSetters = true)
-    private Employee employee;
+    @JsonIgnoreProperties(value = "educationemployees", allowSetters = true)
+    private Employee email;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "educations", allowSetters = true)
-    private University university;
+    @JsonIgnoreProperties(value = "educationuniversities", allowSetters = true)
+    private University idUniver;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "educations", allowSetters = true)
-    private EducType eductype;
+    @JsonIgnoreProperties(value = "educationeductypes", allowSetters = true)
+    private EducType idEducType;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -63,45 +57,6 @@ public class Education implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Education email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getIdUniver() {
-        return idUniver;
-    }
-
-    public Education idUniver(Long idUniver) {
-        this.idUniver = idUniver;
-        return this;
-    }
-
-    public void setIdUniver(Long idUniver) {
-        this.idUniver = idUniver;
-    }
-
-    public String getIdEducType() {
-        return idEducType;
-    }
-
-    public Education idEducType(String idEducType) {
-        this.idEducType = idEducType;
-        return this;
-    }
-
-    public void setIdEducType(String idEducType) {
-        this.idEducType = idEducType;
     }
 
     public String getFaculty() {
@@ -169,45 +124,44 @@ public class Education implements Serializable {
         this.endYear = endYear;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Employee getEmail() {
+        return email;
     }
 
-    public Education employee(Employee employee) {
-        this.employee = employee;
+    public Education email(Employee employee) {
+        this.email = employee;
         return this;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmail(Employee employee) {
+        this.email = employee;
     }
 
-    public University getUniversity() {
-        return university;
+    public University getIdUniver() {
+        return idUniver;
     }
 
-    public Education university(University university) {
-        this.university = university;
+    public Education idUniver(University university) {
+        this.idUniver = university;
         return this;
     }
 
-    public void setUniversity(University university) {
-        this.university = university;
+    public void setIdUniver(University university) {
+        this.idUniver = university;
     }
 
-    public EducType getEductype() {
-        return eductype;
+    public EducType getIdEducType() {
+        return idEducType;
     }
 
-    public Education eductype(EducType educType) {
-        this.eductype = educType;
+    public Education idEducType(EducType educType) {
+        this.idEducType = educType;
         return this;
     }
 
-    public void setEductype(EducType educType) {
-        this.eductype = educType;
+    public void setIdEducType(EducType educType) {
+        this.idEducType = educType;
     }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -231,9 +185,6 @@ public class Education implements Serializable {
     public String toString() {
         return "Education{" +
             "id=" + getId() +
-            ", email='" + getEmail() + "'" +
-            ", idUniver=" + getIdUniver() +
-            ", idEducType='" + getIdEducType() + "'" +
             ", faculty='" + getFaculty() + "'" +
             ", specialty='" + getSpecialty() + "'" +
             ", specialization='" + getSpecialization() + "'" +

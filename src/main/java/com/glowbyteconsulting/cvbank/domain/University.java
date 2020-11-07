@@ -1,11 +1,13 @@
 package com.glowbyteconsulting.cvbank.domain;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A University.
@@ -14,6 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "university")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class University implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,15 +24,12 @@ public class University implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "id_univer")
-    private Long idUniver;
-
     @Column(name = "univer_nm")
     private String univerNm;
 
-    @OneToMany(mappedBy = "university")
+    @OneToMany(mappedBy = "idUniver")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Education> educations = new HashSet<>();
+    private Set<Education> educationuniversities = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -38,19 +38,6 @@ public class University implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdUniver() {
-        return idUniver;
-    }
-
-    public University idUniver(Long idUniver) {
-        this.idUniver = idUniver;
-        return this;
-    }
-
-    public void setIdUniver(Long idUniver) {
-        this.idUniver = idUniver;
     }
 
     public String getUniverNm() {
@@ -66,31 +53,30 @@ public class University implements Serializable {
         this.univerNm = univerNm;
     }
 
-    public Set<Education> getEducations() {
-        return educations;
+    public Set<Education> getEducationuniversities() {
+        return educationuniversities;
     }
 
-    public University educations(Set<Education> educations) {
-        this.educations = educations;
+    public University educationuniversities(Set<Education> educations) {
+        this.educationuniversities = educations;
         return this;
     }
 
-    public University addEducation(Education education) {
-        this.educations.add(education);
-        education.setUniversity(this);
+    public University addEducationuniversity(Education education) {
+        this.educationuniversities.add(education);
+        education.setIdUniver(this);
         return this;
     }
 
-    public University removeEducation(Education education) {
-        this.educations.remove(education);
-        education.setUniversity(null);
+    public University removeEducationuniversity(Education education) {
+        this.educationuniversities.remove(education);
+        education.setIdUniver(null);
         return this;
     }
 
-    public void setEducations(Set<Education> educations) {
-        this.educations = educations;
+    public void setEducationuniversities(Set<Education> educations) {
+        this.educationuniversities = educations;
     }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -114,7 +100,6 @@ public class University implements Serializable {
     public String toString() {
         return "University{" +
             "id=" + getId() +
-            ", idUniver=" + getIdUniver() +
             ", univerNm='" + getUniverNm() + "'" +
             "}";
     }

@@ -75,12 +75,6 @@ export const ProjectUpdate = (props: IProjectUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="idProjectLabel" for="project-idProject">
-                  Id Project
-                </Label>
-                <AvField id="project-idProject" type="string" className="form-control" name="idProject" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="projectNmLabel" for="project-projectNm">
                   Project Nm
                 </Label>

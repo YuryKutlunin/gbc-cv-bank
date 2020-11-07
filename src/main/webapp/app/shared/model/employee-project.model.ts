@@ -5,15 +5,12 @@ import { IProjectRole } from 'app/shared/model/project-role.model';
 
 export interface IEmployeeProject {
   id?: number;
-  email?: string;
-  idProject?: number;
-  idRole?: number;
   responsibilityNm?: string;
   startDt?: string;
   endDt?: string;
-  employee?: IEmployee;
-  project?: IProject;
-  projectrole?: IProjectRole;
+  email?: IEmployee;
+  idProject?: IProject;
+  idRole?: IProjectRole;
 }
 
 export const defaultValue: Readonly<IEmployeeProject> = {};

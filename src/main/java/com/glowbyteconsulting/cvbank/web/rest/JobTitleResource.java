@@ -3,18 +3,20 @@ package com.glowbyteconsulting.cvbank.web.rest;
 import com.glowbyteconsulting.cvbank.domain.JobTitle;
 import com.glowbyteconsulting.cvbank.repository.JobTitleRepository;
 import com.glowbyteconsulting.cvbank.web.rest.errors.BadRequestAlertException;
+
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.glowbyteconsulting.cvbank.domain.JobTitle}.
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 @Transactional
 public class JobTitleResource {
+
     private final Logger log = LoggerFactory.getLogger(JobTitleResource.class);
 
     private static final String ENTITY_NAME = "jobTitle";
@@ -50,8 +53,7 @@ public class JobTitleResource {
             throw new BadRequestAlertException("A new jobTitle cannot already have an ID", ENTITY_NAME, "idexists");
         }
         JobTitle result = jobTitleRepository.save(jobTitle);
-        return ResponseEntity
-            .created(new URI("/api/job-titles/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/job-titles/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -72,8 +74,7 @@ public class JobTitleResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         JobTitle result = jobTitleRepository.save(jobTitle);
-        return ResponseEntity
-            .ok()
+        return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, jobTitle.getId().toString()))
             .body(result);
     }
@@ -112,9 +113,6 @@ public class JobTitleResource {
     public ResponseEntity<Void> deleteJobTitle(@PathVariable Long id) {
         log.debug("REST request to delete JobTitle : {}", id);
         jobTitleRepository.deleteById(id);
-        return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 }

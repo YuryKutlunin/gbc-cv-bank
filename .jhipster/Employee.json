@@ -28,71 +28,59 @@
     {
       "fieldName": "birthDt",
       "fieldType": "Instant"
-    },
-    {
-      "fieldName": "idTitle",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "resourcePoolCode",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "emailCurator",
-      "fieldType": "String"
     }
   ],
   "relationships": [
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "employee",
-      "otherEntityRelationshipName": "empl",
-      "relationshipName": "employee"
+      "otherEntityRelationshipName": "emailCurator",
+      "relationshipName": "employeeemployee"
     },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "education",
-      "otherEntityRelationshipName": "employee",
-      "relationshipName": "education"
+      "otherEntityRelationshipName": "email",
+      "relationshipName": "educationemployee"
     },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "employeeProject",
-      "otherEntityRelationshipName": "employee",
-      "relationshipName": "employeeproject"
+      "otherEntityRelationshipName": "email",
+      "relationshipName": "employeeprojectemployee"
     },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "employeeCertif",
-      "otherEntityRelationshipName": "employee",
-      "relationshipName": "employeecertif"
+      "otherEntityRelationshipName": "email",
+      "relationshipName": "employeecertifemployee"
     },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "employeeSkill",
-      "otherEntityRelationshipName": "employee",
-      "relationshipName": "employeeskill"
+      "otherEntityRelationshipName": "email",
+      "relationshipName": "employeeskillemployee"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "employee",
-      "otherEntityRelationshipName": "employee",
-      "relationshipName": "empl",
+      "otherEntityRelationshipName": "employeeemployee",
+      "relationshipName": "emailCurator",
       "otherEntityField": "email"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "resourcePool",
-      "otherEntityRelationshipName": "employee",
-      "relationshipName": "resourcePool",
-      "otherEntityField": "resourcePoolCode"
+      "otherEntityRelationshipName": "employeeresourcepool",
+      "relationshipName": "resourcePoolId",
+      "otherEntityField": "id"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "jobTitle",
-      "otherEntityRelationshipName": "employee",
-      "relationshipName": "jobtitle",
-      "otherEntityField": "idTitle"
+      "otherEntityRelationshipName": "employeejobtitle",
+      "relationshipName": "idTitle",
+      "otherEntityField": "id"
     }
   ],
   "changelogDate": "20201106143436",

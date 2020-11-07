@@ -33,7 +33,6 @@ export const Technology = (props: ITechnologyProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Id Technology</th>
                 <th>Technology Nm</th>
                 <th />
               </tr>
@@ -46,7 +45,6 @@ export const Technology = (props: ITechnologyProps) => {
                       {technology.id}
                     </Button>
                   </td>
-                  <td>{technology.idTechnology}</td>
                   <td>{technology.technologyNm}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

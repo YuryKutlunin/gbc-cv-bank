@@ -1,6 +1,7 @@
 package com.glowbyteconsulting.cvbank.repository;
 
 import com.glowbyteconsulting.cvbank.domain.Certificate;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface CertificateRepository extends JpaRepository<Certificate, Long> {}
+public interface CertificateRepository extends JpaRepository<Certificate, Long> {
+}

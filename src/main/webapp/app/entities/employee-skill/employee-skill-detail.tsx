@@ -25,24 +25,12 @@ export const EmployeeSkillDetail = (props: IEmployeeSkillDetailProps) => {
           EmployeeSkill [<b>{employeeSkillEntity.id}</b>]
         </h2>
         <dl className="jh-entity-details">
-          <dt>
-            <span id="email">Email</span>
-          </dt>
-          <dd>{employeeSkillEntity.email}</dd>
-          <dt>
-            <span id="idSkill">Id Skill</span>
-          </dt>
-          <dd>{employeeSkillEntity.idSkill}</dd>
-          <dt>
-            <span id="idLevel">Id Level</span>
-          </dt>
-          <dd>{employeeSkillEntity.idLevel}</dd>
-          <dt>Employee</dt>
-          <dd>{employeeSkillEntity.employee ? employeeSkillEntity.employee.email : ''}</dd>
-          <dt>Skill</dt>
-          <dd>{employeeSkillEntity.skill ? employeeSkillEntity.skill.idSkill : ''}</dd>
-          <dt>Skilllevel</dt>
-          <dd>{employeeSkillEntity.skilllevel ? employeeSkillEntity.skilllevel.idLevel : ''}</dd>
+          <dt>Email</dt>
+          <dd>{employeeSkillEntity.email ? employeeSkillEntity.email.email : ''}</dd>
+          <dt>Id Skill</dt>
+          <dd>{employeeSkillEntity.idSkill ? employeeSkillEntity.idSkill.id : ''}</dd>
+          <dt>Id Level</dt>
+          <dd>{employeeSkillEntity.idLevel ? employeeSkillEntity.idLevel.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/employee-skill" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

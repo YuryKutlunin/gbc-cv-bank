@@ -33,15 +33,12 @@ export const EmployeeProject = (props: IEmployeeProjectProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Email</th>
-                <th>Id Project</th>
-                <th>Id Role</th>
                 <th>Responsibility Nm</th>
                 <th>Start Dt</th>
                 <th>End Dt</th>
-                <th>Employee</th>
-                <th>Project</th>
-                <th>Projectrole</th>
+                <th>Email</th>
+                <th>Id Project</th>
+                <th>Id Role</th>
                 <th />
               </tr>
             </thead>
@@ -53,9 +50,6 @@ export const EmployeeProject = (props: IEmployeeProjectProps) => {
                       {employeeProject.id}
                     </Button>
                   </td>
-                  <td>{employeeProject.email}</td>
-                  <td>{employeeProject.idProject}</td>
-                  <td>{employeeProject.idRole}</td>
                   <td>{employeeProject.responsibilityNm}</td>
                   <td>
                     {employeeProject.startDt ? <TextFormat type="date" value={employeeProject.startDt} format={APP_DATE_FORMAT} /> : null}
@@ -64,22 +58,18 @@ export const EmployeeProject = (props: IEmployeeProjectProps) => {
                     {employeeProject.endDt ? <TextFormat type="date" value={employeeProject.endDt} format={APP_DATE_FORMAT} /> : null}
                   </td>
                   <td>
-                    {employeeProject.employee ? (
-                      <Link to={`employee/${employeeProject.employee.id}`}>{employeeProject.employee.email}</Link>
+                    {employeeProject.email ? <Link to={`employee/${employeeProject.email.id}`}>{employeeProject.email.email}</Link> : ''}
+                  </td>
+                  <td>
+                    {employeeProject.idProject ? (
+                      <Link to={`project/${employeeProject.idProject.id}`}>{employeeProject.idProject.id}</Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {employeeProject.project ? (
-                      <Link to={`project/${employeeProject.project.id}`}>{employeeProject.project.idProject}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>
-                    {employeeProject.projectrole ? (
-                      <Link to={`project-role/${employeeProject.projectrole.id}`}>{employeeProject.projectrole.idRole}</Link>
+                    {employeeProject.idRole ? (
+                      <Link to={`project-role/${employeeProject.idRole.id}`}>{employeeProject.idRole.id}</Link>
                     ) : (
                       ''
                     )}

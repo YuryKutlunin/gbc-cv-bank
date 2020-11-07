@@ -33,7 +33,6 @@ export const Certificate = (props: ICertificateProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Id Certificate</th>
                 <th>Certificate Nm</th>
                 <th>Cert Scope Nm</th>
                 <th />
@@ -47,7 +46,6 @@ export const Certificate = (props: ICertificateProps) => {
                       {certificate.id}
                     </Button>
                   </td>
-                  <td>{certificate.idCertificate}</td>
                   <td>{certificate.certificateNm}</td>
                   <td>{certificate.certScopeNm}</td>
                   <td className="text-right">
