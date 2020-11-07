@@ -1,9 +1,15 @@
 package com.glowbyteconsulting.cvbank.web.rest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import com.glowbyteconsulting.cvbank.GbccvBankApp;
 import com.glowbyteconsulting.cvbank.domain.ProjectTechnology;
 import com.glowbyteconsulting.cvbank.repository.ProjectTechnologyRepository;
-
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link ProjectTechnologyResource} REST controller.
@@ -28,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @WithMockUser
 public class ProjectTechnologyResourceIT {
-
     private static final Long DEFAULT_ID_PROJECT = 1L;
     private static final Long UPDATED_ID_PROJECT = 2L;
 
@@ -53,11 +51,10 @@ public class ProjectTechnologyResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProjectTechnology createEntity(EntityManager em) {
-        ProjectTechnology projectTechnology = new ProjectTechnology()
-            .idProject(DEFAULT_ID_PROJECT)
-            .idTechnology(DEFAULT_ID_TECHNOLOGY);
+        ProjectTechnology projectTechnology = new ProjectTechnology().idProject(DEFAULT_ID_PROJECT).idTechnology(DEFAULT_ID_TECHNOLOGY);
         return projectTechnology;
     }
+
     /**
      * Create an updated entity for this test.
      *
@@ -65,9 +62,7 @@ public class ProjectTechnologyResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProjectTechnology createUpdatedEntity(EntityManager em) {
-        ProjectTechnology projectTechnology = new ProjectTechnology()
-            .idProject(UPDATED_ID_PROJECT)
-            .idTechnology(UPDATED_ID_TECHNOLOGY);
+        ProjectTechnology projectTechnology = new ProjectTechnology().idProject(UPDATED_ID_PROJECT).idTechnology(UPDATED_ID_TECHNOLOGY);
         return projectTechnology;
     }
 
@@ -81,9 +76,12 @@ public class ProjectTechnologyResourceIT {
     public void createProjectTechnology() throws Exception {
         int databaseSizeBeforeCreate = projectTechnologyRepository.findAll().size();
         // Create the ProjectTechnology
-        restProjectTechnologyMockMvc.perform(post("/api/project-technologies")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(projectTechnology)))
+        restProjectTechnologyMockMvc
+            .perform(
+                post("/api/project-technologies")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(projectTechnology))
+            )
             .andExpect(status().isCreated());
 
         // Validate the ProjectTechnology in the database
@@ -103,16 +101,18 @@ public class ProjectTechnologyResourceIT {
         projectTechnology.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restProjectTechnologyMockMvc.perform(post("/api/project-technologies")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(projectTechnology)))
+        restProjectTechnologyMockMvc
+            .perform(
+                post("/api/project-technologies")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(projectTechnology))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the ProjectTechnology in the database
         List<ProjectTechnology> projectTechnologyList = projectTechnologyRepository.findAll();
         assertThat(projectTechnologyList).hasSize(databaseSizeBeforeCreate);
     }
-
 
     @Test
     @Transactional
@@ -121,14 +121,15 @@ public class ProjectTechnologyResourceIT {
         projectTechnologyRepository.saveAndFlush(projectTechnology);
 
         // Get all the projectTechnologyList
-        restProjectTechnologyMockMvc.perform(get("/api/project-technologies?sort=id,desc"))
+        restProjectTechnologyMockMvc
+            .perform(get("/api/project-technologies?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(projectTechnology.getId().intValue())))
             .andExpect(jsonPath("$.[*].idProject").value(hasItem(DEFAULT_ID_PROJECT.intValue())))
             .andExpect(jsonPath("$.[*].idTechnology").value(hasItem(DEFAULT_ID_TECHNOLOGY.intValue())));
     }
-    
+
     @Test
     @Transactional
     public void getProjectTechnology() throws Exception {
@@ -136,19 +137,20 @@ public class ProjectTechnologyResourceIT {
         projectTechnologyRepository.saveAndFlush(projectTechnology);
 
         // Get the projectTechnology
-        restProjectTechnologyMockMvc.perform(get("/api/project-technologies/{id}", projectTechnology.getId()))
+        restProjectTechnologyMockMvc
+            .perform(get("/api/project-technologies/{id}", projectTechnology.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(projectTechnology.getId().intValue()))
             .andExpect(jsonPath("$.idProject").value(DEFAULT_ID_PROJECT.intValue()))
             .andExpect(jsonPath("$.idTechnology").value(DEFAULT_ID_TECHNOLOGY.intValue()));
     }
+
     @Test
     @Transactional
     public void getNonExistingProjectTechnology() throws Exception {
         // Get the projectTechnology
-        restProjectTechnologyMockMvc.perform(get("/api/project-technologies/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+        restProjectTechnologyMockMvc.perform(get("/api/project-technologies/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -163,13 +165,14 @@ public class ProjectTechnologyResourceIT {
         ProjectTechnology updatedProjectTechnology = projectTechnologyRepository.findById(projectTechnology.getId()).get();
         // Disconnect from session so that the updates on updatedProjectTechnology are not directly saved in db
         em.detach(updatedProjectTechnology);
-        updatedProjectTechnology
-            .idProject(UPDATED_ID_PROJECT)
-            .idTechnology(UPDATED_ID_TECHNOLOGY);
+        updatedProjectTechnology.idProject(UPDATED_ID_PROJECT).idTechnology(UPDATED_ID_TECHNOLOGY);
 
-        restProjectTechnologyMockMvc.perform(put("/api/project-technologies")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedProjectTechnology)))
+        restProjectTechnologyMockMvc
+            .perform(
+                put("/api/project-technologies")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(updatedProjectTechnology))
+            )
             .andExpect(status().isOk());
 
         // Validate the ProjectTechnology in the database
@@ -186,9 +189,12 @@ public class ProjectTechnologyResourceIT {
         int databaseSizeBeforeUpdate = projectTechnologyRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restProjectTechnologyMockMvc.perform(put("/api/project-technologies")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(projectTechnology)))
+        restProjectTechnologyMockMvc
+            .perform(
+                put("/api/project-technologies")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(projectTechnology))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the ProjectTechnology in the database
@@ -205,8 +211,8 @@ public class ProjectTechnologyResourceIT {
         int databaseSizeBeforeDelete = projectTechnologyRepository.findAll().size();
 
         // Delete the projectTechnology
-        restProjectTechnologyMockMvc.perform(delete("/api/project-technologies/{id}", projectTechnology.getId())
-            .accept(MediaType.APPLICATION_JSON))
+        restProjectTechnologyMockMvc
+            .perform(delete("/api/project-technologies/{id}", projectTechnology.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

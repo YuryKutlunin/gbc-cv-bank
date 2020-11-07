@@ -1,9 +1,15 @@
 package com.glowbyteconsulting.cvbank.web.rest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import com.glowbyteconsulting.cvbank.GbccvBankApp;
 import com.glowbyteconsulting.cvbank.domain.ProjectRole;
 import com.glowbyteconsulting.cvbank.repository.ProjectRoleRepository;
-
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link ProjectRoleResource} REST controller.
@@ -28,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @WithMockUser
 public class ProjectRoleResourceIT {
-
     private static final Long DEFAULT_ID_ROLE = 1L;
     private static final Long UPDATED_ID_ROLE = 2L;
 
@@ -53,11 +51,10 @@ public class ProjectRoleResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProjectRole createEntity(EntityManager em) {
-        ProjectRole projectRole = new ProjectRole()
-            .idRole(DEFAULT_ID_ROLE)
-            .roleNm(DEFAULT_ROLE_NM);
+        ProjectRole projectRole = new ProjectRole().idRole(DEFAULT_ID_ROLE).roleNm(DEFAULT_ROLE_NM);
         return projectRole;
     }
+
     /**
      * Create an updated entity for this test.
      *
@@ -65,9 +62,7 @@ public class ProjectRoleResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProjectRole createUpdatedEntity(EntityManager em) {
-        ProjectRole projectRole = new ProjectRole()
-            .idRole(UPDATED_ID_ROLE)
-            .roleNm(UPDATED_ROLE_NM);
+        ProjectRole projectRole = new ProjectRole().idRole(UPDATED_ID_ROLE).roleNm(UPDATED_ROLE_NM);
         return projectRole;
     }
 
@@ -81,9 +76,10 @@ public class ProjectRoleResourceIT {
     public void createProjectRole() throws Exception {
         int databaseSizeBeforeCreate = projectRoleRepository.findAll().size();
         // Create the ProjectRole
-        restProjectRoleMockMvc.perform(post("/api/project-roles")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(projectRole)))
+        restProjectRoleMockMvc
+            .perform(
+                post("/api/project-roles").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(projectRole))
+            )
             .andExpect(status().isCreated());
 
         // Validate the ProjectRole in the database
@@ -103,16 +99,16 @@ public class ProjectRoleResourceIT {
         projectRole.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restProjectRoleMockMvc.perform(post("/api/project-roles")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(projectRole)))
+        restProjectRoleMockMvc
+            .perform(
+                post("/api/project-roles").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(projectRole))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the ProjectRole in the database
         List<ProjectRole> projectRoleList = projectRoleRepository.findAll();
         assertThat(projectRoleList).hasSize(databaseSizeBeforeCreate);
     }
-
 
     @Test
     @Transactional
@@ -121,14 +117,15 @@ public class ProjectRoleResourceIT {
         projectRoleRepository.saveAndFlush(projectRole);
 
         // Get all the projectRoleList
-        restProjectRoleMockMvc.perform(get("/api/project-roles?sort=id,desc"))
+        restProjectRoleMockMvc
+            .perform(get("/api/project-roles?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(projectRole.getId().intValue())))
             .andExpect(jsonPath("$.[*].idRole").value(hasItem(DEFAULT_ID_ROLE.intValue())))
             .andExpect(jsonPath("$.[*].roleNm").value(hasItem(DEFAULT_ROLE_NM)));
     }
-    
+
     @Test
     @Transactional
     public void getProjectRole() throws Exception {
@@ -136,19 +133,20 @@ public class ProjectRoleResourceIT {
         projectRoleRepository.saveAndFlush(projectRole);
 
         // Get the projectRole
-        restProjectRoleMockMvc.perform(get("/api/project-roles/{id}", projectRole.getId()))
+        restProjectRoleMockMvc
+            .perform(get("/api/project-roles/{id}", projectRole.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(projectRole.getId().intValue()))
             .andExpect(jsonPath("$.idRole").value(DEFAULT_ID_ROLE.intValue()))
             .andExpect(jsonPath("$.roleNm").value(DEFAULT_ROLE_NM));
     }
+
     @Test
     @Transactional
     public void getNonExistingProjectRole() throws Exception {
         // Get the projectRole
-        restProjectRoleMockMvc.perform(get("/api/project-roles/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+        restProjectRoleMockMvc.perform(get("/api/project-roles/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -163,13 +161,14 @@ public class ProjectRoleResourceIT {
         ProjectRole updatedProjectRole = projectRoleRepository.findById(projectRole.getId()).get();
         // Disconnect from session so that the updates on updatedProjectRole are not directly saved in db
         em.detach(updatedProjectRole);
-        updatedProjectRole
-            .idRole(UPDATED_ID_ROLE)
-            .roleNm(UPDATED_ROLE_NM);
+        updatedProjectRole.idRole(UPDATED_ID_ROLE).roleNm(UPDATED_ROLE_NM);
 
-        restProjectRoleMockMvc.perform(put("/api/project-roles")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedProjectRole)))
+        restProjectRoleMockMvc
+            .perform(
+                put("/api/project-roles")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(updatedProjectRole))
+            )
             .andExpect(status().isOk());
 
         // Validate the ProjectRole in the database
@@ -186,9 +185,10 @@ public class ProjectRoleResourceIT {
         int databaseSizeBeforeUpdate = projectRoleRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restProjectRoleMockMvc.perform(put("/api/project-roles")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(projectRole)))
+        restProjectRoleMockMvc
+            .perform(
+                put("/api/project-roles").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(projectRole))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the ProjectRole in the database
@@ -205,8 +205,8 @@ public class ProjectRoleResourceIT {
         int databaseSizeBeforeDelete = projectRoleRepository.findAll().size();
 
         // Delete the projectRole
-        restProjectRoleMockMvc.perform(delete("/api/project-roles/{id}", projectRole.getId())
-            .accept(MediaType.APPLICATION_JSON))
+        restProjectRoleMockMvc
+            .perform(delete("/api/project-roles/{id}", projectRole.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

@@ -1,7 +1,6 @@
 package com.glowbyteconsulting.cvbank.repository;
 
 import com.glowbyteconsulting.cvbank.domain.JobTitle;
-
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface JobTitleRepository extends JpaRepository<JobTitle, Long> {
-}
+public interface JobTitleRepository extends JpaRepository<JobTitle, Long> {}

@@ -1,13 +1,11 @@
 package com.glowbyteconsulting.cvbank.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A SkillLevel.
@@ -16,7 +14,6 @@ import java.util.Set;
 @Table(name = "skill_level")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SkillLevel implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -93,6 +90,7 @@ public class SkillLevel implements Serializable {
     public void setEmployeeskills(Set<EmployeeSkill> employeeSkills) {
         this.employeeskills = employeeSkills;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

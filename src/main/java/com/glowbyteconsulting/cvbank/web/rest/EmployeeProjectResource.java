@@ -3,20 +3,18 @@ package com.glowbyteconsulting.cvbank.web.rest;
 import com.glowbyteconsulting.cvbank.domain.EmployeeProject;
 import com.glowbyteconsulting.cvbank.repository.EmployeeProjectRepository;
 import com.glowbyteconsulting.cvbank.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.glowbyteconsulting.cvbank.domain.EmployeeProject}.
@@ -25,7 +23,6 @@ import java.util.Optional;
 @RequestMapping("/api")
 @Transactional
 public class EmployeeProjectResource {
-
     private final Logger log = LoggerFactory.getLogger(EmployeeProjectResource.class);
 
     private static final String ENTITY_NAME = "employeeProject";
@@ -53,7 +50,8 @@ public class EmployeeProjectResource {
             throw new BadRequestAlertException("A new employeeProject cannot already have an ID", ENTITY_NAME, "idexists");
         }
         EmployeeProject result = employeeProjectRepository.save(employeeProject);
-        return ResponseEntity.created(new URI("/api/employee-projects/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/employee-projects/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -74,7 +72,8 @@ public class EmployeeProjectResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         EmployeeProject result = employeeProjectRepository.save(employeeProject);
-        return ResponseEntity.ok()
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, employeeProject.getId().toString()))
             .body(result);
     }
@@ -113,6 +112,9 @@ public class EmployeeProjectResource {
     public ResponseEntity<Void> deleteEmployeeProject(@PathVariable Long id) {
         log.debug("REST request to delete EmployeeProject : {}", id);
         employeeProjectRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

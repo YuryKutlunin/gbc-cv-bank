@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.glowbyteconsulting.cvbank</groupId>
-    <artifactId>gbc-cv-bank</artifactId>
+    <artifactId>gbccv-bank</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>GBCCVBank</name>
+    <name>GBCCV Bank</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->

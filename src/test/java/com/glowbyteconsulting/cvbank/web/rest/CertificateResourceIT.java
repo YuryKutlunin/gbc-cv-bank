@@ -1,9 +1,15 @@
 package com.glowbyteconsulting.cvbank.web.rest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import com.glowbyteconsulting.cvbank.GbccvBankApp;
 import com.glowbyteconsulting.cvbank.domain.Certificate;
 import com.glowbyteconsulting.cvbank.repository.CertificateRepository;
-
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link CertificateResource} REST controller.
@@ -28,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @WithMockUser
 public class CertificateResourceIT {
-
     private static final Long DEFAULT_ID_CERTIFICATE = 1L;
     private static final Long UPDATED_ID_CERTIFICATE = 2L;
 
@@ -62,6 +60,7 @@ public class CertificateResourceIT {
             .certScopeNm(DEFAULT_CERT_SCOPE_NM);
         return certificate;
     }
+
     /**
      * Create an updated entity for this test.
      *
@@ -86,9 +85,10 @@ public class CertificateResourceIT {
     public void createCertificate() throws Exception {
         int databaseSizeBeforeCreate = certificateRepository.findAll().size();
         // Create the Certificate
-        restCertificateMockMvc.perform(post("/api/certificates")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(certificate)))
+        restCertificateMockMvc
+            .perform(
+                post("/api/certificates").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(certificate))
+            )
             .andExpect(status().isCreated());
 
         // Validate the Certificate in the database
@@ -109,16 +109,16 @@ public class CertificateResourceIT {
         certificate.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restCertificateMockMvc.perform(post("/api/certificates")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(certificate)))
+        restCertificateMockMvc
+            .perform(
+                post("/api/certificates").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(certificate))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the Certificate in the database
         List<Certificate> certificateList = certificateRepository.findAll();
         assertThat(certificateList).hasSize(databaseSizeBeforeCreate);
     }
-
 
     @Test
     @Transactional
@@ -127,7 +127,8 @@ public class CertificateResourceIT {
         certificateRepository.saveAndFlush(certificate);
 
         // Get all the certificateList
-        restCertificateMockMvc.perform(get("/api/certificates?sort=id,desc"))
+        restCertificateMockMvc
+            .perform(get("/api/certificates?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(certificate.getId().intValue())))
@@ -135,7 +136,7 @@ public class CertificateResourceIT {
             .andExpect(jsonPath("$.[*].certificateNm").value(hasItem(DEFAULT_CERTIFICATE_NM)))
             .andExpect(jsonPath("$.[*].certScopeNm").value(hasItem(DEFAULT_CERT_SCOPE_NM)));
     }
-    
+
     @Test
     @Transactional
     public void getCertificate() throws Exception {
@@ -143,7 +144,8 @@ public class CertificateResourceIT {
         certificateRepository.saveAndFlush(certificate);
 
         // Get the certificate
-        restCertificateMockMvc.perform(get("/api/certificates/{id}", certificate.getId()))
+        restCertificateMockMvc
+            .perform(get("/api/certificates/{id}", certificate.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(certificate.getId().intValue()))
@@ -151,12 +153,12 @@ public class CertificateResourceIT {
             .andExpect(jsonPath("$.certificateNm").value(DEFAULT_CERTIFICATE_NM))
             .andExpect(jsonPath("$.certScopeNm").value(DEFAULT_CERT_SCOPE_NM));
     }
+
     @Test
     @Transactional
     public void getNonExistingCertificate() throws Exception {
         // Get the certificate
-        restCertificateMockMvc.perform(get("/api/certificates/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+        restCertificateMockMvc.perform(get("/api/certificates/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -171,14 +173,14 @@ public class CertificateResourceIT {
         Certificate updatedCertificate = certificateRepository.findById(certificate.getId()).get();
         // Disconnect from session so that the updates on updatedCertificate are not directly saved in db
         em.detach(updatedCertificate);
-        updatedCertificate
-            .idCertificate(UPDATED_ID_CERTIFICATE)
-            .certificateNm(UPDATED_CERTIFICATE_NM)
-            .certScopeNm(UPDATED_CERT_SCOPE_NM);
+        updatedCertificate.idCertificate(UPDATED_ID_CERTIFICATE).certificateNm(UPDATED_CERTIFICATE_NM).certScopeNm(UPDATED_CERT_SCOPE_NM);
 
-        restCertificateMockMvc.perform(put("/api/certificates")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedCertificate)))
+        restCertificateMockMvc
+            .perform(
+                put("/api/certificates")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(TestUtil.convertObjectToJsonBytes(updatedCertificate))
+            )
             .andExpect(status().isOk());
 
         // Validate the Certificate in the database
@@ -196,9 +198,10 @@ public class CertificateResourceIT {
         int databaseSizeBeforeUpdate = certificateRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCertificateMockMvc.perform(put("/api/certificates")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(certificate)))
+        restCertificateMockMvc
+            .perform(
+                put("/api/certificates").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(certificate))
+            )
             .andExpect(status().isBadRequest());
 
         // Validate the Certificate in the database
@@ -215,8 +218,8 @@ public class CertificateResourceIT {
         int databaseSizeBeforeDelete = certificateRepository.findAll().size();
 
         // Delete the certificate
-        restCertificateMockMvc.perform(delete("/api/certificates/{id}", certificate.getId())
-            .accept(MediaType.APPLICATION_JSON))
+        restCertificateMockMvc
+            .perform(delete("/api/certificates/{id}", certificate.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

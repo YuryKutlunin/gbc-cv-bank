@@ -1,12 +1,10 @@
 package com.glowbyteconsulting.cvbank.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
-import java.io.Serializable;
 
 /**
  * A Education.
@@ -15,7 +13,6 @@ import java.io.Serializable;
 @Table(name = "education")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Education implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -210,6 +207,7 @@ public class Education implements Serializable {
     public void setEductype(EducType educType) {
         this.eductype = educType;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

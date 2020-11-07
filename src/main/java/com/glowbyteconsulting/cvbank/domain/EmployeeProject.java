@@ -1,13 +1,11 @@
 package com.glowbyteconsulting.cvbank.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.Instant;
+import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A EmployeeProject.
@@ -16,7 +14,6 @@ import java.time.Instant;
 @Table(name = "employee_project")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class EmployeeProject implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -179,6 +176,7 @@ public class EmployeeProject implements Serializable {
     public void setProjectrole(ProjectRole projectRole) {
         this.projectrole = projectRole;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

@@ -1,13 +1,11 @@
 package com.glowbyteconsulting.cvbank.domain;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A University.
@@ -16,7 +14,6 @@ import java.util.Set;
 @Table(name = "university")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class University implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -93,6 +90,7 @@ public class University implements Serializable {
     public void setEducations(Set<Education> educations) {
         this.educations = educations;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

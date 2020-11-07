@@ -1,13 +1,11 @@
 package com.glowbyteconsulting.cvbank.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
 import java.time.Instant;
+import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * A EmployeeCertif.
@@ -16,7 +14,6 @@ import java.time.Instant;
 @Table(name = "employee_certif")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class EmployeeCertif implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -130,6 +127,7 @@ public class EmployeeCertif implements Serializable {
     public void setCertificate(Certificate certificate) {
         this.certificate = certificate;
     }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override

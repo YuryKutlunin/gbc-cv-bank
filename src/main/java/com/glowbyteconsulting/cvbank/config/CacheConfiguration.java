@@ -48,13 +48,13 @@ public class CacheConfiguration {
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Authority.class.getName());
             createCache(cm, com.glowbyteconsulting.cvbank.domain.User.class.getName() + ".authorities");
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName());
-            createCache(cm, com.glowbyteconsulting.cvbank.domain.ResourcePool.class.getName());
-            createCache(cm, com.glowbyteconsulting.cvbank.domain.ResourcePool.class.getName() + ".employees");
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".employees");
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".educations");
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".employeeprojects");
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".employeecertifs");
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".employeeskills");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ResourcePool.class.getName());
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ResourcePool.class.getName() + ".employees");
             createCache(cm, com.glowbyteconsulting.cvbank.domain.JobTitle.class.getName());
             createCache(cm, com.glowbyteconsulting.cvbank.domain.JobTitle.class.getName() + ".employees");
             createCache(cm, com.glowbyteconsulting.cvbank.domain.Education.class.getName());

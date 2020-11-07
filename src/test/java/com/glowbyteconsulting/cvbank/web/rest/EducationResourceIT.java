@@ -1,9 +1,15 @@
 package com.glowbyteconsulting.cvbank.web.rest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import com.glowbyteconsulting.cvbank.GbccvBankApp;
 import com.glowbyteconsulting.cvbank.domain.Education;
 import com.glowbyteconsulting.cvbank.repository.EducationRepository;
-
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link EducationResource} REST controller.
@@ -28,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @WithMockUser
 public class EducationResourceIT {
-
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
@@ -82,6 +80,7 @@ public class EducationResourceIT {
             .endYear(DEFAULT_END_YEAR);
         return education;
     }
+
     /**
      * Create an updated entity for this test.
      *
@@ -111,9 +110,8 @@ public class EducationResourceIT {
     public void createEducation() throws Exception {
         int databaseSizeBeforeCreate = educationRepository.findAll().size();
         // Create the Education
-        restEducationMockMvc.perform(post("/api/educations")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(education)))
+        restEducationMockMvc
+            .perform(post("/api/educations").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(education)))
             .andExpect(status().isCreated());
 
         // Validate the Education in the database
@@ -139,16 +137,14 @@ public class EducationResourceIT {
         education.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restEducationMockMvc.perform(post("/api/educations")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(education)))
+        restEducationMockMvc
+            .perform(post("/api/educations").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(education)))
             .andExpect(status().isBadRequest());
 
         // Validate the Education in the database
         List<Education> educationList = educationRepository.findAll();
         assertThat(educationList).hasSize(databaseSizeBeforeCreate);
     }
-
 
     @Test
     @Transactional
@@ -157,7 +153,8 @@ public class EducationResourceIT {
         educationRepository.saveAndFlush(education);
 
         // Get all the educationList
-        restEducationMockMvc.perform(get("/api/educations?sort=id,desc"))
+        restEducationMockMvc
+            .perform(get("/api/educations?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(education.getId().intValue())))
@@ -170,7 +167,7 @@ public class EducationResourceIT {
             .andExpect(jsonPath("$.[*].startYear").value(hasItem(DEFAULT_START_YEAR.intValue())))
             .andExpect(jsonPath("$.[*].endYear").value(hasItem(DEFAULT_END_YEAR.intValue())));
     }
-    
+
     @Test
     @Transactional
     public void getEducation() throws Exception {
@@ -178,7 +175,8 @@ public class EducationResourceIT {
         educationRepository.saveAndFlush(education);
 
         // Get the education
-        restEducationMockMvc.perform(get("/api/educations/{id}", education.getId()))
+        restEducationMockMvc
+            .perform(get("/api/educations/{id}", education.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(education.getId().intValue()))
@@ -191,12 +189,12 @@ public class EducationResourceIT {
             .andExpect(jsonPath("$.startYear").value(DEFAULT_START_YEAR.intValue()))
             .andExpect(jsonPath("$.endYear").value(DEFAULT_END_YEAR.intValue()));
     }
+
     @Test
     @Transactional
     public void getNonExistingEducation() throws Exception {
         // Get the education
-        restEducationMockMvc.perform(get("/api/educations/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+        restEducationMockMvc.perform(get("/api/educations/{id}", Long.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -221,9 +219,10 @@ public class EducationResourceIT {
             .startYear(UPDATED_START_YEAR)
             .endYear(UPDATED_END_YEAR);
 
-        restEducationMockMvc.perform(put("/api/educations")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedEducation)))
+        restEducationMockMvc
+            .perform(
+                put("/api/educations").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(updatedEducation))
+            )
             .andExpect(status().isOk());
 
         // Validate the Education in the database
@@ -246,9 +245,8 @@ public class EducationResourceIT {
         int databaseSizeBeforeUpdate = educationRepository.findAll().size();
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restEducationMockMvc.perform(put("/api/educations")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(education)))
+        restEducationMockMvc
+            .perform(put("/api/educations").contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(education)))
             .andExpect(status().isBadRequest());
 
         // Validate the Education in the database
@@ -265,8 +263,8 @@ public class EducationResourceIT {
         int databaseSizeBeforeDelete = educationRepository.findAll().size();
 
         // Delete the education
-        restEducationMockMvc.perform(delete("/api/educations/{id}", education.getId())
-            .accept(MediaType.APPLICATION_JSON))
+        restEducationMockMvc
+            .perform(delete("/api/educations/{id}", education.getId()).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

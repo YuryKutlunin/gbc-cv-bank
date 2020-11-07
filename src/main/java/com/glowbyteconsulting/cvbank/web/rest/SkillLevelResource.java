@@ -3,20 +3,18 @@ package com.glowbyteconsulting.cvbank.web.rest;
 import com.glowbyteconsulting.cvbank.domain.SkillLevel;
 import com.glowbyteconsulting.cvbank.repository.SkillLevelRepository;
 import com.glowbyteconsulting.cvbank.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.glowbyteconsulting.cvbank.domain.SkillLevel}.
@@ -25,7 +23,6 @@ import java.util.Optional;
 @RequestMapping("/api")
 @Transactional
 public class SkillLevelResource {
-
     private final Logger log = LoggerFactory.getLogger(SkillLevelResource.class);
 
     private static final String ENTITY_NAME = "skillLevel";
@@ -53,7 +50,8 @@ public class SkillLevelResource {
             throw new BadRequestAlertException("A new skillLevel cannot already have an ID", ENTITY_NAME, "idexists");
         }
         SkillLevel result = skillLevelRepository.save(skillLevel);
-        return ResponseEntity.created(new URI("/api/skill-levels/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/skill-levels/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -74,7 +72,8 @@ public class SkillLevelResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         SkillLevel result = skillLevelRepository.save(skillLevel);
-        return ResponseEntity.ok()
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, skillLevel.getId().toString()))
             .body(result);
     }
@@ -113,6 +112,9 @@ public class SkillLevelResource {
     public ResponseEntity<Void> deleteSkillLevel(@PathVariable Long id) {
         log.debug("REST request to delete SkillLevel : {}", id);
         skillLevelRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
+            .build();
     }
 }
