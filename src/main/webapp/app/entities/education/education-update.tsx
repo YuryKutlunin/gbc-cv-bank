@@ -21,9 +21,9 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IEducationUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const EducationUpdate = (props: IEducationUpdateProps) => {
-  const [employeeId, setEmployeeId] = useState('0');
-  const [universityId, setUniversityId] = useState('0');
-  const [eductypeId, setEductypeId] = useState('0');
+  const [emailId, setEmailId] = useState('0');
+  const [idUniverId, setIdUniverId] = useState('0');
+  const [idEducTypeId, setIdEducTypeId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
   const { educationEntity, employees, universities, educTypes, loading, updating } = props;
@@ -85,24 +85,6 @@ export const EducationUpdate = (props: IEducationUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="emailLabel" for="education-email">
-                  Email
-                </Label>
-                <AvField id="education-email" type="text" name="email" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="idUniverLabel" for="education-idUniver">
-                  Id Univer
-                </Label>
-                <AvField id="education-idUniver" type="string" className="form-control" name="idUniver" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="idEducTypeLabel" for="education-idEducType">
-                  Id Educ Type
-                </Label>
-                <AvField id="education-idEducType" type="text" name="idEducType" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="facultyLabel" for="education-faculty">
                   Faculty
                 </Label>
@@ -133,8 +115,8 @@ export const EducationUpdate = (props: IEducationUpdateProps) => {
                 <AvField id="education-endYear" type="string" className="form-control" name="endYear" />
               </AvGroup>
               <AvGroup>
-                <Label for="education-employee">Employee</Label>
-                <AvInput id="education-employee" type="select" className="form-control" name="employee.id">
+                <Label for="education-email">Email</Label>
+                <AvInput id="education-email" type="select" className="form-control" name="email.id">
                   <option value="" key="0" />
                   {employees
                     ? employees.map(otherEntity => (
@@ -146,26 +128,26 @@ export const EducationUpdate = (props: IEducationUpdateProps) => {
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="education-university">University</Label>
-                <AvInput id="education-university" type="select" className="form-control" name="university.id">
+                <Label for="education-idUniver">Id Univer</Label>
+                <AvInput id="education-idUniver" type="select" className="form-control" name="idUniver.id">
                   <option value="" key="0" />
                   {universities
                     ? universities.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idUniver}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="education-eductype">Eductype</Label>
-                <AvInput id="education-eductype" type="select" className="form-control" name="eductype.id">
+                <Label for="education-idEducType">Id Educ Type</Label>
+                <AvInput id="education-idEducType" type="select" className="form-control" name="idEducType.id">
                   <option value="" key="0" />
                   {educTypes
                     ? educTypes.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idEducType}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}

@@ -40,12 +40,9 @@ export const Employee = (props: IEmployeeProps) => {
                 <th>Phone Num</th>
                 <th>Work Type</th>
                 <th>Birth Dt</th>
-                <th>Id Title</th>
-                <th>Resource Pool Code</th>
                 <th>Email Curator</th>
-                <th>Empl</th>
-                <th>Resource Pool</th>
-                <th>Jobtitle</th>
+                <th>Resource Pool Id</th>
+                <th>Id Title</th>
                 <th />
               </tr>
             </thead>
@@ -64,18 +61,17 @@ export const Employee = (props: IEmployeeProps) => {
                   <td>{employee.phoneNum}</td>
                   <td>{employee.workType}</td>
                   <td>{employee.birthDt ? <TextFormat type="date" value={employee.birthDt} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{employee.idTitle}</td>
-                  <td>{employee.resourcePoolCode}</td>
-                  <td>{employee.emailCurator}</td>
-                  <td>{employee.empl ? <Link to={`employee/${employee.empl.id}`}>{employee.empl.email}</Link> : ''}</td>
                   <td>
-                    {employee.resourcePool ? (
-                      <Link to={`resource-pool/${employee.resourcePool.id}`}>{employee.resourcePool.resourcePoolCode}</Link>
+                    {employee.emailCurator ? <Link to={`employee/${employee.emailCurator.id}`}>{employee.emailCurator.email}</Link> : ''}
+                  </td>
+                  <td>
+                    {employee.resourcePoolId ? (
+                      <Link to={`resource-pool/${employee.resourcePoolId.id}`}>{employee.resourcePoolId.id}</Link>
                     ) : (
                       ''
                     )}
                   </td>
-                  <td>{employee.jobtitle ? <Link to={`job-title/${employee.jobtitle.id}`}>{employee.jobtitle.idTitle}</Link> : ''}</td>
+                  <td>{employee.idTitle ? <Link to={`job-title/${employee.idTitle.id}`}>{employee.idTitle.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${employee.id}`} color="info" size="sm">

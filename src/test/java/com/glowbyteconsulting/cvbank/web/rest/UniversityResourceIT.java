@@ -29,9 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class UniversityResourceIT {
 
-    private static final Long DEFAULT_ID_UNIVER = 1L;
-    private static final Long UPDATED_ID_UNIVER = 2L;
-
     private static final String DEFAULT_UNIVER_NM = "AAAAAAAAAA";
     private static final String UPDATED_UNIVER_NM = "BBBBBBBBBB";
 
@@ -54,7 +51,6 @@ public class UniversityResourceIT {
      */
     public static University createEntity(EntityManager em) {
         University university = new University()
-            .idUniver(DEFAULT_ID_UNIVER)
             .univerNm(DEFAULT_UNIVER_NM);
         return university;
     }
@@ -66,7 +62,6 @@ public class UniversityResourceIT {
      */
     public static University createUpdatedEntity(EntityManager em) {
         University university = new University()
-            .idUniver(UPDATED_ID_UNIVER)
             .univerNm(UPDATED_UNIVER_NM);
         return university;
     }
@@ -90,7 +85,6 @@ public class UniversityResourceIT {
         List<University> universityList = universityRepository.findAll();
         assertThat(universityList).hasSize(databaseSizeBeforeCreate + 1);
         University testUniversity = universityList.get(universityList.size() - 1);
-        assertThat(testUniversity.getIdUniver()).isEqualTo(DEFAULT_ID_UNIVER);
         assertThat(testUniversity.getUniverNm()).isEqualTo(DEFAULT_UNIVER_NM);
     }
 
@@ -125,7 +119,6 @@ public class UniversityResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(university.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idUniver").value(hasItem(DEFAULT_ID_UNIVER.intValue())))
             .andExpect(jsonPath("$.[*].univerNm").value(hasItem(DEFAULT_UNIVER_NM)));
     }
     
@@ -140,7 +133,6 @@ public class UniversityResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(university.getId().intValue()))
-            .andExpect(jsonPath("$.idUniver").value(DEFAULT_ID_UNIVER.intValue()))
             .andExpect(jsonPath("$.univerNm").value(DEFAULT_UNIVER_NM));
     }
     @Test
@@ -164,7 +156,6 @@ public class UniversityResourceIT {
         // Disconnect from session so that the updates on updatedUniversity are not directly saved in db
         em.detach(updatedUniversity);
         updatedUniversity
-            .idUniver(UPDATED_ID_UNIVER)
             .univerNm(UPDATED_UNIVER_NM);
 
         restUniversityMockMvc.perform(put("/api/universities")
@@ -176,7 +167,6 @@ public class UniversityResourceIT {
         List<University> universityList = universityRepository.findAll();
         assertThat(universityList).hasSize(databaseSizeBeforeUpdate);
         University testUniversity = universityList.get(universityList.size() - 1);
-        assertThat(testUniversity.getIdUniver()).isEqualTo(UPDATED_ID_UNIVER);
         assertThat(testUniversity.getUniverNm()).isEqualTo(UPDATED_UNIVER_NM);
     }
 

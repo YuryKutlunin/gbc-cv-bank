@@ -33,17 +33,14 @@ export const Education = (props: IEducationProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Email</th>
-                <th>Id Univer</th>
-                <th>Id Educ Type</th>
                 <th>Faculty</th>
                 <th>Specialty</th>
                 <th>Specialization</th>
                 <th>Start Year</th>
                 <th>End Year</th>
-                <th>Employee</th>
-                <th>University</th>
-                <th>Eductype</th>
+                <th>Email</th>
+                <th>Id Univer</th>
+                <th>Id Educ Type</th>
                 <th />
               </tr>
             </thead>
@@ -55,21 +52,14 @@ export const Education = (props: IEducationProps) => {
                       {education.id}
                     </Button>
                   </td>
-                  <td>{education.email}</td>
-                  <td>{education.idUniver}</td>
-                  <td>{education.idEducType}</td>
                   <td>{education.faculty}</td>
                   <td>{education.specialty}</td>
                   <td>{education.specialization}</td>
                   <td>{education.startYear}</td>
                   <td>{education.endYear}</td>
-                  <td>{education.employee ? <Link to={`employee/${education.employee.id}`}>{education.employee.email}</Link> : ''}</td>
-                  <td>
-                    {education.university ? <Link to={`university/${education.university.id}`}>{education.university.idUniver}</Link> : ''}
-                  </td>
-                  <td>
-                    {education.eductype ? <Link to={`educ-type/${education.eductype.id}`}>{education.eductype.idEducType}</Link> : ''}
-                  </td>
+                  <td>{education.email ? <Link to={`employee/${education.email.id}`}>{education.email.email}</Link> : ''}</td>
+                  <td>{education.idUniver ? <Link to={`university/${education.idUniver.id}`}>{education.idUniver.id}</Link> : ''}</td>
+                  <td>{education.idEducType ? <Link to={`educ-type/${education.idEducType.id}`}>{education.idEducType.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${education.id}`} color="info" size="sm">

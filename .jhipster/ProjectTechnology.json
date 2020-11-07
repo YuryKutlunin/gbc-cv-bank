@@ -1,29 +1,20 @@
 {
   "name": "ProjectTechnology",
-  "fields": [
-    {
-      "fieldName": "idProject",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idTechnology",
-      "fieldType": "Long"
-    }
-  ],
+  "fields": [],
   "relationships": [
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "project",
-      "otherEntityRelationshipName": "projecttechnology",
-      "relationshipName": "project",
-      "otherEntityField": "idProject"
+      "otherEntityRelationshipName": "projecttechnologyproject",
+      "relationshipName": "idProject",
+      "otherEntityField": "id"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "technology",
-      "otherEntityRelationshipName": "projecttechnology",
-      "relationshipName": "technology",
-      "otherEntityField": "idTechnology"
+      "otherEntityRelationshipName": "projecttechnologytechnology",
+      "relationshipName": "idTechnology",
+      "otherEntityField": "id"
     }
   ],
   "changelogDate": "20201107094520",

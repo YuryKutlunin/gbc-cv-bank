@@ -29,9 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class JobTitleResourceIT {
 
-    private static final Long DEFAULT_ID_TITLE = 1L;
-    private static final Long UPDATED_ID_TITLE = 2L;
-
     private static final String DEFAULT_TITLE_NM = "AAAAAAAAAA";
     private static final String UPDATED_TITLE_NM = "BBBBBBBBBB";
 
@@ -54,7 +51,6 @@ public class JobTitleResourceIT {
      */
     public static JobTitle createEntity(EntityManager em) {
         JobTitle jobTitle = new JobTitle()
-            .idTitle(DEFAULT_ID_TITLE)
             .titleNM(DEFAULT_TITLE_NM);
         return jobTitle;
     }
@@ -66,7 +62,6 @@ public class JobTitleResourceIT {
      */
     public static JobTitle createUpdatedEntity(EntityManager em) {
         JobTitle jobTitle = new JobTitle()
-            .idTitle(UPDATED_ID_TITLE)
             .titleNM(UPDATED_TITLE_NM);
         return jobTitle;
     }
@@ -90,7 +85,6 @@ public class JobTitleResourceIT {
         List<JobTitle> jobTitleList = jobTitleRepository.findAll();
         assertThat(jobTitleList).hasSize(databaseSizeBeforeCreate + 1);
         JobTitle testJobTitle = jobTitleList.get(jobTitleList.size() - 1);
-        assertThat(testJobTitle.getIdTitle()).isEqualTo(DEFAULT_ID_TITLE);
         assertThat(testJobTitle.getTitleNM()).isEqualTo(DEFAULT_TITLE_NM);
     }
 
@@ -125,7 +119,6 @@ public class JobTitleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(jobTitle.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idTitle").value(hasItem(DEFAULT_ID_TITLE.intValue())))
             .andExpect(jsonPath("$.[*].titleNM").value(hasItem(DEFAULT_TITLE_NM)));
     }
     
@@ -140,7 +133,6 @@ public class JobTitleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(jobTitle.getId().intValue()))
-            .andExpect(jsonPath("$.idTitle").value(DEFAULT_ID_TITLE.intValue()))
             .andExpect(jsonPath("$.titleNM").value(DEFAULT_TITLE_NM));
     }
     @Test
@@ -164,7 +156,6 @@ public class JobTitleResourceIT {
         // Disconnect from session so that the updates on updatedJobTitle are not directly saved in db
         em.detach(updatedJobTitle);
         updatedJobTitle
-            .idTitle(UPDATED_ID_TITLE)
             .titleNM(UPDATED_TITLE_NM);
 
         restJobTitleMockMvc.perform(put("/api/job-titles")
@@ -176,7 +167,6 @@ public class JobTitleResourceIT {
         List<JobTitle> jobTitleList = jobTitleRepository.findAll();
         assertThat(jobTitleList).hasSize(databaseSizeBeforeUpdate);
         JobTitle testJobTitle = jobTitleList.get(jobTitleList.size() - 1);
-        assertThat(testJobTitle.getIdTitle()).isEqualTo(UPDATED_ID_TITLE);
         assertThat(testJobTitle.getTitleNM()).isEqualTo(UPDATED_TITLE_NM);
     }
 

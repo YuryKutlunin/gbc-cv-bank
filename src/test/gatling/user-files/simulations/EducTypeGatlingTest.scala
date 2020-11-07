@@ -72,7 +72,6 @@ class EducTypeGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "idEducType":null
                 , "educTypeNm":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))

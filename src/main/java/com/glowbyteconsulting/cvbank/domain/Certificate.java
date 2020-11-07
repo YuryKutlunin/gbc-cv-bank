@@ -24,18 +24,15 @@ public class Certificate implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "id_certificate")
-    private Long idCertificate;
-
     @Column(name = "certificate_nm")
     private String certificateNm;
 
     @Column(name = "cert_scope_nm")
     private String certScopeNm;
 
-    @OneToMany(mappedBy = "certificate")
+    @OneToMany(mappedBy = "idCertificate")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<EmployeeCertif> employeecertifs = new HashSet<>();
+    private Set<EmployeeCertif> employeecertifcertificates = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -44,19 +41,6 @@ public class Certificate implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdCertificate() {
-        return idCertificate;
-    }
-
-    public Certificate idCertificate(Long idCertificate) {
-        this.idCertificate = idCertificate;
-        return this;
-    }
-
-    public void setIdCertificate(Long idCertificate) {
-        this.idCertificate = idCertificate;
     }
 
     public String getCertificateNm() {
@@ -85,29 +69,29 @@ public class Certificate implements Serializable {
         this.certScopeNm = certScopeNm;
     }
 
-    public Set<EmployeeCertif> getEmployeecertifs() {
-        return employeecertifs;
+    public Set<EmployeeCertif> getEmployeecertifcertificates() {
+        return employeecertifcertificates;
     }
 
-    public Certificate employeecertifs(Set<EmployeeCertif> employeeCertifs) {
-        this.employeecertifs = employeeCertifs;
+    public Certificate employeecertifcertificates(Set<EmployeeCertif> employeeCertifs) {
+        this.employeecertifcertificates = employeeCertifs;
         return this;
     }
 
-    public Certificate addEmployeecertif(EmployeeCertif employeeCertif) {
-        this.employeecertifs.add(employeeCertif);
-        employeeCertif.setCertificate(this);
+    public Certificate addEmployeecertifcertificate(EmployeeCertif employeeCertif) {
+        this.employeecertifcertificates.add(employeeCertif);
+        employeeCertif.setIdCertificate(this);
         return this;
     }
 
-    public Certificate removeEmployeecertif(EmployeeCertif employeeCertif) {
-        this.employeecertifs.remove(employeeCertif);
-        employeeCertif.setCertificate(null);
+    public Certificate removeEmployeecertifcertificate(EmployeeCertif employeeCertif) {
+        this.employeecertifcertificates.remove(employeeCertif);
+        employeeCertif.setIdCertificate(null);
         return this;
     }
 
-    public void setEmployeecertifs(Set<EmployeeCertif> employeeCertifs) {
-        this.employeecertifs = employeeCertifs;
+    public void setEmployeecertifcertificates(Set<EmployeeCertif> employeeCertifs) {
+        this.employeecertifcertificates = employeeCertifs;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -132,7 +116,6 @@ public class Certificate implements Serializable {
     public String toString() {
         return "Certificate{" +
             "id=" + getId() +
-            ", idCertificate=" + getIdCertificate() +
             ", certificateNm='" + getCertificateNm() + "'" +
             ", certScopeNm='" + getCertScopeNm() + "'" +
             "}";

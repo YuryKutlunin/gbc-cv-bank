@@ -4,13 +4,12 @@ import { IEmployeeProject } from 'app/shared/model/employee-project.model';
 
 export interface IProject {
   id?: number;
-  idProject?: number;
   projectNm?: string;
   companyNM?: string;
   startDt?: string;
   endDt?: string;
-  projecttechnologies?: IProjectTechnology[];
-  employeeprojects?: IEmployeeProject[];
+  projecttechnologyprojects?: IProjectTechnology[];
+  employeeprojectprojects?: IEmployeeProject[];
 }
 
 export const defaultValue: Readonly<IProject> = {};

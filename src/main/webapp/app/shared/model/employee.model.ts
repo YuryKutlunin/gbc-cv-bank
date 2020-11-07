@@ -15,17 +15,14 @@ export interface IEmployee {
   phoneNum?: string;
   workType?: string;
   birthDt?: string;
-  idTitle?: number;
-  resourcePoolCode?: string;
-  emailCurator?: string;
-  employees?: IEmployee[];
-  educations?: IEducation[];
-  employeeprojects?: IEmployeeProject[];
-  employeecertifs?: IEmployeeCertif[];
-  employeeskills?: IEmployeeSkill[];
-  empl?: IEmployee;
-  resourcePool?: IResourcePool;
-  jobtitle?: IJobTitle;
+  employeeemployees?: IEmployee[];
+  educationemployees?: IEducation[];
+  employeeprojectemployees?: IEmployeeProject[];
+  employeecertifemployees?: IEmployeeCertif[];
+  employeeskillemployees?: IEmployeeSkill[];
+  emailCurator?: IEmployee;
+  resourcePoolId?: IResourcePool;
+  idTitle?: IJobTitle;
 }
 
 export const defaultValue: Readonly<IEmployee> = {};

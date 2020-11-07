@@ -29,9 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class CertificateResourceIT {
 
-    private static final Long DEFAULT_ID_CERTIFICATE = 1L;
-    private static final Long UPDATED_ID_CERTIFICATE = 2L;
-
     private static final String DEFAULT_CERTIFICATE_NM = "AAAAAAAAAA";
     private static final String UPDATED_CERTIFICATE_NM = "BBBBBBBBBB";
 
@@ -57,7 +54,6 @@ public class CertificateResourceIT {
      */
     public static Certificate createEntity(EntityManager em) {
         Certificate certificate = new Certificate()
-            .idCertificate(DEFAULT_ID_CERTIFICATE)
             .certificateNm(DEFAULT_CERTIFICATE_NM)
             .certScopeNm(DEFAULT_CERT_SCOPE_NM);
         return certificate;
@@ -70,7 +66,6 @@ public class CertificateResourceIT {
      */
     public static Certificate createUpdatedEntity(EntityManager em) {
         Certificate certificate = new Certificate()
-            .idCertificate(UPDATED_ID_CERTIFICATE)
             .certificateNm(UPDATED_CERTIFICATE_NM)
             .certScopeNm(UPDATED_CERT_SCOPE_NM);
         return certificate;
@@ -95,7 +90,6 @@ public class CertificateResourceIT {
         List<Certificate> certificateList = certificateRepository.findAll();
         assertThat(certificateList).hasSize(databaseSizeBeforeCreate + 1);
         Certificate testCertificate = certificateList.get(certificateList.size() - 1);
-        assertThat(testCertificate.getIdCertificate()).isEqualTo(DEFAULT_ID_CERTIFICATE);
         assertThat(testCertificate.getCertificateNm()).isEqualTo(DEFAULT_CERTIFICATE_NM);
         assertThat(testCertificate.getCertScopeNm()).isEqualTo(DEFAULT_CERT_SCOPE_NM);
     }
@@ -131,7 +125,6 @@ public class CertificateResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(certificate.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idCertificate").value(hasItem(DEFAULT_ID_CERTIFICATE.intValue())))
             .andExpect(jsonPath("$.[*].certificateNm").value(hasItem(DEFAULT_CERTIFICATE_NM)))
             .andExpect(jsonPath("$.[*].certScopeNm").value(hasItem(DEFAULT_CERT_SCOPE_NM)));
     }
@@ -147,7 +140,6 @@ public class CertificateResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(certificate.getId().intValue()))
-            .andExpect(jsonPath("$.idCertificate").value(DEFAULT_ID_CERTIFICATE.intValue()))
             .andExpect(jsonPath("$.certificateNm").value(DEFAULT_CERTIFICATE_NM))
             .andExpect(jsonPath("$.certScopeNm").value(DEFAULT_CERT_SCOPE_NM));
     }
@@ -172,7 +164,6 @@ public class CertificateResourceIT {
         // Disconnect from session so that the updates on updatedCertificate are not directly saved in db
         em.detach(updatedCertificate);
         updatedCertificate
-            .idCertificate(UPDATED_ID_CERTIFICATE)
             .certificateNm(UPDATED_CERTIFICATE_NM)
             .certScopeNm(UPDATED_CERT_SCOPE_NM);
 
@@ -185,7 +176,6 @@ public class CertificateResourceIT {
         List<Certificate> certificateList = certificateRepository.findAll();
         assertThat(certificateList).hasSize(databaseSizeBeforeUpdate);
         Certificate testCertificate = certificateList.get(certificateList.size() - 1);
-        assertThat(testCertificate.getIdCertificate()).isEqualTo(UPDATED_ID_CERTIFICATE);
         assertThat(testCertificate.getCertificateNm()).isEqualTo(UPDATED_CERTIFICATE_NM);
         assertThat(testCertificate.getCertScopeNm()).isEqualTo(UPDATED_CERT_SCOPE_NM);
     }

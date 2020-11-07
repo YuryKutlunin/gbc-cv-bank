@@ -24,15 +24,12 @@ public class ProjectRole implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "id_role")
-    private Long idRole;
-
     @Column(name = "role_nm")
     private String roleNm;
 
-    @OneToMany(mappedBy = "projectrole")
+    @OneToMany(mappedBy = "idRole")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<EmployeeProject> employeeprojects = new HashSet<>();
+    private Set<EmployeeProject> employeeprojectprojectroles = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -41,19 +38,6 @@ public class ProjectRole implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdRole() {
-        return idRole;
-    }
-
-    public ProjectRole idRole(Long idRole) {
-        this.idRole = idRole;
-        return this;
-    }
-
-    public void setIdRole(Long idRole) {
-        this.idRole = idRole;
     }
 
     public String getRoleNm() {
@@ -69,29 +53,29 @@ public class ProjectRole implements Serializable {
         this.roleNm = roleNm;
     }
 
-    public Set<EmployeeProject> getEmployeeprojects() {
-        return employeeprojects;
+    public Set<EmployeeProject> getEmployeeprojectprojectroles() {
+        return employeeprojectprojectroles;
     }
 
-    public ProjectRole employeeprojects(Set<EmployeeProject> employeeProjects) {
-        this.employeeprojects = employeeProjects;
+    public ProjectRole employeeprojectprojectroles(Set<EmployeeProject> employeeProjects) {
+        this.employeeprojectprojectroles = employeeProjects;
         return this;
     }
 
-    public ProjectRole addEmployeeproject(EmployeeProject employeeProject) {
-        this.employeeprojects.add(employeeProject);
-        employeeProject.setProjectrole(this);
+    public ProjectRole addEmployeeprojectprojectrole(EmployeeProject employeeProject) {
+        this.employeeprojectprojectroles.add(employeeProject);
+        employeeProject.setIdRole(this);
         return this;
     }
 
-    public ProjectRole removeEmployeeproject(EmployeeProject employeeProject) {
-        this.employeeprojects.remove(employeeProject);
-        employeeProject.setProjectrole(null);
+    public ProjectRole removeEmployeeprojectprojectrole(EmployeeProject employeeProject) {
+        this.employeeprojectprojectroles.remove(employeeProject);
+        employeeProject.setIdRole(null);
         return this;
     }
 
-    public void setEmployeeprojects(Set<EmployeeProject> employeeProjects) {
-        this.employeeprojects = employeeProjects;
+    public void setEmployeeprojectprojectroles(Set<EmployeeProject> employeeProjects) {
+        this.employeeprojectprojectroles = employeeProjects;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -116,7 +100,6 @@ public class ProjectRole implements Serializable {
     public String toString() {
         return "ProjectRole{" +
             "id=" + getId() +
-            ", idRole=" + getIdRole() +
             ", roleNm='" + getRoleNm() + "'" +
             "}";
     }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col, Label } from 'reactstrap';
-import { AvFeedback, AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
+import { AvFeedback, AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
@@ -19,8 +19,8 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IEmployeeCertifUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const EmployeeCertifUpdate = (props: IEmployeeCertifUpdateProps) => {
-  const [employeeId, setEmployeeId] = useState('0');
-  const [certificateId, setCertificateId] = useState('0');
+  const [emailId, setEmailId] = useState('0');
+  const [idCertificateId, setIdCertificateId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
   const { employeeCertifEntity, employees, certificates, loading, updating } = props;
@@ -84,18 +84,6 @@ export const EmployeeCertifUpdate = (props: IEmployeeCertifUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="emailLabel" for="employee-certif-email">
-                  Email
-                </Label>
-                <AvField id="employee-certif-email" type="text" name="email" />
-              </AvGroup>
-              <AvGroup>
-                <Label id="idCertificateLabel" for="employee-certif-idCertificate">
-                  Id Certificate
-                </Label>
-                <AvField id="employee-certif-idCertificate" type="string" className="form-control" name="idCertificate" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="startDtLabel" for="employee-certif-startDt">
                   Start Dt
                 </Label>
@@ -122,8 +110,8 @@ export const EmployeeCertifUpdate = (props: IEmployeeCertifUpdateProps) => {
                 />
               </AvGroup>
               <AvGroup>
-                <Label for="employee-certif-employee">Employee</Label>
-                <AvInput id="employee-certif-employee" type="select" className="form-control" name="employee.id">
+                <Label for="employee-certif-email">Email</Label>
+                <AvInput id="employee-certif-email" type="select" className="form-control" name="email.id">
                   <option value="" key="0" />
                   {employees
                     ? employees.map(otherEntity => (
@@ -135,13 +123,13 @@ export const EmployeeCertifUpdate = (props: IEmployeeCertifUpdateProps) => {
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label for="employee-certif-certificate">Certificate</Label>
-                <AvInput id="employee-certif-certificate" type="select" className="form-control" name="certificate.id">
+                <Label for="employee-certif-idCertificate">Id Certificate</Label>
+                <AvInput id="employee-certif-idCertificate" type="select" className="form-control" name="idCertificate.id">
                   <option value="" key="0" />
                   {certificates
                     ? certificates.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.idCertificate}
+                          {otherEntity.id}
                         </option>
                       ))
                     : null}

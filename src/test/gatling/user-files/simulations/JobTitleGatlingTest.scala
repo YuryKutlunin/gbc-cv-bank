@@ -72,7 +72,6 @@ class JobTitleGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "idTitle":null
                 , "titleNM":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))

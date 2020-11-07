@@ -53,24 +53,12 @@ export const EmployeeDetail = (props: IEmployeeDetailProps) => {
             <span id="birthDt">Birth Dt</span>
           </dt>
           <dd>{employeeEntity.birthDt ? <TextFormat value={employeeEntity.birthDt} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
-          <dt>
-            <span id="idTitle">Id Title</span>
-          </dt>
-          <dd>{employeeEntity.idTitle}</dd>
-          <dt>
-            <span id="resourcePoolCode">Resource Pool Code</span>
-          </dt>
-          <dd>{employeeEntity.resourcePoolCode}</dd>
-          <dt>
-            <span id="emailCurator">Email Curator</span>
-          </dt>
-          <dd>{employeeEntity.emailCurator}</dd>
-          <dt>Empl</dt>
-          <dd>{employeeEntity.empl ? employeeEntity.empl.email : ''}</dd>
-          <dt>Resource Pool</dt>
-          <dd>{employeeEntity.resourcePool ? employeeEntity.resourcePool.resourcePoolCode : ''}</dd>
-          <dt>Jobtitle</dt>
-          <dd>{employeeEntity.jobtitle ? employeeEntity.jobtitle.idTitle : ''}</dd>
+          <dt>Email Curator</dt>
+          <dd>{employeeEntity.emailCurator ? employeeEntity.emailCurator.email : ''}</dd>
+          <dt>Resource Pool Id</dt>
+          <dd>{employeeEntity.resourcePoolId ? employeeEntity.resourcePoolId.id : ''}</dd>
+          <dt>Id Title</dt>
+          <dd>{employeeEntity.idTitle ? employeeEntity.idTitle.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/employee" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

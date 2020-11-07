@@ -15,22 +15,16 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="id_certificate" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="start_dt" type="datetime">
                 <constraints nullable="true" />
             </column>
             <column name="end_dt" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="employee_id" type="bigint">
+            <column name="email_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="certificate_id" type="bigint">
+            <column name="id_certificate_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -58,8 +52,6 @@
                   separator=";"
                   tableName="employee_certif">
             <column name="id" type="numeric"/>
-            <column name="email" type="string"/>
-            <column name="id_certificate" type="numeric"/>
             <column name="start_dt" type="datetime"/>
             <column name="end_dt" type="datetime"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

@@ -72,12 +72,6 @@ export const EducTypeUpdate = (props: IEducTypeUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="idEducTypeLabel" for="educ-type-idEducType">
-                  Id Educ Type
-                </Label>
-                <AvField id="educ-type-idEducType" type="string" className="form-control" name="idEducType" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="educTypeNmLabel" for="educ-type-educTypeNm">
                   Educ Type Nm
                 </Label>

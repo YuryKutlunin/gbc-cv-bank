@@ -23,19 +23,13 @@ public class ProjectTechnology implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "id_project")
-    private Long idProject;
-
-    @Column(name = "id_technology")
-    private Long idTechnology;
+    @ManyToOne
+    @JsonIgnoreProperties(value = "projecttechnologyprojects", allowSetters = true)
+    private Project idProject;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "projecttechnologies", allowSetters = true)
-    private Project project;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "projecttechnologies", allowSetters = true)
-    private Technology technology;
+    @JsonIgnoreProperties(value = "projecttechnologytechnologies", allowSetters = true)
+    private Technology idTechnology;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -46,56 +40,30 @@ public class ProjectTechnology implements Serializable {
         this.id = id;
     }
 
-    public Long getIdProject() {
+    public Project getIdProject() {
         return idProject;
     }
 
-    public ProjectTechnology idProject(Long idProject) {
-        this.idProject = idProject;
+    public ProjectTechnology idProject(Project project) {
+        this.idProject = project;
         return this;
     }
 
-    public void setIdProject(Long idProject) {
-        this.idProject = idProject;
+    public void setIdProject(Project project) {
+        this.idProject = project;
     }
 
-    public Long getIdTechnology() {
+    public Technology getIdTechnology() {
         return idTechnology;
     }
 
-    public ProjectTechnology idTechnology(Long idTechnology) {
-        this.idTechnology = idTechnology;
+    public ProjectTechnology idTechnology(Technology technology) {
+        this.idTechnology = technology;
         return this;
     }
 
-    public void setIdTechnology(Long idTechnology) {
-        this.idTechnology = idTechnology;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public ProjectTechnology project(Project project) {
-        this.project = project;
-        return this;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public Technology getTechnology() {
-        return technology;
-    }
-
-    public ProjectTechnology technology(Technology technology) {
-        this.technology = technology;
-        return this;
-    }
-
-    public void setTechnology(Technology technology) {
-        this.technology = technology;
+    public void setIdTechnology(Technology technology) {
+        this.idTechnology = technology;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -120,8 +88,6 @@ public class ProjectTechnology implements Serializable {
     public String toString() {
         return "ProjectTechnology{" +
             "id=" + getId() +
-            ", idProject=" + getIdProject() +
-            ", idTechnology=" + getIdTechnology() +
             "}";
     }
 }

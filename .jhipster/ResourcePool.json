@@ -2,10 +2,6 @@
   "name": "ResourcePool",
   "fields": [
     {
-      "fieldName": "resourcePoolCode",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "resourcePoolNm",
       "fieldType": "String"
     },
@@ -18,8 +14,8 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "employee",
-      "otherEntityRelationshipName": "resourcePool",
-      "relationshipName": "employee"
+      "otherEntityRelationshipName": "resourcePoolId",
+      "relationshipName": "employeeresourcepool"
     }
   ],
   "changelogDate": "20201106143536",

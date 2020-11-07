@@ -26,10 +26,6 @@ export const JobTitleDetail = (props: IJobTitleDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="idTitle">Id Title</span>
-          </dt>
-          <dd>{jobTitleEntity.idTitle}</dd>
-          <dt>
             <span id="titleNM">Title NM</span>
           </dt>
           <dd>{jobTitleEntity.titleNM}</dd>

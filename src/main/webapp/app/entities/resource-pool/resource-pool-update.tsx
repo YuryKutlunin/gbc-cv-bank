@@ -72,12 +72,6 @@ export const ResourcePoolUpdate = (props: IResourcePoolUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="resourcePoolCodeLabel" for="resource-pool-resourcePoolCode">
-                  Resource Pool Code
-                </Label>
-                <AvField id="resource-pool-resourcePoolCode" type="text" name="resourcePoolCode" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="resourcePoolNmLabel" for="resource-pool-resourcePoolNm">
                   Resource Pool Nm
                 </Label>

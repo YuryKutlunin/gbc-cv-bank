@@ -26,14 +26,6 @@ export const EmployeeCertifDetail = (props: IEmployeeCertifDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="email">Email</span>
-          </dt>
-          <dd>{employeeCertifEntity.email}</dd>
-          <dt>
-            <span id="idCertificate">Id Certificate</span>
-          </dt>
-          <dd>{employeeCertifEntity.idCertificate}</dd>
-          <dt>
             <span id="startDt">Start Dt</span>
           </dt>
           <dd>
@@ -45,10 +37,10 @@ export const EmployeeCertifDetail = (props: IEmployeeCertifDetailProps) => {
           <dd>
             {employeeCertifEntity.endDt ? <TextFormat value={employeeCertifEntity.endDt} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
-          <dt>Employee</dt>
-          <dd>{employeeCertifEntity.employee ? employeeCertifEntity.employee.email : ''}</dd>
-          <dt>Certificate</dt>
-          <dd>{employeeCertifEntity.certificate ? employeeCertifEntity.certificate.idCertificate : ''}</dd>
+          <dt>Email</dt>
+          <dd>{employeeCertifEntity.email ? employeeCertifEntity.email.email : ''}</dd>
+          <dt>Id Certificate</dt>
+          <dd>{employeeCertifEntity.idCertificate ? employeeCertifEntity.idCertificate.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/employee-certif" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

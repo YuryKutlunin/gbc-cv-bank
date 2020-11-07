@@ -24,15 +24,12 @@ public class EducType implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "id_educ_type")
-    private Long idEducType;
-
     @Column(name = "educ_type_nm")
     private String educTypeNm;
 
-    @OneToMany(mappedBy = "eductype")
+    @OneToMany(mappedBy = "idEducType")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Education> educations = new HashSet<>();
+    private Set<Education> educationeductypes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -41,19 +38,6 @@ public class EducType implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdEducType() {
-        return idEducType;
-    }
-
-    public EducType idEducType(Long idEducType) {
-        this.idEducType = idEducType;
-        return this;
-    }
-
-    public void setIdEducType(Long idEducType) {
-        this.idEducType = idEducType;
     }
 
     public String getEducTypeNm() {
@@ -69,29 +53,29 @@ public class EducType implements Serializable {
         this.educTypeNm = educTypeNm;
     }
 
-    public Set<Education> getEducations() {
-        return educations;
+    public Set<Education> getEducationeductypes() {
+        return educationeductypes;
     }
 
-    public EducType educations(Set<Education> educations) {
-        this.educations = educations;
+    public EducType educationeductypes(Set<Education> educations) {
+        this.educationeductypes = educations;
         return this;
     }
 
-    public EducType addEducation(Education education) {
-        this.educations.add(education);
-        education.setEductype(this);
+    public EducType addEducationeductype(Education education) {
+        this.educationeductypes.add(education);
+        education.setIdEducType(this);
         return this;
     }
 
-    public EducType removeEducation(Education education) {
-        this.educations.remove(education);
-        education.setEductype(null);
+    public EducType removeEducationeductype(Education education) {
+        this.educationeductypes.remove(education);
+        education.setIdEducType(null);
         return this;
     }
 
-    public void setEducations(Set<Education> educations) {
-        this.educations = educations;
+    public void setEducationeductypes(Set<Education> educations) {
+        this.educationeductypes = educations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -116,7 +100,6 @@ public class EducType implements Serializable {
     public String toString() {
         return "EducType{" +
             "id=" + getId() +
-            ", idEducType=" + getIdEducType() +
             ", educTypeNm='" + getEducTypeNm() + "'" +
             "}";
     }

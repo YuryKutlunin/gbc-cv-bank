@@ -52,15 +52,6 @@ public class EmployeeResourceIT {
     private static final Instant DEFAULT_BIRTH_DT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_BIRTH_DT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Long DEFAULT_ID_TITLE = 1L;
-    private static final Long UPDATED_ID_TITLE = 2L;
-
-    private static final String DEFAULT_RESOURCE_POOL_CODE = "AAAAAAAAAA";
-    private static final String UPDATED_RESOURCE_POOL_CODE = "BBBBBBBBBB";
-
-    private static final String DEFAULT_EMAIL_CURATOR = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL_CURATOR = "BBBBBBBBBB";
-
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -86,10 +77,7 @@ public class EmployeeResourceIT {
             .email(DEFAULT_EMAIL)
             .phoneNum(DEFAULT_PHONE_NUM)
             .workType(DEFAULT_WORK_TYPE)
-            .birthDt(DEFAULT_BIRTH_DT)
-            .idTitle(DEFAULT_ID_TITLE)
-            .resourcePoolCode(DEFAULT_RESOURCE_POOL_CODE)
-            .emailCurator(DEFAULT_EMAIL_CURATOR);
+            .birthDt(DEFAULT_BIRTH_DT);
         return employee;
     }
     /**
@@ -106,10 +94,7 @@ public class EmployeeResourceIT {
             .email(UPDATED_EMAIL)
             .phoneNum(UPDATED_PHONE_NUM)
             .workType(UPDATED_WORK_TYPE)
-            .birthDt(UPDATED_BIRTH_DT)
-            .idTitle(UPDATED_ID_TITLE)
-            .resourcePoolCode(UPDATED_RESOURCE_POOL_CODE)
-            .emailCurator(UPDATED_EMAIL_CURATOR);
+            .birthDt(UPDATED_BIRTH_DT);
         return employee;
     }
 
@@ -139,9 +124,6 @@ public class EmployeeResourceIT {
         assertThat(testEmployee.getPhoneNum()).isEqualTo(DEFAULT_PHONE_NUM);
         assertThat(testEmployee.getWorkType()).isEqualTo(DEFAULT_WORK_TYPE);
         assertThat(testEmployee.getBirthDt()).isEqualTo(DEFAULT_BIRTH_DT);
-        assertThat(testEmployee.getIdTitle()).isEqualTo(DEFAULT_ID_TITLE);
-        assertThat(testEmployee.getResourcePoolCode()).isEqualTo(DEFAULT_RESOURCE_POOL_CODE);
-        assertThat(testEmployee.getEmailCurator()).isEqualTo(DEFAULT_EMAIL_CURATOR);
     }
 
     @Test
@@ -181,10 +163,7 @@ public class EmployeeResourceIT {
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].phoneNum").value(hasItem(DEFAULT_PHONE_NUM)))
             .andExpect(jsonPath("$.[*].workType").value(hasItem(DEFAULT_WORK_TYPE)))
-            .andExpect(jsonPath("$.[*].birthDt").value(hasItem(DEFAULT_BIRTH_DT.toString())))
-            .andExpect(jsonPath("$.[*].idTitle").value(hasItem(DEFAULT_ID_TITLE.intValue())))
-            .andExpect(jsonPath("$.[*].resourcePoolCode").value(hasItem(DEFAULT_RESOURCE_POOL_CODE)))
-            .andExpect(jsonPath("$.[*].emailCurator").value(hasItem(DEFAULT_EMAIL_CURATOR)));
+            .andExpect(jsonPath("$.[*].birthDt").value(hasItem(DEFAULT_BIRTH_DT.toString())));
     }
     
     @Test
@@ -204,10 +183,7 @@ public class EmployeeResourceIT {
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.phoneNum").value(DEFAULT_PHONE_NUM))
             .andExpect(jsonPath("$.workType").value(DEFAULT_WORK_TYPE))
-            .andExpect(jsonPath("$.birthDt").value(DEFAULT_BIRTH_DT.toString()))
-            .andExpect(jsonPath("$.idTitle").value(DEFAULT_ID_TITLE.intValue()))
-            .andExpect(jsonPath("$.resourcePoolCode").value(DEFAULT_RESOURCE_POOL_CODE))
-            .andExpect(jsonPath("$.emailCurator").value(DEFAULT_EMAIL_CURATOR));
+            .andExpect(jsonPath("$.birthDt").value(DEFAULT_BIRTH_DT.toString()));
     }
     @Test
     @Transactional
@@ -236,10 +212,7 @@ public class EmployeeResourceIT {
             .email(UPDATED_EMAIL)
             .phoneNum(UPDATED_PHONE_NUM)
             .workType(UPDATED_WORK_TYPE)
-            .birthDt(UPDATED_BIRTH_DT)
-            .idTitle(UPDATED_ID_TITLE)
-            .resourcePoolCode(UPDATED_RESOURCE_POOL_CODE)
-            .emailCurator(UPDATED_EMAIL_CURATOR);
+            .birthDt(UPDATED_BIRTH_DT);
 
         restEmployeeMockMvc.perform(put("/api/employees")
             .contentType(MediaType.APPLICATION_JSON)
@@ -257,9 +230,6 @@ public class EmployeeResourceIT {
         assertThat(testEmployee.getPhoneNum()).isEqualTo(UPDATED_PHONE_NUM);
         assertThat(testEmployee.getWorkType()).isEqualTo(UPDATED_WORK_TYPE);
         assertThat(testEmployee.getBirthDt()).isEqualTo(UPDATED_BIRTH_DT);
-        assertThat(testEmployee.getIdTitle()).isEqualTo(UPDATED_ID_TITLE);
-        assertThat(testEmployee.getResourcePoolCode()).isEqualTo(UPDATED_RESOURCE_POOL_CODE);
-        assertThat(testEmployee.getEmailCurator()).isEqualTo(UPDATED_EMAIL_CURATOR);
     }
 
     @Test

@@ -29,9 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ProjectRoleResourceIT {
 
-    private static final Long DEFAULT_ID_ROLE = 1L;
-    private static final Long UPDATED_ID_ROLE = 2L;
-
     private static final String DEFAULT_ROLE_NM = "AAAAAAAAAA";
     private static final String UPDATED_ROLE_NM = "BBBBBBBBBB";
 
@@ -54,7 +51,6 @@ public class ProjectRoleResourceIT {
      */
     public static ProjectRole createEntity(EntityManager em) {
         ProjectRole projectRole = new ProjectRole()
-            .idRole(DEFAULT_ID_ROLE)
             .roleNm(DEFAULT_ROLE_NM);
         return projectRole;
     }
@@ -66,7 +62,6 @@ public class ProjectRoleResourceIT {
      */
     public static ProjectRole createUpdatedEntity(EntityManager em) {
         ProjectRole projectRole = new ProjectRole()
-            .idRole(UPDATED_ID_ROLE)
             .roleNm(UPDATED_ROLE_NM);
         return projectRole;
     }
@@ -90,7 +85,6 @@ public class ProjectRoleResourceIT {
         List<ProjectRole> projectRoleList = projectRoleRepository.findAll();
         assertThat(projectRoleList).hasSize(databaseSizeBeforeCreate + 1);
         ProjectRole testProjectRole = projectRoleList.get(projectRoleList.size() - 1);
-        assertThat(testProjectRole.getIdRole()).isEqualTo(DEFAULT_ID_ROLE);
         assertThat(testProjectRole.getRoleNm()).isEqualTo(DEFAULT_ROLE_NM);
     }
 
@@ -125,7 +119,6 @@ public class ProjectRoleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(projectRole.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idRole").value(hasItem(DEFAULT_ID_ROLE.intValue())))
             .andExpect(jsonPath("$.[*].roleNm").value(hasItem(DEFAULT_ROLE_NM)));
     }
     
@@ -140,7 +133,6 @@ public class ProjectRoleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(projectRole.getId().intValue()))
-            .andExpect(jsonPath("$.idRole").value(DEFAULT_ID_ROLE.intValue()))
             .andExpect(jsonPath("$.roleNm").value(DEFAULT_ROLE_NM));
     }
     @Test
@@ -164,7 +156,6 @@ public class ProjectRoleResourceIT {
         // Disconnect from session so that the updates on updatedProjectRole are not directly saved in db
         em.detach(updatedProjectRole);
         updatedProjectRole
-            .idRole(UPDATED_ID_ROLE)
             .roleNm(UPDATED_ROLE_NM);
 
         restProjectRoleMockMvc.perform(put("/api/project-roles")
@@ -176,7 +167,6 @@ public class ProjectRoleResourceIT {
         List<ProjectRole> projectRoleList = projectRoleRepository.findAll();
         assertThat(projectRoleList).hasSize(databaseSizeBeforeUpdate);
         ProjectRole testProjectRole = projectRoleList.get(projectRoleList.size() - 1);
-        assertThat(testProjectRole.getIdRole()).isEqualTo(UPDATED_ID_ROLE);
         assertThat(testProjectRole.getRoleNm()).isEqualTo(UPDATED_ROLE_NM);
     }
 

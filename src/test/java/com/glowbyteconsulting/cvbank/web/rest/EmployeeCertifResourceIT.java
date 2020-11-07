@@ -31,12 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class EmployeeCertifResourceIT {
 
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_ID_CERTIFICATE = 1L;
-    private static final Long UPDATED_ID_CERTIFICATE = 2L;
-
     private static final Instant DEFAULT_START_DT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_START_DT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -62,8 +56,6 @@ public class EmployeeCertifResourceIT {
      */
     public static EmployeeCertif createEntity(EntityManager em) {
         EmployeeCertif employeeCertif = new EmployeeCertif()
-            .email(DEFAULT_EMAIL)
-            .idCertificate(DEFAULT_ID_CERTIFICATE)
             .startDt(DEFAULT_START_DT)
             .endDt(DEFAULT_END_DT);
         return employeeCertif;
@@ -76,8 +68,6 @@ public class EmployeeCertifResourceIT {
      */
     public static EmployeeCertif createUpdatedEntity(EntityManager em) {
         EmployeeCertif employeeCertif = new EmployeeCertif()
-            .email(UPDATED_EMAIL)
-            .idCertificate(UPDATED_ID_CERTIFICATE)
             .startDt(UPDATED_START_DT)
             .endDt(UPDATED_END_DT);
         return employeeCertif;
@@ -102,8 +92,6 @@ public class EmployeeCertifResourceIT {
         List<EmployeeCertif> employeeCertifList = employeeCertifRepository.findAll();
         assertThat(employeeCertifList).hasSize(databaseSizeBeforeCreate + 1);
         EmployeeCertif testEmployeeCertif = employeeCertifList.get(employeeCertifList.size() - 1);
-        assertThat(testEmployeeCertif.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testEmployeeCertif.getIdCertificate()).isEqualTo(DEFAULT_ID_CERTIFICATE);
         assertThat(testEmployeeCertif.getStartDt()).isEqualTo(DEFAULT_START_DT);
         assertThat(testEmployeeCertif.getEndDt()).isEqualTo(DEFAULT_END_DT);
     }
@@ -139,8 +127,6 @@ public class EmployeeCertifResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(employeeCertif.getId().intValue())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].idCertificate").value(hasItem(DEFAULT_ID_CERTIFICATE.intValue())))
             .andExpect(jsonPath("$.[*].startDt").value(hasItem(DEFAULT_START_DT.toString())))
             .andExpect(jsonPath("$.[*].endDt").value(hasItem(DEFAULT_END_DT.toString())));
     }
@@ -156,8 +142,6 @@ public class EmployeeCertifResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(employeeCertif.getId().intValue()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.idCertificate").value(DEFAULT_ID_CERTIFICATE.intValue()))
             .andExpect(jsonPath("$.startDt").value(DEFAULT_START_DT.toString()))
             .andExpect(jsonPath("$.endDt").value(DEFAULT_END_DT.toString()));
     }
@@ -182,8 +166,6 @@ public class EmployeeCertifResourceIT {
         // Disconnect from session so that the updates on updatedEmployeeCertif are not directly saved in db
         em.detach(updatedEmployeeCertif);
         updatedEmployeeCertif
-            .email(UPDATED_EMAIL)
-            .idCertificate(UPDATED_ID_CERTIFICATE)
             .startDt(UPDATED_START_DT)
             .endDt(UPDATED_END_DT);
 
@@ -196,8 +178,6 @@ public class EmployeeCertifResourceIT {
         List<EmployeeCertif> employeeCertifList = employeeCertifRepository.findAll();
         assertThat(employeeCertifList).hasSize(databaseSizeBeforeUpdate);
         EmployeeCertif testEmployeeCertif = employeeCertifList.get(employeeCertifList.size() - 1);
-        assertThat(testEmployeeCertif.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testEmployeeCertif.getIdCertificate()).isEqualTo(UPDATED_ID_CERTIFICATE);
         assertThat(testEmployeeCertif.getStartDt()).isEqualTo(UPDATED_START_DT);
         assertThat(testEmployeeCertif.getEndDt()).isEqualTo(UPDATED_END_DT);
     }

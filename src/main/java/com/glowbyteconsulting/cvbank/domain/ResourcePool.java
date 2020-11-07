@@ -24,18 +24,15 @@ public class ResourcePool implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "resource_pool_code")
-    private String resourcePoolCode;
-
     @Column(name = "resource_pool_nm")
     private String resourcePoolNm;
 
     @Column(name = "pool_leader")
     private String poolLeader;
 
-    @OneToMany(mappedBy = "resourcePool")
+    @OneToMany(mappedBy = "resourcePoolId")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Employee> employees = new HashSet<>();
+    private Set<Employee> employeeresourcepools = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -44,19 +41,6 @@ public class ResourcePool implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getResourcePoolCode() {
-        return resourcePoolCode;
-    }
-
-    public ResourcePool resourcePoolCode(String resourcePoolCode) {
-        this.resourcePoolCode = resourcePoolCode;
-        return this;
-    }
-
-    public void setResourcePoolCode(String resourcePoolCode) {
-        this.resourcePoolCode = resourcePoolCode;
     }
 
     public String getResourcePoolNm() {
@@ -85,29 +69,29 @@ public class ResourcePool implements Serializable {
         this.poolLeader = poolLeader;
     }
 
-    public Set<Employee> getEmployees() {
-        return employees;
+    public Set<Employee> getEmployeeresourcepools() {
+        return employeeresourcepools;
     }
 
-    public ResourcePool employees(Set<Employee> employees) {
-        this.employees = employees;
+    public ResourcePool employeeresourcepools(Set<Employee> employees) {
+        this.employeeresourcepools = employees;
         return this;
     }
 
-    public ResourcePool addEmployee(Employee employee) {
-        this.employees.add(employee);
-        employee.setResourcePool(this);
+    public ResourcePool addEmployeeresourcepool(Employee employee) {
+        this.employeeresourcepools.add(employee);
+        employee.setResourcePoolId(this);
         return this;
     }
 
-    public ResourcePool removeEmployee(Employee employee) {
-        this.employees.remove(employee);
-        employee.setResourcePool(null);
+    public ResourcePool removeEmployeeresourcepool(Employee employee) {
+        this.employeeresourcepools.remove(employee);
+        employee.setResourcePoolId(null);
         return this;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setEmployeeresourcepools(Set<Employee> employees) {
+        this.employeeresourcepools = employees;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -132,7 +116,6 @@ public class ResourcePool implements Serializable {
     public String toString() {
         return "ResourcePool{" +
             "id=" + getId() +
-            ", resourcePoolCode='" + getResourcePoolCode() + "'" +
             ", resourcePoolNm='" + getResourcePoolNm() + "'" +
             ", poolLeader='" + getPoolLeader() + "'" +
             "}";

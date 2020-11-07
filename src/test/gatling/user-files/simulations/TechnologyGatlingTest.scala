@@ -72,7 +72,6 @@ class TechnologyGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "idTechnology":null
                 , "technologyNm":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))

@@ -29,15 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class EducationResourceIT {
 
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_ID_UNIVER = 1L;
-    private static final Long UPDATED_ID_UNIVER = 2L;
-
-    private static final String DEFAULT_ID_EDUC_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_ID_EDUC_TYPE = "BBBBBBBBBB";
-
     private static final String DEFAULT_FACULTY = "AAAAAAAAAA";
     private static final String UPDATED_FACULTY = "BBBBBBBBBB";
 
@@ -72,9 +63,6 @@ public class EducationResourceIT {
      */
     public static Education createEntity(EntityManager em) {
         Education education = new Education()
-            .email(DEFAULT_EMAIL)
-            .idUniver(DEFAULT_ID_UNIVER)
-            .idEducType(DEFAULT_ID_EDUC_TYPE)
             .faculty(DEFAULT_FACULTY)
             .specialty(DEFAULT_SPECIALTY)
             .specialization(DEFAULT_SPECIALIZATION)
@@ -90,9 +78,6 @@ public class EducationResourceIT {
      */
     public static Education createUpdatedEntity(EntityManager em) {
         Education education = new Education()
-            .email(UPDATED_EMAIL)
-            .idUniver(UPDATED_ID_UNIVER)
-            .idEducType(UPDATED_ID_EDUC_TYPE)
             .faculty(UPDATED_FACULTY)
             .specialty(UPDATED_SPECIALTY)
             .specialization(UPDATED_SPECIALIZATION)
@@ -120,9 +105,6 @@ public class EducationResourceIT {
         List<Education> educationList = educationRepository.findAll();
         assertThat(educationList).hasSize(databaseSizeBeforeCreate + 1);
         Education testEducation = educationList.get(educationList.size() - 1);
-        assertThat(testEducation.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testEducation.getIdUniver()).isEqualTo(DEFAULT_ID_UNIVER);
-        assertThat(testEducation.getIdEducType()).isEqualTo(DEFAULT_ID_EDUC_TYPE);
         assertThat(testEducation.getFaculty()).isEqualTo(DEFAULT_FACULTY);
         assertThat(testEducation.getSpecialty()).isEqualTo(DEFAULT_SPECIALTY);
         assertThat(testEducation.getSpecialization()).isEqualTo(DEFAULT_SPECIALIZATION);
@@ -161,9 +143,6 @@ public class EducationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(education.getId().intValue())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].idUniver").value(hasItem(DEFAULT_ID_UNIVER.intValue())))
-            .andExpect(jsonPath("$.[*].idEducType").value(hasItem(DEFAULT_ID_EDUC_TYPE)))
             .andExpect(jsonPath("$.[*].faculty").value(hasItem(DEFAULT_FACULTY)))
             .andExpect(jsonPath("$.[*].specialty").value(hasItem(DEFAULT_SPECIALTY)))
             .andExpect(jsonPath("$.[*].specialization").value(hasItem(DEFAULT_SPECIALIZATION)))
@@ -182,9 +161,6 @@ public class EducationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(education.getId().intValue()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.idUniver").value(DEFAULT_ID_UNIVER.intValue()))
-            .andExpect(jsonPath("$.idEducType").value(DEFAULT_ID_EDUC_TYPE))
             .andExpect(jsonPath("$.faculty").value(DEFAULT_FACULTY))
             .andExpect(jsonPath("$.specialty").value(DEFAULT_SPECIALTY))
             .andExpect(jsonPath("$.specialization").value(DEFAULT_SPECIALIZATION))
@@ -212,9 +188,6 @@ public class EducationResourceIT {
         // Disconnect from session so that the updates on updatedEducation are not directly saved in db
         em.detach(updatedEducation);
         updatedEducation
-            .email(UPDATED_EMAIL)
-            .idUniver(UPDATED_ID_UNIVER)
-            .idEducType(UPDATED_ID_EDUC_TYPE)
             .faculty(UPDATED_FACULTY)
             .specialty(UPDATED_SPECIALTY)
             .specialization(UPDATED_SPECIALIZATION)
@@ -230,9 +203,6 @@ public class EducationResourceIT {
         List<Education> educationList = educationRepository.findAll();
         assertThat(educationList).hasSize(databaseSizeBeforeUpdate);
         Education testEducation = educationList.get(educationList.size() - 1);
-        assertThat(testEducation.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testEducation.getIdUniver()).isEqualTo(UPDATED_ID_UNIVER);
-        assertThat(testEducation.getIdEducType()).isEqualTo(UPDATED_ID_EDUC_TYPE);
         assertThat(testEducation.getFaculty()).isEqualTo(UPDATED_FACULTY);
         assertThat(testEducation.getSpecialty()).isEqualTo(UPDATED_SPECIALTY);
         assertThat(testEducation.getSpecialization()).isEqualTo(UPDATED_SPECIALIZATION);

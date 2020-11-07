@@ -72,8 +72,6 @@ class ProjectTechnologyGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "idProject":null
-                , "idTechnology":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_projectTechnology_url"))).exitHereIfFailed

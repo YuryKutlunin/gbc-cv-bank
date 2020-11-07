@@ -33,7 +33,6 @@ export const ResourcePool = (props: IResourcePoolProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Resource Pool Code</th>
                 <th>Resource Pool Nm</th>
                 <th>Pool Leader</th>
                 <th />
@@ -47,7 +46,6 @@ export const ResourcePool = (props: IResourcePoolProps) => {
                       {resourcePool.id}
                     </Button>
                   </td>
-                  <td>{resourcePool.resourcePoolCode}</td>
                   <td>{resourcePool.resourcePoolNm}</td>
                   <td>{resourcePool.poolLeader}</td>
                   <td className="text-right">

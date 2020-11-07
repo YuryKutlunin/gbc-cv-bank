@@ -26,10 +26,6 @@ export const SkillLevelDetail = (props: ISkillLevelDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="idLevel">Id Level</span>
-          </dt>
-          <dd>{skillLevelEntity.idLevel}</dd>
-          <dt>
             <span id="levelDesc">Level Desc</span>
           </dt>
           <dd>{skillLevelEntity.levelDesc}</dd>

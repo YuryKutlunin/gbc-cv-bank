@@ -72,12 +72,6 @@ export const JobTitleUpdate = (props: IJobTitleUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
-                <Label id="idTitleLabel" for="job-title-idTitle">
-                  Id Title
-                </Label>
-                <AvField id="job-title-idTitle" type="string" className="form-control" name="idTitle" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="titleNMLabel" for="job-title-titleNM">
                   Title NM
                 </Label>

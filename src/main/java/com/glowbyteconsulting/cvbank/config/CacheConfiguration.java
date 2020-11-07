@@ -79,6 +79,22 @@ public class CacheConfiguration {
             createCache(cm, com.glowbyteconsulting.cvbank.domain.EmployeeSkill.class.getName());
             createCache(cm, com.glowbyteconsulting.cvbank.domain.SkillLevel.class.getName());
             createCache(cm, com.glowbyteconsulting.cvbank.domain.SkillLevel.class.getName() + ".employeeskills");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".employeeemployees");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".educationemployees");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".employeeprojectemployees");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".employeecertifemployees");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Employee.class.getName() + ".employeeskillemployees");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ResourcePool.class.getName() + ".employeeresourcepools");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.JobTitle.class.getName() + ".employeejobtitles");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.University.class.getName() + ".educationuniversities");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.EducType.class.getName() + ".educationeductypes");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Project.class.getName() + ".projecttechnologyprojects");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Project.class.getName() + ".employeeprojectprojects");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Technology.class.getName() + ".projecttechnologytechnologies");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.ProjectRole.class.getName() + ".employeeprojectprojectroles");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Certificate.class.getName() + ".employeecertifcertificates");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.Skill.class.getName() + ".employeeskillskills");
+            createCache(cm, com.glowbyteconsulting.cvbank.domain.SkillLevel.class.getName() + ".employeeskillskilllevels");
             // jhipster-needle-ehcache-add-entry
         };
     }

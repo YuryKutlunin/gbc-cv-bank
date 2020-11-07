@@ -33,7 +33,6 @@ export const JobTitle = (props: IJobTitleProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Id Title</th>
                 <th>Title NM</th>
                 <th />
               </tr>
@@ -46,7 +45,6 @@ export const JobTitle = (props: IJobTitleProps) => {
                       {jobTitle.id}
                     </Button>
                   </td>
-                  <td>{jobTitle.idTitle}</td>
                   <td>{jobTitle.titleNM}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

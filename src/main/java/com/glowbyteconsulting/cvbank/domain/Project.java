@@ -25,9 +25,6 @@ public class Project implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "id_project")
-    private Long idProject;
-
     @Column(name = "project_nm")
     private String projectNm;
 
@@ -40,13 +37,13 @@ public class Project implements Serializable {
     @Column(name = "end_dt")
     private Instant endDt;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "idProject")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<ProjectTechnology> projecttechnologies = new HashSet<>();
+    private Set<ProjectTechnology> projecttechnologyprojects = new HashSet<>();
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "idProject")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<EmployeeProject> employeeprojects = new HashSet<>();
+    private Set<EmployeeProject> employeeprojectprojects = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -55,19 +52,6 @@ public class Project implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdProject() {
-        return idProject;
-    }
-
-    public Project idProject(Long idProject) {
-        this.idProject = idProject;
-        return this;
-    }
-
-    public void setIdProject(Long idProject) {
-        this.idProject = idProject;
     }
 
     public String getProjectNm() {
@@ -122,54 +106,54 @@ public class Project implements Serializable {
         this.endDt = endDt;
     }
 
-    public Set<ProjectTechnology> getProjecttechnologies() {
-        return projecttechnologies;
+    public Set<ProjectTechnology> getProjecttechnologyprojects() {
+        return projecttechnologyprojects;
     }
 
-    public Project projecttechnologies(Set<ProjectTechnology> projectTechnologies) {
-        this.projecttechnologies = projectTechnologies;
+    public Project projecttechnologyprojects(Set<ProjectTechnology> projectTechnologies) {
+        this.projecttechnologyprojects = projectTechnologies;
         return this;
     }
 
-    public Project addProjecttechnology(ProjectTechnology projectTechnology) {
-        this.projecttechnologies.add(projectTechnology);
-        projectTechnology.setProject(this);
+    public Project addProjecttechnologyproject(ProjectTechnology projectTechnology) {
+        this.projecttechnologyprojects.add(projectTechnology);
+        projectTechnology.setIdProject(this);
         return this;
     }
 
-    public Project removeProjecttechnology(ProjectTechnology projectTechnology) {
-        this.projecttechnologies.remove(projectTechnology);
-        projectTechnology.setProject(null);
+    public Project removeProjecttechnologyproject(ProjectTechnology projectTechnology) {
+        this.projecttechnologyprojects.remove(projectTechnology);
+        projectTechnology.setIdProject(null);
         return this;
     }
 
-    public void setProjecttechnologies(Set<ProjectTechnology> projectTechnologies) {
-        this.projecttechnologies = projectTechnologies;
+    public void setProjecttechnologyprojects(Set<ProjectTechnology> projectTechnologies) {
+        this.projecttechnologyprojects = projectTechnologies;
     }
 
-    public Set<EmployeeProject> getEmployeeprojects() {
-        return employeeprojects;
+    public Set<EmployeeProject> getEmployeeprojectprojects() {
+        return employeeprojectprojects;
     }
 
-    public Project employeeprojects(Set<EmployeeProject> employeeProjects) {
-        this.employeeprojects = employeeProjects;
+    public Project employeeprojectprojects(Set<EmployeeProject> employeeProjects) {
+        this.employeeprojectprojects = employeeProjects;
         return this;
     }
 
-    public Project addEmployeeproject(EmployeeProject employeeProject) {
-        this.employeeprojects.add(employeeProject);
-        employeeProject.setProject(this);
+    public Project addEmployeeprojectproject(EmployeeProject employeeProject) {
+        this.employeeprojectprojects.add(employeeProject);
+        employeeProject.setIdProject(this);
         return this;
     }
 
-    public Project removeEmployeeproject(EmployeeProject employeeProject) {
-        this.employeeprojects.remove(employeeProject);
-        employeeProject.setProject(null);
+    public Project removeEmployeeprojectproject(EmployeeProject employeeProject) {
+        this.employeeprojectprojects.remove(employeeProject);
+        employeeProject.setIdProject(null);
         return this;
     }
 
-    public void setEmployeeprojects(Set<EmployeeProject> employeeProjects) {
-        this.employeeprojects = employeeProjects;
+    public void setEmployeeprojectprojects(Set<EmployeeProject> employeeProjects) {
+        this.employeeprojectprojects = employeeProjects;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -194,7 +178,6 @@ public class Project implements Serializable {
     public String toString() {
         return "Project{" +
             "id=" + getId() +
-            ", idProject=" + getIdProject() +
             ", projectNm='" + getProjectNm() + "'" +
             ", companyNM='" + getCompanyNM() + "'" +
             ", startDt='" + getStartDt() + "'" +

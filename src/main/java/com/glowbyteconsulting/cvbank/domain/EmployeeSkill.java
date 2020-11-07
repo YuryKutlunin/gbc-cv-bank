@@ -23,26 +23,17 @@ public class EmployeeSkill implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "id_skill")
-    private Long idSkill;
-
-    @Column(name = "id_level")
-    private Long idLevel;
+    @ManyToOne
+    @JsonIgnoreProperties(value = "employeeskillemployees", allowSetters = true)
+    private Employee email;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "employeeskills", allowSetters = true)
-    private Employee employee;
+    @JsonIgnoreProperties(value = "employeeskillskills", allowSetters = true)
+    private Skill idSkill;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "employeeskills", allowSetters = true)
-    private Skill skill;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "employeeskills", allowSetters = true)
-    private SkillLevel skilllevel;
+    @JsonIgnoreProperties(value = "employeeskillskilllevels", allowSetters = true)
+    private SkillLevel idLevel;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -53,82 +44,43 @@ public class EmployeeSkill implements Serializable {
         this.id = id;
     }
 
-    public String getEmail() {
+    public Employee getEmail() {
         return email;
     }
 
-    public EmployeeSkill email(String email) {
-        this.email = email;
+    public EmployeeSkill email(Employee employee) {
+        this.email = employee;
         return this;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(Employee employee) {
+        this.email = employee;
     }
 
-    public Long getIdSkill() {
+    public Skill getIdSkill() {
         return idSkill;
     }
 
-    public EmployeeSkill idSkill(Long idSkill) {
-        this.idSkill = idSkill;
+    public EmployeeSkill idSkill(Skill skill) {
+        this.idSkill = skill;
         return this;
     }
 
-    public void setIdSkill(Long idSkill) {
-        this.idSkill = idSkill;
+    public void setIdSkill(Skill skill) {
+        this.idSkill = skill;
     }
 
-    public Long getIdLevel() {
+    public SkillLevel getIdLevel() {
         return idLevel;
     }
 
-    public EmployeeSkill idLevel(Long idLevel) {
-        this.idLevel = idLevel;
+    public EmployeeSkill idLevel(SkillLevel skillLevel) {
+        this.idLevel = skillLevel;
         return this;
     }
 
-    public void setIdLevel(Long idLevel) {
-        this.idLevel = idLevel;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public EmployeeSkill employee(Employee employee) {
-        this.employee = employee;
-        return this;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Skill getSkill() {
-        return skill;
-    }
-
-    public EmployeeSkill skill(Skill skill) {
-        this.skill = skill;
-        return this;
-    }
-
-    public void setSkill(Skill skill) {
-        this.skill = skill;
-    }
-
-    public SkillLevel getSkilllevel() {
-        return skilllevel;
-    }
-
-    public EmployeeSkill skilllevel(SkillLevel skillLevel) {
-        this.skilllevel = skillLevel;
-        return this;
-    }
-
-    public void setSkilllevel(SkillLevel skillLevel) {
-        this.skilllevel = skillLevel;
+    public void setIdLevel(SkillLevel skillLevel) {
+        this.idLevel = skillLevel;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -153,9 +105,6 @@ public class EmployeeSkill implements Serializable {
     public String toString() {
         return "EmployeeSkill{" +
             "id=" + getId() +
-            ", email='" + getEmail() + "'" +
-            ", idSkill=" + getIdSkill() +
-            ", idLevel=" + getIdLevel() +
             "}";
     }
 }

@@ -2,10 +2,6 @@
   "name": "EducType",
   "fields": [
     {
-      "fieldName": "idEducType",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "educTypeNm",
       "fieldType": "String"
     }
@@ -14,8 +10,8 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "education",
-      "otherEntityRelationshipName": "eductype",
-      "relationshipName": "education"
+      "otherEntityRelationshipName": "idEducType",
+      "relationshipName": "educationeductype"
     }
   ],
   "changelogDate": "20201107094320",

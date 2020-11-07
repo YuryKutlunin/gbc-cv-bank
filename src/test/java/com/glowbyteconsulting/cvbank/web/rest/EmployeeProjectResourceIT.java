@@ -31,15 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class EmployeeProjectResourceIT {
 
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_ID_PROJECT = 1L;
-    private static final Long UPDATED_ID_PROJECT = 2L;
-
-    private static final Long DEFAULT_ID_ROLE = 1L;
-    private static final Long UPDATED_ID_ROLE = 2L;
-
     private static final String DEFAULT_RESPONSIBILITY_NM = "AAAAAAAAAA";
     private static final String UPDATED_RESPONSIBILITY_NM = "BBBBBBBBBB";
 
@@ -68,9 +59,6 @@ public class EmployeeProjectResourceIT {
      */
     public static EmployeeProject createEntity(EntityManager em) {
         EmployeeProject employeeProject = new EmployeeProject()
-            .email(DEFAULT_EMAIL)
-            .idProject(DEFAULT_ID_PROJECT)
-            .idRole(DEFAULT_ID_ROLE)
             .responsibilityNm(DEFAULT_RESPONSIBILITY_NM)
             .startDt(DEFAULT_START_DT)
             .endDt(DEFAULT_END_DT);
@@ -84,9 +72,6 @@ public class EmployeeProjectResourceIT {
      */
     public static EmployeeProject createUpdatedEntity(EntityManager em) {
         EmployeeProject employeeProject = new EmployeeProject()
-            .email(UPDATED_EMAIL)
-            .idProject(UPDATED_ID_PROJECT)
-            .idRole(UPDATED_ID_ROLE)
             .responsibilityNm(UPDATED_RESPONSIBILITY_NM)
             .startDt(UPDATED_START_DT)
             .endDt(UPDATED_END_DT);
@@ -112,9 +97,6 @@ public class EmployeeProjectResourceIT {
         List<EmployeeProject> employeeProjectList = employeeProjectRepository.findAll();
         assertThat(employeeProjectList).hasSize(databaseSizeBeforeCreate + 1);
         EmployeeProject testEmployeeProject = employeeProjectList.get(employeeProjectList.size() - 1);
-        assertThat(testEmployeeProject.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testEmployeeProject.getIdProject()).isEqualTo(DEFAULT_ID_PROJECT);
-        assertThat(testEmployeeProject.getIdRole()).isEqualTo(DEFAULT_ID_ROLE);
         assertThat(testEmployeeProject.getResponsibilityNm()).isEqualTo(DEFAULT_RESPONSIBILITY_NM);
         assertThat(testEmployeeProject.getStartDt()).isEqualTo(DEFAULT_START_DT);
         assertThat(testEmployeeProject.getEndDt()).isEqualTo(DEFAULT_END_DT);
@@ -151,9 +133,6 @@ public class EmployeeProjectResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(employeeProject.getId().intValue())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].idProject").value(hasItem(DEFAULT_ID_PROJECT.intValue())))
-            .andExpect(jsonPath("$.[*].idRole").value(hasItem(DEFAULT_ID_ROLE.intValue())))
             .andExpect(jsonPath("$.[*].responsibilityNm").value(hasItem(DEFAULT_RESPONSIBILITY_NM)))
             .andExpect(jsonPath("$.[*].startDt").value(hasItem(DEFAULT_START_DT.toString())))
             .andExpect(jsonPath("$.[*].endDt").value(hasItem(DEFAULT_END_DT.toString())));
@@ -170,9 +149,6 @@ public class EmployeeProjectResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(employeeProject.getId().intValue()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.idProject").value(DEFAULT_ID_PROJECT.intValue()))
-            .andExpect(jsonPath("$.idRole").value(DEFAULT_ID_ROLE.intValue()))
             .andExpect(jsonPath("$.responsibilityNm").value(DEFAULT_RESPONSIBILITY_NM))
             .andExpect(jsonPath("$.startDt").value(DEFAULT_START_DT.toString()))
             .andExpect(jsonPath("$.endDt").value(DEFAULT_END_DT.toString()));
@@ -198,9 +174,6 @@ public class EmployeeProjectResourceIT {
         // Disconnect from session so that the updates on updatedEmployeeProject are not directly saved in db
         em.detach(updatedEmployeeProject);
         updatedEmployeeProject
-            .email(UPDATED_EMAIL)
-            .idProject(UPDATED_ID_PROJECT)
-            .idRole(UPDATED_ID_ROLE)
             .responsibilityNm(UPDATED_RESPONSIBILITY_NM)
             .startDt(UPDATED_START_DT)
             .endDt(UPDATED_END_DT);
@@ -214,9 +187,6 @@ public class EmployeeProjectResourceIT {
         List<EmployeeProject> employeeProjectList = employeeProjectRepository.findAll();
         assertThat(employeeProjectList).hasSize(databaseSizeBeforeUpdate);
         EmployeeProject testEmployeeProject = employeeProjectList.get(employeeProjectList.size() - 1);
-        assertThat(testEmployeeProject.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testEmployeeProject.getIdProject()).isEqualTo(UPDATED_ID_PROJECT);
-        assertThat(testEmployeeProject.getIdRole()).isEqualTo(UPDATED_ID_ROLE);
         assertThat(testEmployeeProject.getResponsibilityNm()).isEqualTo(UPDATED_RESPONSIBILITY_NM);
         assertThat(testEmployeeProject.getStartDt()).isEqualTo(UPDATED_START_DT);
         assertThat(testEmployeeProject.getEndDt()).isEqualTo(UPDATED_END_DT);

@@ -2,18 +2,6 @@
   "name": "Education",
   "fields": [
     {
-      "fieldName": "email",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "idUniver",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "idEducType",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "faculty",
       "fieldType": "String"
     },
@@ -38,23 +26,23 @@
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "employee",
-      "otherEntityRelationshipName": "education",
-      "relationshipName": "employee",
+      "otherEntityRelationshipName": "educationemployee",
+      "relationshipName": "email",
       "otherEntityField": "email"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "university",
-      "otherEntityRelationshipName": "education",
-      "relationshipName": "university",
-      "otherEntityField": "idUniver"
+      "otherEntityRelationshipName": "educationuniversity",
+      "relationshipName": "idUniver",
+      "otherEntityField": "id"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "educType",
-      "otherEntityRelationshipName": "education",
-      "relationshipName": "eductype",
-      "otherEntityField": "idEducType"
+      "otherEntityRelationshipName": "educationeductype",
+      "relationshipName": "idEducType",
+      "otherEntityField": "id"
     }
   ],
   "changelogDate": "20201107094120",

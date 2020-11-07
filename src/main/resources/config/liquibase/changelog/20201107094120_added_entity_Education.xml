@@ -15,15 +15,6 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="id_univer" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="id_educ_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="faculty" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -39,13 +30,13 @@
             <column name="end_year" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="employee_id" type="bigint">
+            <column name="email_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="university_id" type="bigint">
+            <column name="id_univer_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="eductype_id" type="bigint">
+            <column name="id_educ_type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -71,9 +62,6 @@
                   separator=";"
                   tableName="education">
             <column name="id" type="numeric"/>
-            <column name="email" type="string"/>
-            <column name="id_univer" type="numeric"/>
-            <column name="id_educ_type" type="string"/>
             <column name="faculty" type="string"/>
             <column name="specialty" type="string"/>
             <column name="specialization" type="string"/>

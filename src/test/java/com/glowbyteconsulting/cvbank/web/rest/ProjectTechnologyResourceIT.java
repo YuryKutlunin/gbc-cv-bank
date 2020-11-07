@@ -29,12 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ProjectTechnologyResourceIT {
 
-    private static final Long DEFAULT_ID_PROJECT = 1L;
-    private static final Long UPDATED_ID_PROJECT = 2L;
-
-    private static final Long DEFAULT_ID_TECHNOLOGY = 1L;
-    private static final Long UPDATED_ID_TECHNOLOGY = 2L;
-
     @Autowired
     private ProjectTechnologyRepository projectTechnologyRepository;
 
@@ -53,9 +47,7 @@ public class ProjectTechnologyResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProjectTechnology createEntity(EntityManager em) {
-        ProjectTechnology projectTechnology = new ProjectTechnology()
-            .idProject(DEFAULT_ID_PROJECT)
-            .idTechnology(DEFAULT_ID_TECHNOLOGY);
+        ProjectTechnology projectTechnology = new ProjectTechnology();
         return projectTechnology;
     }
     /**
@@ -65,9 +57,7 @@ public class ProjectTechnologyResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ProjectTechnology createUpdatedEntity(EntityManager em) {
-        ProjectTechnology projectTechnology = new ProjectTechnology()
-            .idProject(UPDATED_ID_PROJECT)
-            .idTechnology(UPDATED_ID_TECHNOLOGY);
+        ProjectTechnology projectTechnology = new ProjectTechnology();
         return projectTechnology;
     }
 
@@ -90,8 +80,6 @@ public class ProjectTechnologyResourceIT {
         List<ProjectTechnology> projectTechnologyList = projectTechnologyRepository.findAll();
         assertThat(projectTechnologyList).hasSize(databaseSizeBeforeCreate + 1);
         ProjectTechnology testProjectTechnology = projectTechnologyList.get(projectTechnologyList.size() - 1);
-        assertThat(testProjectTechnology.getIdProject()).isEqualTo(DEFAULT_ID_PROJECT);
-        assertThat(testProjectTechnology.getIdTechnology()).isEqualTo(DEFAULT_ID_TECHNOLOGY);
     }
 
     @Test
@@ -124,9 +112,7 @@ public class ProjectTechnologyResourceIT {
         restProjectTechnologyMockMvc.perform(get("/api/project-technologies?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(projectTechnology.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idProject").value(hasItem(DEFAULT_ID_PROJECT.intValue())))
-            .andExpect(jsonPath("$.[*].idTechnology").value(hasItem(DEFAULT_ID_TECHNOLOGY.intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(projectTechnology.getId().intValue())));
     }
     
     @Test
@@ -139,9 +125,7 @@ public class ProjectTechnologyResourceIT {
         restProjectTechnologyMockMvc.perform(get("/api/project-technologies/{id}", projectTechnology.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(projectTechnology.getId().intValue()))
-            .andExpect(jsonPath("$.idProject").value(DEFAULT_ID_PROJECT.intValue()))
-            .andExpect(jsonPath("$.idTechnology").value(DEFAULT_ID_TECHNOLOGY.intValue()));
+            .andExpect(jsonPath("$.id").value(projectTechnology.getId().intValue()));
     }
     @Test
     @Transactional
@@ -163,9 +147,6 @@ public class ProjectTechnologyResourceIT {
         ProjectTechnology updatedProjectTechnology = projectTechnologyRepository.findById(projectTechnology.getId()).get();
         // Disconnect from session so that the updates on updatedProjectTechnology are not directly saved in db
         em.detach(updatedProjectTechnology);
-        updatedProjectTechnology
-            .idProject(UPDATED_ID_PROJECT)
-            .idTechnology(UPDATED_ID_TECHNOLOGY);
 
         restProjectTechnologyMockMvc.perform(put("/api/project-technologies")
             .contentType(MediaType.APPLICATION_JSON)
@@ -176,8 +157,6 @@ public class ProjectTechnologyResourceIT {
         List<ProjectTechnology> projectTechnologyList = projectTechnologyRepository.findAll();
         assertThat(projectTechnologyList).hasSize(databaseSizeBeforeUpdate);
         ProjectTechnology testProjectTechnology = projectTechnologyList.get(projectTechnologyList.size() - 1);
-        assertThat(testProjectTechnology.getIdProject()).isEqualTo(UPDATED_ID_PROJECT);
-        assertThat(testProjectTechnology.getIdTechnology()).isEqualTo(UPDATED_ID_TECHNOLOGY);
     }
 
     @Test

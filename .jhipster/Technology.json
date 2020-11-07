@@ -2,10 +2,6 @@
   "name": "Technology",
   "fields": [
     {
-      "fieldName": "idTechnology",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "technologyNm",
       "fieldType": "String"
     }
@@ -14,8 +10,8 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "projectTechnology",
-      "otherEntityRelationshipName": "technology",
-      "relationshipName": "projecttechnology"
+      "otherEntityRelationshipName": "idTechnology",
+      "relationshipName": "projecttechnologytechnology"
     }
   ],
   "changelogDate": "20201107094620",

@@ -15,9 +15,6 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="id_project" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="project_nm" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -55,7 +52,6 @@
                   separator=";"
                   tableName="project">
             <column name="id" type="numeric"/>
-            <column name="id_project" type="numeric"/>
             <column name="project_nm" type="string"/>
             <column name="company_nm" type="string"/>
             <column name="start_dt" type="datetime"/>

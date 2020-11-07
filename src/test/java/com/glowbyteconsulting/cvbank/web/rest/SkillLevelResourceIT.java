@@ -29,9 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class SkillLevelResourceIT {
 
-    private static final Long DEFAULT_ID_LEVEL = 1L;
-    private static final Long UPDATED_ID_LEVEL = 2L;
-
     private static final String DEFAULT_LEVEL_DESC = "AAAAAAAAAA";
     private static final String UPDATED_LEVEL_DESC = "BBBBBBBBBB";
 
@@ -54,7 +51,6 @@ public class SkillLevelResourceIT {
      */
     public static SkillLevel createEntity(EntityManager em) {
         SkillLevel skillLevel = new SkillLevel()
-            .idLevel(DEFAULT_ID_LEVEL)
             .levelDesc(DEFAULT_LEVEL_DESC);
         return skillLevel;
     }
@@ -66,7 +62,6 @@ public class SkillLevelResourceIT {
      */
     public static SkillLevel createUpdatedEntity(EntityManager em) {
         SkillLevel skillLevel = new SkillLevel()
-            .idLevel(UPDATED_ID_LEVEL)
             .levelDesc(UPDATED_LEVEL_DESC);
         return skillLevel;
     }
@@ -90,7 +85,6 @@ public class SkillLevelResourceIT {
         List<SkillLevel> skillLevelList = skillLevelRepository.findAll();
         assertThat(skillLevelList).hasSize(databaseSizeBeforeCreate + 1);
         SkillLevel testSkillLevel = skillLevelList.get(skillLevelList.size() - 1);
-        assertThat(testSkillLevel.getIdLevel()).isEqualTo(DEFAULT_ID_LEVEL);
         assertThat(testSkillLevel.getLevelDesc()).isEqualTo(DEFAULT_LEVEL_DESC);
     }
 
@@ -125,7 +119,6 @@ public class SkillLevelResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(skillLevel.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idLevel").value(hasItem(DEFAULT_ID_LEVEL.intValue())))
             .andExpect(jsonPath("$.[*].levelDesc").value(hasItem(DEFAULT_LEVEL_DESC)));
     }
     
@@ -140,7 +133,6 @@ public class SkillLevelResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(skillLevel.getId().intValue()))
-            .andExpect(jsonPath("$.idLevel").value(DEFAULT_ID_LEVEL.intValue()))
             .andExpect(jsonPath("$.levelDesc").value(DEFAULT_LEVEL_DESC));
     }
     @Test
@@ -164,7 +156,6 @@ public class SkillLevelResourceIT {
         // Disconnect from session so that the updates on updatedSkillLevel are not directly saved in db
         em.detach(updatedSkillLevel);
         updatedSkillLevel
-            .idLevel(UPDATED_ID_LEVEL)
             .levelDesc(UPDATED_LEVEL_DESC);
 
         restSkillLevelMockMvc.perform(put("/api/skill-levels")
@@ -176,7 +167,6 @@ public class SkillLevelResourceIT {
         List<SkillLevel> skillLevelList = skillLevelRepository.findAll();
         assertThat(skillLevelList).hasSize(databaseSizeBeforeUpdate);
         SkillLevel testSkillLevel = skillLevelList.get(skillLevelList.size() - 1);
-        assertThat(testSkillLevel.getIdLevel()).isEqualTo(UPDATED_ID_LEVEL);
         assertThat(testSkillLevel.getLevelDesc()).isEqualTo(UPDATED_LEVEL_DESC);
     }
 

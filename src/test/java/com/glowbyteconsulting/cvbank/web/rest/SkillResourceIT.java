@@ -29,9 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class SkillResourceIT {
 
-    private static final Long DEFAULT_ID_SKILL = 1L;
-    private static final Long UPDATED_ID_SKILL = 2L;
-
     private static final String DEFAULT_SKILL_NM = "AAAAAAAAAA";
     private static final String UPDATED_SKILL_NM = "BBBBBBBBBB";
 
@@ -54,7 +51,6 @@ public class SkillResourceIT {
      */
     public static Skill createEntity(EntityManager em) {
         Skill skill = new Skill()
-            .idSkill(DEFAULT_ID_SKILL)
             .skillNm(DEFAULT_SKILL_NM);
         return skill;
     }
@@ -66,7 +62,6 @@ public class SkillResourceIT {
      */
     public static Skill createUpdatedEntity(EntityManager em) {
         Skill skill = new Skill()
-            .idSkill(UPDATED_ID_SKILL)
             .skillNm(UPDATED_SKILL_NM);
         return skill;
     }
@@ -90,7 +85,6 @@ public class SkillResourceIT {
         List<Skill> skillList = skillRepository.findAll();
         assertThat(skillList).hasSize(databaseSizeBeforeCreate + 1);
         Skill testSkill = skillList.get(skillList.size() - 1);
-        assertThat(testSkill.getIdSkill()).isEqualTo(DEFAULT_ID_SKILL);
         assertThat(testSkill.getSkillNm()).isEqualTo(DEFAULT_SKILL_NM);
     }
 
@@ -125,7 +119,6 @@ public class SkillResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(skill.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idSkill").value(hasItem(DEFAULT_ID_SKILL.intValue())))
             .andExpect(jsonPath("$.[*].skillNm").value(hasItem(DEFAULT_SKILL_NM)));
     }
     
@@ -140,7 +133,6 @@ public class SkillResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(skill.getId().intValue()))
-            .andExpect(jsonPath("$.idSkill").value(DEFAULT_ID_SKILL.intValue()))
             .andExpect(jsonPath("$.skillNm").value(DEFAULT_SKILL_NM));
     }
     @Test
@@ -164,7 +156,6 @@ public class SkillResourceIT {
         // Disconnect from session so that the updates on updatedSkill are not directly saved in db
         em.detach(updatedSkill);
         updatedSkill
-            .idSkill(UPDATED_ID_SKILL)
             .skillNm(UPDATED_SKILL_NM);
 
         restSkillMockMvc.perform(put("/api/skills")
@@ -176,7 +167,6 @@ public class SkillResourceIT {
         List<Skill> skillList = skillRepository.findAll();
         assertThat(skillList).hasSize(databaseSizeBeforeUpdate);
         Skill testSkill = skillList.get(skillList.size() - 1);
-        assertThat(testSkill.getIdSkill()).isEqualTo(UPDATED_ID_SKILL);
         assertThat(testSkill.getSkillNm()).isEqualTo(UPDATED_SKILL_NM);
     }
 

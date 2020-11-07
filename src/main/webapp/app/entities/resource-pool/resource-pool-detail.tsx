@@ -26,10 +26,6 @@ export const ResourcePoolDetail = (props: IResourcePoolDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="resourcePoolCode">Resource Pool Code</span>
-          </dt>
-          <dd>{resourcePoolEntity.resourcePoolCode}</dd>
-          <dt>
             <span id="resourcePoolNm">Resource Pool Nm</span>
           </dt>
           <dd>{resourcePoolEntity.resourcePoolNm}</dd>

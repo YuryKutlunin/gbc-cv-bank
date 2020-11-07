@@ -24,15 +24,12 @@ public class JobTitle implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "id_title")
-    private Long idTitle;
-
     @Column(name = "title_nm")
     private String titleNM;
 
-    @OneToMany(mappedBy = "jobtitle")
+    @OneToMany(mappedBy = "idTitle")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Employee> employees = new HashSet<>();
+    private Set<Employee> employeejobtitles = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -41,19 +38,6 @@ public class JobTitle implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdTitle() {
-        return idTitle;
-    }
-
-    public JobTitle idTitle(Long idTitle) {
-        this.idTitle = idTitle;
-        return this;
-    }
-
-    public void setIdTitle(Long idTitle) {
-        this.idTitle = idTitle;
     }
 
     public String getTitleNM() {
@@ -69,29 +53,29 @@ public class JobTitle implements Serializable {
         this.titleNM = titleNM;
     }
 
-    public Set<Employee> getEmployees() {
-        return employees;
+    public Set<Employee> getEmployeejobtitles() {
+        return employeejobtitles;
     }
 
-    public JobTitle employees(Set<Employee> employees) {
-        this.employees = employees;
+    public JobTitle employeejobtitles(Set<Employee> employees) {
+        this.employeejobtitles = employees;
         return this;
     }
 
-    public JobTitle addEmployee(Employee employee) {
-        this.employees.add(employee);
-        employee.setJobtitle(this);
+    public JobTitle addEmployeejobtitle(Employee employee) {
+        this.employeejobtitles.add(employee);
+        employee.setIdTitle(this);
         return this;
     }
 
-    public JobTitle removeEmployee(Employee employee) {
-        this.employees.remove(employee);
-        employee.setJobtitle(null);
+    public JobTitle removeEmployeejobtitle(Employee employee) {
+        this.employeejobtitles.remove(employee);
+        employee.setIdTitle(null);
         return this;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setEmployeejobtitles(Set<Employee> employees) {
+        this.employeejobtitles = employees;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -116,7 +100,6 @@ public class JobTitle implements Serializable {
     public String toString() {
         return "JobTitle{" +
             "id=" + getId() +
-            ", idTitle=" + getIdTitle() +
             ", titleNM='" + getTitleNM() + "'" +
             "}";
     }

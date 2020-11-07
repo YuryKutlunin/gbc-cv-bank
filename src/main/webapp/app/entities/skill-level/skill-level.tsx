@@ -33,7 +33,6 @@ export const SkillLevel = (props: ISkillLevelProps) => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Id Level</th>
                 <th>Level Desc</th>
                 <th />
               </tr>
@@ -46,7 +45,6 @@ export const SkillLevel = (props: ISkillLevelProps) => {
                       {skillLevel.id}
                     </Button>
                   </td>
-                  <td>{skillLevel.idLevel}</td>
                   <td>{skillLevel.levelDesc}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

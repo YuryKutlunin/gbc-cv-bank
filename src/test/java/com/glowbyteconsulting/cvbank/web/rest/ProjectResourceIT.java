@@ -31,9 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ProjectResourceIT {
 
-    private static final Long DEFAULT_ID_PROJECT = 1L;
-    private static final Long UPDATED_ID_PROJECT = 2L;
-
     private static final String DEFAULT_PROJECT_NM = "AAAAAAAAAA";
     private static final String UPDATED_PROJECT_NM = "BBBBBBBBBB";
 
@@ -65,7 +62,6 @@ public class ProjectResourceIT {
      */
     public static Project createEntity(EntityManager em) {
         Project project = new Project()
-            .idProject(DEFAULT_ID_PROJECT)
             .projectNm(DEFAULT_PROJECT_NM)
             .companyNM(DEFAULT_COMPANY_NM)
             .startDt(DEFAULT_START_DT)
@@ -80,7 +76,6 @@ public class ProjectResourceIT {
      */
     public static Project createUpdatedEntity(EntityManager em) {
         Project project = new Project()
-            .idProject(UPDATED_ID_PROJECT)
             .projectNm(UPDATED_PROJECT_NM)
             .companyNM(UPDATED_COMPANY_NM)
             .startDt(UPDATED_START_DT)
@@ -107,7 +102,6 @@ public class ProjectResourceIT {
         List<Project> projectList = projectRepository.findAll();
         assertThat(projectList).hasSize(databaseSizeBeforeCreate + 1);
         Project testProject = projectList.get(projectList.size() - 1);
-        assertThat(testProject.getIdProject()).isEqualTo(DEFAULT_ID_PROJECT);
         assertThat(testProject.getProjectNm()).isEqualTo(DEFAULT_PROJECT_NM);
         assertThat(testProject.getCompanyNM()).isEqualTo(DEFAULT_COMPANY_NM);
         assertThat(testProject.getStartDt()).isEqualTo(DEFAULT_START_DT);
@@ -145,7 +139,6 @@ public class ProjectResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(project.getId().intValue())))
-            .andExpect(jsonPath("$.[*].idProject").value(hasItem(DEFAULT_ID_PROJECT.intValue())))
             .andExpect(jsonPath("$.[*].projectNm").value(hasItem(DEFAULT_PROJECT_NM)))
             .andExpect(jsonPath("$.[*].companyNM").value(hasItem(DEFAULT_COMPANY_NM)))
             .andExpect(jsonPath("$.[*].startDt").value(hasItem(DEFAULT_START_DT.toString())))
@@ -163,7 +156,6 @@ public class ProjectResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(project.getId().intValue()))
-            .andExpect(jsonPath("$.idProject").value(DEFAULT_ID_PROJECT.intValue()))
             .andExpect(jsonPath("$.projectNm").value(DEFAULT_PROJECT_NM))
             .andExpect(jsonPath("$.companyNM").value(DEFAULT_COMPANY_NM))
             .andExpect(jsonPath("$.startDt").value(DEFAULT_START_DT.toString()))
@@ -190,7 +182,6 @@ public class ProjectResourceIT {
         // Disconnect from session so that the updates on updatedProject are not directly saved in db
         em.detach(updatedProject);
         updatedProject
-            .idProject(UPDATED_ID_PROJECT)
             .projectNm(UPDATED_PROJECT_NM)
             .companyNM(UPDATED_COMPANY_NM)
             .startDt(UPDATED_START_DT)
@@ -205,7 +196,6 @@ public class ProjectResourceIT {
         List<Project> projectList = projectRepository.findAll();
         assertThat(projectList).hasSize(databaseSizeBeforeUpdate);
         Project testProject = projectList.get(projectList.size() - 1);
-        assertThat(testProject.getIdProject()).isEqualTo(UPDATED_ID_PROJECT);
         assertThat(testProject.getProjectNm()).isEqualTo(UPDATED_PROJECT_NM);
         assertThat(testProject.getCompanyNM()).isEqualTo(UPDATED_COMPANY_NM);
         assertThat(testProject.getStartDt()).isEqualTo(UPDATED_START_DT);
