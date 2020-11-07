@@ -1,0 +1,63 @@
+{
+  "name": "EmployeeProject",
+  "fields": [
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idProject",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "idRole",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "responsibilityNm",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDt",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employeeproject",
+      "relationshipName": "employee",
+      "otherEntityField": "email"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "project",
+      "otherEntityRelationshipName": "employeeproject",
+      "relationshipName": "project",
+      "otherEntityField": "idProject"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "projectRole",
+      "otherEntityRelationshipName": "employeeproject",
+      "relationshipName": "projectrole",
+      "otherEntityField": "idRole"
+    }
+  ],
+  "changelogDate": "20201107094720",
+  "entityTableName": "employee_project",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

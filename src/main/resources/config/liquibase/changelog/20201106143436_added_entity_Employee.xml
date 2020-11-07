@@ -45,7 +45,13 @@
             <column name="email_curator" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="resourcepool_id" type="bigint">
+            <column name="empl_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="resource_pool_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="jobtitle_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

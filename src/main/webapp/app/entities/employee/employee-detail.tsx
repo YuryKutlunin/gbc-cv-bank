@@ -65,8 +65,12 @@ export const EmployeeDetail = (props: IEmployeeDetailProps) => {
             <span id="emailCurator">Email Curator</span>
           </dt>
           <dd>{employeeEntity.emailCurator}</dd>
-          <dt>Resourcepool</dt>
-          <dd>{employeeEntity.resourcepool ? employeeEntity.resourcepool.resourcePoolCode : ''}</dd>
+          <dt>Empl</dt>
+          <dd>{employeeEntity.empl ? employeeEntity.empl.email : ''}</dd>
+          <dt>Resource Pool</dt>
+          <dd>{employeeEntity.resourcePool ? employeeEntity.resourcePool.resourcePoolCode : ''}</dd>
+          <dt>Jobtitle</dt>
+          <dd>{employeeEntity.jobtitle ? employeeEntity.jobtitle.idTitle : ''}</dd>
         </dl>
         <Button tag={Link} to="/employee" replace color="info">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

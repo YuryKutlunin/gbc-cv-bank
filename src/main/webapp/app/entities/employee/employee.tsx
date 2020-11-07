@@ -43,7 +43,9 @@ export const Employee = (props: IEmployeeProps) => {
                 <th>Id Title</th>
                 <th>Resource Pool Code</th>
                 <th>Email Curator</th>
-                <th>Resourcepool</th>
+                <th>Empl</th>
+                <th>Resource Pool</th>
+                <th>Jobtitle</th>
                 <th />
               </tr>
             </thead>
@@ -65,13 +67,15 @@ export const Employee = (props: IEmployeeProps) => {
                   <td>{employee.idTitle}</td>
                   <td>{employee.resourcePoolCode}</td>
                   <td>{employee.emailCurator}</td>
+                  <td>{employee.empl ? <Link to={`employee/${employee.empl.id}`}>{employee.empl.email}</Link> : ''}</td>
                   <td>
-                    {employee.resourcepool ? (
-                      <Link to={`resource-pool/${employee.resourcepool.id}`}>{employee.resourcepool.resourcePoolCode}</Link>
+                    {employee.resourcePool ? (
+                      <Link to={`resource-pool/${employee.resourcePool.id}`}>{employee.resourcePool.resourcePoolCode}</Link>
                     ) : (
                       ''
                     )}
                   </td>
+                  <td>{employee.jobtitle ? <Link to={`job-title/${employee.jobtitle.id}`}>{employee.jobtitle.idTitle}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${employee.id}`} color="info" size="sm">

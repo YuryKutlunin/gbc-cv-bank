@@ -1,0 +1,48 @@
+{
+  "name": "EmployeeCertif",
+  "fields": [
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "idCertificate",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "startDt",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDt",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "employeecertif",
+      "relationshipName": "employee",
+      "otherEntityField": "email"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "certificate",
+      "otherEntityRelationshipName": "employeecertif",
+      "relationshipName": "certificate",
+      "otherEntityField": "idCertificate"
+    }
+  ],
+  "changelogDate": "20201107095020",
+  "entityTableName": "employee_certif",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

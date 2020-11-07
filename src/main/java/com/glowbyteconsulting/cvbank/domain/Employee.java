@@ -8,6 +8,8 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Employee.
@@ -54,9 +56,37 @@ public class Employee implements Serializable {
     @Column(name = "email_curator")
     private String emailCurator;
 
+    @OneToMany(mappedBy = "empl")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Employee> employees = new HashSet<>();
+
+    @OneToMany(mappedBy = "employee")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Education> educations = new HashSet<>();
+
+    @OneToMany(mappedBy = "employee")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<EmployeeProject> employeeprojects = new HashSet<>();
+
+    @OneToMany(mappedBy = "employee")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<EmployeeCertif> employeecertifs = new HashSet<>();
+
+    @OneToMany(mappedBy = "employee")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<EmployeeSkill> employeeskills = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties(value = "employees", allowSetters = true)
-    private ResourcePool resourcepool;
+    private Employee empl;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "employees", allowSetters = true)
+    private ResourcePool resourcePool;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "employees", allowSetters = true)
+    private JobTitle jobtitle;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -197,17 +227,168 @@ public class Employee implements Serializable {
         this.emailCurator = emailCurator;
     }
 
-    public ResourcePool getResourcepool() {
-        return resourcepool;
+    public Set<Employee> getEmployees() {
+        return employees;
     }
 
-    public Employee resourcepool(ResourcePool resourcePool) {
-        this.resourcepool = resourcePool;
+    public Employee employees(Set<Employee> employees) {
+        this.employees = employees;
         return this;
     }
 
-    public void setResourcepool(ResourcePool resourcePool) {
-        this.resourcepool = resourcePool;
+    public Employee addEmployee(Employee employee) {
+        this.employees.add(employee);
+        employee.setEmpl(this);
+        return this;
+    }
+
+    public Employee removeEmployee(Employee employee) {
+        this.employees.remove(employee);
+        employee.setEmpl(null);
+        return this;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public Set<Education> getEducations() {
+        return educations;
+    }
+
+    public Employee educations(Set<Education> educations) {
+        this.educations = educations;
+        return this;
+    }
+
+    public Employee addEducation(Education education) {
+        this.educations.add(education);
+        education.setEmployee(this);
+        return this;
+    }
+
+    public Employee removeEducation(Education education) {
+        this.educations.remove(education);
+        education.setEmployee(null);
+        return this;
+    }
+
+    public void setEducations(Set<Education> educations) {
+        this.educations = educations;
+    }
+
+    public Set<EmployeeProject> getEmployeeprojects() {
+        return employeeprojects;
+    }
+
+    public Employee employeeprojects(Set<EmployeeProject> employeeProjects) {
+        this.employeeprojects = employeeProjects;
+        return this;
+    }
+
+    public Employee addEmployeeproject(EmployeeProject employeeProject) {
+        this.employeeprojects.add(employeeProject);
+        employeeProject.setEmployee(this);
+        return this;
+    }
+
+    public Employee removeEmployeeproject(EmployeeProject employeeProject) {
+        this.employeeprojects.remove(employeeProject);
+        employeeProject.setEmployee(null);
+        return this;
+    }
+
+    public void setEmployeeprojects(Set<EmployeeProject> employeeProjects) {
+        this.employeeprojects = employeeProjects;
+    }
+
+    public Set<EmployeeCertif> getEmployeecertifs() {
+        return employeecertifs;
+    }
+
+    public Employee employeecertifs(Set<EmployeeCertif> employeeCertifs) {
+        this.employeecertifs = employeeCertifs;
+        return this;
+    }
+
+    public Employee addEmployeecertif(EmployeeCertif employeeCertif) {
+        this.employeecertifs.add(employeeCertif);
+        employeeCertif.setEmployee(this);
+        return this;
+    }
+
+    public Employee removeEmployeecertif(EmployeeCertif employeeCertif) {
+        this.employeecertifs.remove(employeeCertif);
+        employeeCertif.setEmployee(null);
+        return this;
+    }
+
+    public void setEmployeecertifs(Set<EmployeeCertif> employeeCertifs) {
+        this.employeecertifs = employeeCertifs;
+    }
+
+    public Set<EmployeeSkill> getEmployeeskills() {
+        return employeeskills;
+    }
+
+    public Employee employeeskills(Set<EmployeeSkill> employeeSkills) {
+        this.employeeskills = employeeSkills;
+        return this;
+    }
+
+    public Employee addEmployeeskill(EmployeeSkill employeeSkill) {
+        this.employeeskills.add(employeeSkill);
+        employeeSkill.setEmployee(this);
+        return this;
+    }
+
+    public Employee removeEmployeeskill(EmployeeSkill employeeSkill) {
+        this.employeeskills.remove(employeeSkill);
+        employeeSkill.setEmployee(null);
+        return this;
+    }
+
+    public void setEmployeeskills(Set<EmployeeSkill> employeeSkills) {
+        this.employeeskills = employeeSkills;
+    }
+
+    public Employee getEmpl() {
+        return empl;
+    }
+
+    public Employee empl(Employee employee) {
+        this.empl = employee;
+        return this;
+    }
+
+    public void setEmpl(Employee employee) {
+        this.empl = employee;
+    }
+
+    public ResourcePool getResourcePool() {
+        return resourcePool;
+    }
+
+    public Employee resourcePool(ResourcePool resourcePool) {
+        this.resourcePool = resourcePool;
+        return this;
+    }
+
+    public void setResourcePool(ResourcePool resourcePool) {
+        this.resourcePool = resourcePool;
+    }
+
+    public JobTitle getJobtitle() {
+        return jobtitle;
+    }
+
+    public Employee jobtitle(JobTitle jobTitle) {
+        this.jobtitle = jobTitle;
+        return this;
+    }
+
+    public void setJobtitle(JobTitle jobTitle) {
+        this.jobtitle = jobTitle;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
